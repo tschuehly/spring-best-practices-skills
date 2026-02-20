@@ -31,6 +31,7 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 23 | Emulating Window Functions in MySQL 5.7          | 2023-01-20 | skip           | -          | skipped | MySQL 5.7 EOL workarounds; not relevant for modern databases         | | 24b28a4 |
 | 24 | Why You Should Execute jOOQ Queries With jOOQ    | 2023-01-18 | jooq-api       | anti-patterns.md | merged  | Core anti-pattern: don't extract SQL for JDBC/JPA; new core rule added | | 6a9a02c |
 | 25 | jOOQ's R2DBC LoggingConnection to log all SQL… | 2023-01-17 | jooq-api       | logging.md | added   | New topic file; R2DBC LoggingConnection proxy (since 3.18)            | | 45774fe |
+| 26 | When to Use jOOQ and When to Use Native SQL      | 2022-12-08 | jooq-api       | native-sql-strategy.md | added   | New topic file; hybrid approach: views/functions for complex static SQL | | 358c6d4 |
 
 ---
 **Run summary** (2026-02-20 18:28):

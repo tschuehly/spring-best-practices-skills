@@ -27,6 +27,7 @@ Built from official docs + 783 blog articles (progressively updated).
 - [derived-tables.md](knowledge/derived-tables.md) — Derived table declaration, type-safe column refs, simplification
 - [aggregate-functions.md](knowledge/aggregate-functions.md) — FILTER vs CASE in aggregates, performance considerations
 - [logging.md](knowledge/logging.md) — LoggingConnection for JDBC and R2DBC SQL statement logging
+- [native-sql-strategy.md](knowledge/native-sql-strategy.md) — When to use jOOQ DSL vs views/functions for complex static SQL
 
 ## Core rules (always apply)
 
