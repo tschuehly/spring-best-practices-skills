@@ -20,6 +20,7 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 13 | Maven Coordinates of the most popular JDBC Dri… | 2023-12-13 | skip           | -          | skipped | Reference list of JDBC driver Maven coords; no patterns              | | 2493bdd |
 | 14 | To DAO or not to DAO                             | 2023-12-06 | jooq-api       | anti-patterns.md | merged  | Enriched N+1 entry: DAOs hide loops, prefer bulk SQL                 | | f063a3a |
 | 15 | JDBC Connection URLs of the Most Popular RDBMS   | 2023-12-01 | skip           | -          | skipped | Reference lookup table of JDBC URLs/drivers; no patterns             | | bdcfec0 |
+| 16 | How to Generate Package Private Code with jOOQ… | 2023-06-28 | jooq-api       | code-generator.md | added   | New topic file; visibility modifiers + custom generator strategies    | | 1e0329a |
 
 ---
 **Run summary** (2026-02-20 18:28):
