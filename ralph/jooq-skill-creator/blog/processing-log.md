@@ -91,6 +91,7 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 57 | Traversing jOOQ Expression Trees with the new… | 2022-02-02 | jooq-api       | qom-traverser.md | added   | New topic file; QOM accessors, Traverser API, $replace() for RLS/soft delete | | 6602da0 |
 
 | 58 | Detect Accidental Blocking Calls when Using R… | 2022-01-28 | skip           | -          | skipped | jOOQ internals: @Blocking annotation for R2DBC IDE warnings          | | 5ff5cc8 |
+| 59 | A Rarely Seen, but Useful SQL Feature: CORRE… | 2022-01-14 | skip           | -          | skipped | CORRESPONDING for set ops; only HSQLDB supports it, not actionable   | | 63ecb69 |
 
 ---
 **Run summary** (2026-02-20 18:59):
