@@ -103,6 +103,8 @@ Auto-appended by each iteration. Captures data for the blog post.
 
 | 64 | Using JDK Collectors to De-duplicate parent/ch… | 2021-12-09 | jooq-api       | multiset.md | skipped | Pre-MULTISET join dedup; all patterns already covered by newer entries | | 898d455 |
 
+| 65 | Why You Should Use jOOQ With Code Generation     | 2021-12-06 | jooq-api       | code-generator.md | merged  | Advocacy piece; extracted forced types, embedded types, schema mapping | | df2b678 |
+
 ---
 **Run summary** (2026-02-20 18:59):
 - Iterations this run: 1

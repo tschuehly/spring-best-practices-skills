@@ -79,3 +79,49 @@ To disable the check (not recommended):
 ```
 
 ---
+
+## Pattern: Forced types for auto-applying converters
+**Source**: [Why You Should Use jOOQ With Code Generation](https://blog.jooq.org/why-you-should-use-jooq-with-code-generation) (2021-12-06)
+
+Instead of manually attaching converters to every column reference, configure them in the code generator via [forced types](https://www.jooq.org/doc/latest/manual/code-generation/codegen-advanced/codegen-config-database/codegen-database-forced-types/). The converter is then automatically applied to all matching columns across all generated code.
+
+This is critical for converters implementing must-use logic (e.g., hashing, encryption) — the code generator guarantees no column is missed.
+
+Without code gen, you'd manually declare each field:
+```java
+// Manual — error-prone, easy to forget
+Field<LeFirstName> firstName = field("author.first_name",
+    VARCHAR.asConvertedDataType(
+        LeFirstName.class, LeFirstName::new, LeFirstName::firstName
+    ));
+```
+
+With forced types in codegen config, you just use the generated field and the converter is applied automatically.
+
+---
+
+## Pattern: Embedded types for composite column groups
+**Source**: [Why You Should Use jOOQ With Code Generation](https://blog.jooq.org/why-you-should-use-jooq-with-code-generation) (2021-12-06)
+
+Embedded types combine multiple database columns into a single client-side value type, as if the database supported UDTs. Classic example: wrapping `AMOUNT` + `CURRENCY` columns into a `Money` type to prevent mixing `USD 1.00` with `EUR 1.00`.
+
+Variants:
+- **Embedded keys** — `BOOK.AUTHOR_ID` and `AUTHOR.ID` share a typed key, preventing comparison with unrelated ID columns
+- **Embedded domains** — reuse semantic types declared via `CREATE DOMAIN` in client code
+
+Embedded types are only available through the code generator, which produces the metadata needed for jOOQ's runtime to map/unmap flat result sets.
+
+---
+
+## Pattern: Schema mapping for multitenancy
+**Source**: [Why You Should Use jOOQ With Code Generation](https://blog.jooq.org/why-you-should-use-jooq-with-code-generation) (2021-12-06)
+
+jOOQ supports schema-level multitenancy via **schema mapping** — dynamically renaming catalogs, schemas, and table names at runtime per tenant. This requires generated code because:
+
+1. Generated objects are fully qualified by default (catalog.schema.table)
+2. Schema mapping intercepts these qualified names and remaps them at runtime
+3. Plain SQL templates bypass this mechanism entirely
+
+This enables porting a schema from one namespace to another via configuration, without rewriting queries.
+
+---
