@@ -119,6 +119,8 @@ Auto-appended by each iteration. Captures data for the blog post.
 
 | 72 | Use jOOλ's Sneaky Throw to Avoid Checked Excep… | 2021-10-07 | skip           | -          | skipped | Java utility piece about jOOλ Sneaky.supplier(); no SQL/jOOQ content | | e93802b |
 
+| 73 | Using Testcontainers to Generate jOOQ Code       | 2021-08-27 | jooq-api       | code-generator.md | merged  | Testcontainers JDBC URL + Flyway for build-time code gen             | | c4fd099 |
+
 ---
 **Run summary** (2026-02-20 18:59):
 - Iterations this run: 1

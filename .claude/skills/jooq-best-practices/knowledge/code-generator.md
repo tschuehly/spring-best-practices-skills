@@ -113,6 +113,31 @@ Embedded types are only available through the code generator, which produces the
 
 ---
 
+## Pattern: Testcontainers for code generation
+**Source**: [Using Testcontainers to Generate jOOQ Code](https://blog.jooq.org/using-testcontainers-to-generate-jooq-code) (2021-08-27)
+
+Use Testcontainers to spin up a real database during the build for jOOQ code generation — no pre-existing database required.
+
+**Simple approach** — Testcontainers JDBC URL with init script:
+```xml
+<jdbc>
+  <driver>org.testcontainers.jdbc.ContainerDatabaseDriver</driver>
+  <url>jdbc:tc:postgresql:13:///mydb?TC_INITSCRIPT=file:${basedir}/src/main/resources/schema.sql</url>
+</jdbc>
+```
+
+**Production approach** — Flyway + Testcontainers + jOOQ (Maven):
+1. Start Testcontainers PostgreSQL via Groovy plugin, capture dynamic JDBC URL
+2. Run Flyway migrations against the container
+3. Run jOOQ code generation against the migrated schema
+4. Optionally reuse the same container for integration tests
+
+**Key advantages**: production-database parity, vendor-specific features work, reproducible CI builds. Eliminates the need for `DDLDatabase`, `JPADatabase`, or `XMLDatabase` workarounds.
+
+> **Supersedes**: older `DDLDatabase`/`JPADatabase` approaches that couldn't leverage vendor-specific features
+
+---
+
 ## Pattern: Schema mapping for multitenancy
 **Source**: [Why You Should Use jOOQ With Code Generation](https://blog.jooq.org/why-you-should-use-jooq-with-code-generation) (2021-12-06)
 
