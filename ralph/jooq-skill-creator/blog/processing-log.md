@@ -51,6 +51,7 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 43 | The Performance of Various To-Many Nesting … | 2022-06-09 | jooq-api       | multiset.md | merged  | MULTISET perf: correlated subqueries OK for filtered sets, not large scans | | ede8a4f |
 | 44 | Changing SELECT .. FROM Into FROM .. SELECT… | 2022-05-31 | skip           | -          | skipped | jOOQ dev philosophy: why DSL keeps SQL's lexical order, not actionable | | 8ec68b1 |
 | 45 | The Many Different Ways to Fetch Data in jOOQ | 2022-05-19 | jooq-api       | fetching-mapping.md | merged  | 3 new patterns: fetch method chooser, single-record semantics, reactive Publisher | | e5b9638 |
+| 46 | Setting the JDBC Statement.setFetchSize() to… | 2022-05-11 | skip           | -          | skipped | jOOQ internals benchmark; concluded setFetchSize(1) hurts perf, not implemented | | aba8302 |
 
 ---
 **Run summary** (2026-02-20 18:28):
