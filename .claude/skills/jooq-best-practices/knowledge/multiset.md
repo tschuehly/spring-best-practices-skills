@@ -108,6 +108,22 @@ The SQL `HAVING bool_or(TRUE) FILTER (WHERE condition)` checks if any row in the
 
 ---
 
+## Pattern: MULTISET performance characteristics — when to use alternatives
+**Source**: [The Performance of Various To-Many Nesting Algorithms](https://blog.jooq.org/the-performance-of-various-to-many-nesting-algorithms) (2022-06-09)
+**Since**: jOOQ 3.15
+
+MULTISET uses correlated subqueries under the hood, which means the database executes nested-loop-style joins. Benchmarks across MySQL, Oracle, PostgreSQL, and SQL Server show:
+
+- **Small/filtered result sets**: MULTISET performs comparably to hand-written single JOIN queries — use it freely
+- **Large unfiltered datasets**: correlated subqueries prevent hash/merge join optimization. Consider multiple independent queries per nesting level instead
+- **N+1 client-side loops**: 50–300x slower than any other approach — always avoid
+- **Emulation format**: JSON/JSONB are fastest; XML emulation is consistently slowest. Configure via `Settings.emulateMultiset`
+- **Double nesting** (e.g., actors → films → categories): amplifies the correlated subquery cost — profile before using MULTISET on deeply nested large datasets
+
+**Rule of thumb**: MULTISET is the right default for typical application queries with WHERE filters. For batch/reporting queries touching large tables without filters, benchmark against multiple-query approaches.
+
+---
+
 ## Pattern: Configure MULTISET emulation
 **Source**: [jOOQ Official Docs — MULTISET value constructor](https://www.jooq.org/doc/3.20/manual/sql-building/column-expressions/multiset-value-constructor/) (docs)
 **Since**: jOOQ 3.15
