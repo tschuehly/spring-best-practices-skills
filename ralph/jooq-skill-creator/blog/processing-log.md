@@ -97,6 +97,8 @@ Auto-appended by each iteration. Captures data for the blog post.
 
 | 61 | The Useful BigQuery * EXCEPT Syntax               | 2022-01-07 | jooq-api       | derived-tables.md | merged  | asterisk().except() for column exclusion; jOOQ emulates across dialects | | 760544f |
 
+| 62 | 3.16.0 Release with a new Public Query Object… | 2022-01-05 | skip           | -          | skipped | Release announcement; QOM already in qom-traverser.md (#57)          | | 024ac60 |
+
 ---
 **Run summary** (2026-02-20 18:59):
 - Iterations this run: 1
