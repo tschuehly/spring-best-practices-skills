@@ -154,6 +154,37 @@ Fully type-safe: changing column types or the record constructor causes compile 
 
 ---
 
+## Pattern: MULTISET avoids cartesian products from multiple to-many JOINs
+**Source**: [No More MultipleBagFetchException Thanks to Multiset Nested Collections](https://blog.jooq.org/no-more-multiplebagfetchexception-thanks-to-multiset-nested-collections) (2022-02-08)
+**Since**: jOOQ 3.15
+
+Joining multiple to-many relationships (e.g., Film → Actors AND Film → Categories) produces an M×N cartesian product — each film row duplicated for every actor-category combination. ORM frameworks like Hibernate throw `MultipleBagFetchException` to prevent this.
+
+MULTISET solves this by using independent correlated subqueries per collection — no cross-multiplication:
+
+```java
+dsl.select(
+      FILM.TITLE,
+      multiset(
+        select(FILM_ACTOR.actor().FIRST_NAME, FILM_ACTOR.actor().LAST_NAME)
+        .from(FILM_ACTOR)
+        .where(FILM_ACTOR.FILM_ID.eq(FILM.FILM_ID))
+      ).as("actors").convertFrom(r -> r.map(mapping(Actor::new))),
+      multiset(
+        select(FILM_CATEGORY.category().NAME)
+        .from(FILM_CATEGORY)
+        .where(FILM_CATEGORY.FILM_ID.eq(FILM.FILM_ID))
+      ).as("categories").convertFrom(r -> r.map(Record1::value1))
+   )
+   .from(FILM)
+   .orderBy(FILM.TITLE)
+   .fetch(mapping(Film::new));
+```
+
+**Key insight**: Each MULTISET subquery runs independently, producing exact row counts per collection without duplication.
+
+---
+
 ## Pattern: Configure MULTISET emulation
 **Source**: [jOOQ Official Docs — MULTISET value constructor](https://www.jooq.org/doc/3.20/manual/sql-building/column-expressions/multiset-value-constructor/) (docs)
 **Since**: jOOQ 3.15
