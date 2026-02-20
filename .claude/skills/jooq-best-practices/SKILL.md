@@ -23,6 +23,7 @@ Built from official docs + 783 blog articles (progressively updated).
 - [merge-upsert.md](knowledge/merge-upsert.md) — SQL MERGE as RIGHT JOIN mental model, staging table sync patterns
 - [implicit-joins.md](knowledge/implicit-joins.md) — Implicit/explicit path joins, join elimination, path correlation, to-many joins
 - [code-generator.md](knowledge/code-generator.md) — Code generator configuration: visibility modifiers, custom strategies, TVP wrappers
+- [hierarchical-queries.md](knowledge/hierarchical-queries.md) — Records.intoHierarchy() collector, recursive CTEs for tree structures
 
 ## Core rules (always apply)
 
