@@ -113,6 +113,8 @@ Auto-appended by each iteration. Captures data for the blog post.
 
 | 69 | Functional Dependencies in SQL GROUP BY          | 2021-10-29 | sql-pattern    | aggregate-functions.md | merged  | GROUP BY functional deps + jOOQ 3.16 table-level grouping            | | 10e3f9e |
 
+| 70 | Write C-Style Local Static Variables in Java 16  | 2021-10-22 | skip           | -          | skipped | Java language feature (JEP 395); no SQL/jOOQ content                 | | 65598fe |
+
 ---
 **Run summary** (2026-02-20 18:59):
 - Iterations this run: 1
