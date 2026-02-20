@@ -109,6 +109,8 @@ Auto-appended by each iteration. Captures data for the blog post.
 
 | 67 | PostgreSQL 14's enable_memoize For Improved Pe… | 2021-11-05 | skip           | -          | skipped | PG optimizer internals (enable_memoize config flag); not actionable   | | 73b9892 |
 
+| 68 | Java's Checked Exceptions Are Just Weird Unio… | 2021-11-01 | skip           | -          | skipped | Java language opinion piece about union types; no SQL/jOOQ content    | | 831dfe0 |
+
 ---
 **Run summary** (2026-02-20 18:59):
 - Iterations this run: 1
