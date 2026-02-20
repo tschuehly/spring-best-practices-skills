@@ -84,6 +84,7 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 51 | Various Meanings of SQL's PARTITION BY Syntax     | 2022-02-24 | skip           | -          | skipped | Educational taxonomy of 5 PARTITION BY contexts; no actionable patterns | | 924e03a |
 | 52 | Use MULTISET Predicates to Compare Data Sets      | 2022-02-22 | jooq-api       | multiset.md | merged  | MULTISET equality predicates for set comparison; order-independent vs ARRAY_AGG | | 2e92c45 |
 | 53 | Projecting Type Safe Nested TableRecords with… | 2022-02-21 | jooq-api       | fetching-mapping.md | merged  | Table as SelectField, ad-hoc ROW expressions, TABLE.* performance caveat | | df31418 |
+| 54 | jOOQ 3.16 and Java EE vs Jakarta EE              | 2022-02-14 | skip           | -          | skipped | jOOQ internals: javax→jakarta migration process, not actionable patterns | | 1352b2c |
 
 ---
 **Run summary** (2026-02-20 18:59):
