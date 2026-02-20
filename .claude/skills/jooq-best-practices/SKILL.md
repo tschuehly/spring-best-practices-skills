@@ -26,6 +26,7 @@ Built from official docs + 783 blog articles (progressively updated).
 - [hierarchical-queries.md](knowledge/hierarchical-queries.md) — Records.intoHierarchy() collector, recursive CTEs for tree structures
 - [derived-tables.md](knowledge/derived-tables.md) — Derived table declaration, type-safe column refs, simplification
 - [aggregate-functions.md](knowledge/aggregate-functions.md) — FILTER vs CASE in aggregates, performance considerations
+- [logging.md](knowledge/logging.md) — LoggingConnection for JDBC and R2DBC SQL statement logging
 
 ## Core rules (always apply)
 

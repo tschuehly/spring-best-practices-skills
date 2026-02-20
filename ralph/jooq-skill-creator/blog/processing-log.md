@@ -30,6 +30,7 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 22 | The Performance Impact of SQL's FILTER Clause    | 2023-02-06 | sql-pattern    | aggregate-functions.md | added   | New topic; FILTER ~8% faster than CASE on PG 15                      | | ed1afbd |
 | 23 | Emulating Window Functions in MySQL 5.7          | 2023-01-20 | skip           | -          | skipped | MySQL 5.7 EOL workarounds; not relevant for modern databases         | | 24b28a4 |
 | 24 | Why You Should Execute jOOQ Queries With jOOQ    | 2023-01-18 | jooq-api       | anti-patterns.md | merged  | Core anti-pattern: don't extract SQL for JDBC/JPA; new core rule added | | 6a9a02c |
+| 25 | jOOQ's R2DBC LoggingConnection to log all SQL… | 2023-01-17 | jooq-api       | logging.md | added   | New topic file; R2DBC LoggingConnection proxy (since 3.18)            | | 45774fe |
 
 ---
 **Run summary** (2026-02-20 18:28):
@@ -45,4 +46,20 @@ Auto-appended by each iteration. Captures data for the blog post.
 - Duration: 9m 541s total
 - Articles processed so far: 14 / 747
 - Topic files: 6
+- Open uncertainties: 1
+
+---
+**Run summary** (2026-02-20 18:53):
+- Iterations this run: 11
+- Duration: 10m 615s total
+- Articles processed so far: 24 / 747
+- Topic files: 10
+- Open uncertainties: 1
+
+---
+**Run summary** (2026-02-20 18:59):
+- Iterations this run: 1
+- Duration: 0m 0s total
+- Articles processed so far: 24 / 747
+- Topic files: 10
 - Open uncertainties: 1
