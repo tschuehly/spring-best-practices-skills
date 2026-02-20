@@ -111,6 +111,8 @@ Auto-appended by each iteration. Captures data for the blog post.
 
 | 68 | Java's Checked Exceptions Are Just Weird Unio… | 2021-11-01 | skip           | -          | skipped | Java language opinion piece about union types; no SQL/jOOQ content    | | 831dfe0 |
 
+| 69 | Functional Dependencies in SQL GROUP BY          | 2021-10-29 | sql-pattern    | aggregate-functions.md | merged  | GROUP BY functional deps + jOOQ 3.16 table-level grouping            | | 10e3f9e |
+
 ---
 **Run summary** (2026-02-20 18:59):
 - Iterations this run: 1

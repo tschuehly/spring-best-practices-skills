@@ -25,7 +25,7 @@ Built from official docs + 783 blog articles (progressively updated).
 - [code-generator.md](knowledge/code-generator.md) — Code generator configuration: visibility modifiers, custom strategies, TVP wrappers, version compatibility, forced types, embedded types, schema mapping
 - [hierarchical-queries.md](knowledge/hierarchical-queries.md) — Records.intoHierarchy() collector, recursive CTEs for tree structures
 - [derived-tables.md](knowledge/derived-tables.md) — Derived table declaration, type-safe column refs, simplification, LATERAL as local variables, asterisk().except()
-- [aggregate-functions.md](knowledge/aggregate-functions.md) — FILTER vs CASE in aggregates, performance considerations
+- [aggregate-functions.md](knowledge/aggregate-functions.md) — FILTER vs CASE in aggregates, functional dependencies in GROUP BY, table-level grouping
 - [logging.md](knowledge/logging.md) — LoggingConnection for SQL logging, DiagnosticsConnection for N+1 detection
 - [native-sql-strategy.md](knowledge/native-sql-strategy.md) — When to use jOOQ DSL vs views/functions for complex static SQL
 - [stored-procedures.md](knowledge/stored-procedures.md) — Calling procedures with default/named parameters across dialects
