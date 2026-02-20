@@ -99,6 +99,8 @@ Auto-appended by each iteration. Captures data for the blog post.
 
 | 62 | 3.16.0 Release with a new Public Query Object… | 2022-01-05 | skip           | -          | skipped | Release announcement; QOM already in qom-traverser.md (#57)          | | 024ac60 |
 
+| 63 | How to customise a jOOQ Configuration that is… | 2021-12-16 | jooq-api       | spring-boot-config.md | added   | New topic file; DefaultConfigurationCustomizer since Spring Boot 2.5  | | 0f8a52b |
+
 ---
 **Run summary** (2026-02-20 18:59):
 - Iterations this run: 1
