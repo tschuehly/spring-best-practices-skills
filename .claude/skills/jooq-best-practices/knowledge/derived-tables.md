@@ -40,6 +40,31 @@ ctx.select(nested.fields())
 
 ---
 
+## Pattern: LATERAL derived tables as local column variables
+**Source**: [LATERAL is Your Friend to Create Local Column Variables in SQL](https://blog.jooq.org/lateral-is-your-friend-to-create-local-column-variables-in-sql) (2022-11-04)
+
+Use `CROSS JOIN LATERAL` to compute expressions once and reuse them throughout the query — like local variables in the `FROM` clause. Each LATERAL subquery can reference columns from preceding tables.
+
+```sql
+SELECT actor_id, name, name_length, COUNT(*)
+FROM actor
+CROSS JOIN LATERAL (
+  SELECT first_name || ' ' || last_name AS name
+) AS t1
+CROSS JOIN LATERAL (
+  SELECT length(name) AS name_length
+) AS t2
+JOIN film_actor AS fa USING (actor_id)
+GROUP BY actor_id, name, name_length
+ORDER BY COUNT(*) DESC
+```
+
+This avoids repeating the same expression in `SELECT`, `GROUP BY`, and `ORDER BY`. Variables declared in `FROM` are visible to all subsequent clauses.
+
+**Dialect**: Standard SQL (Db2, Firebird, MySQL, PostgreSQL, Snowflake). SQL Server and Oracle use `CROSS APPLY` instead of `CROSS JOIN LATERAL`.
+
+---
+
 ## Pattern: Simplify away unnecessary derived tables
 **Source**: [How to Write a Derived Table in jOOQ](https://blog.jooq.org/how-to-write-a-derived-table-in-jooq) (2023-02-24)
 

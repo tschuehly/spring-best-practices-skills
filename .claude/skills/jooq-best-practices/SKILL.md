@@ -24,7 +24,7 @@ Built from official docs + 783 blog articles (progressively updated).
 - [implicit-joins.md](knowledge/implicit-joins.md) — Implicit/explicit path joins, join elimination, path correlation, to-many joins
 - [code-generator.md](knowledge/code-generator.md) — Code generator configuration: visibility modifiers, custom strategies, TVP wrappers
 - [hierarchical-queries.md](knowledge/hierarchical-queries.md) — Records.intoHierarchy() collector, recursive CTEs for tree structures
-- [derived-tables.md](knowledge/derived-tables.md) — Derived table declaration, type-safe column refs, simplification
+- [derived-tables.md](knowledge/derived-tables.md) — Derived table declaration, type-safe column refs, simplification, LATERAL as local variables
 - [aggregate-functions.md](knowledge/aggregate-functions.md) — FILTER vs CASE in aggregates, performance considerations
 - [logging.md](knowledge/logging.md) — LoggingConnection for JDBC and R2DBC SQL statement logging
 - [native-sql-strategy.md](knowledge/native-sql-strategy.md) — When to use jOOQ DSL vs views/functions for complex static SQL
