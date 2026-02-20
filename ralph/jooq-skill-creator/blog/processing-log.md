@@ -21,6 +21,7 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 14 | To DAO or not to DAO                             | 2023-12-06 | jooq-api       | anti-patterns.md | merged  | Enriched N+1 entry: DAOs hide loops, prefer bulk SQL                 | | f063a3a |
 | 15 | JDBC Connection URLs of the Most Popular RDBMS   | 2023-12-01 | skip           | -          | skipped | Reference lookup table of JDBC URLs/drivers; no patterns             | | bdcfec0 |
 | 16 | How to Generate Package Private Code with jOOQ… | 2023-06-28 | jooq-api       | code-generator.md | added   | New topic file; visibility modifiers + custom generator strategies    | | 1e0329a |
+| 17 | How to Pass a Table Valued Parameter to a T-SQ… | 2023-04-25 | jooq-api       | code-generator.md | merged  | SQL Server TVP wrappers via code generator; dialect-specific          | | e4cdde9 |
 
 ---
 **Run summary** (2026-02-20 18:28):

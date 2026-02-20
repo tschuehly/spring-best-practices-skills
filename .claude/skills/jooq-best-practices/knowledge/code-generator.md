@@ -29,3 +29,33 @@ Use `<clean>false</clean>` on the target to avoid deleting other files in the sh
 **Since**: jOOQ 3.19 (inline strategy support)
 
 ---
+
+## Pattern: Table-valued parameters via code generation
+**Source**: [How to Pass a Table Valued Parameter to a T-SQL Function with jOOQ](https://blog.jooq.org/how-to-pass-a-table-valued-parameter-to-a-t-sql-function-with-jooq) (2023-04-25)
+**Dialect**: SQL Server (T-SQL)
+
+The code generator produces type-safe wrappers for T-SQL table-valued parameters (TVPs). For a user-defined table type and function:
+
+```sql
+CREATE TYPE u_number_table AS TABLE (column_value INTEGER);
+CREATE FUNCTION f_cross_multiply (@numbers u_number_table READONLY)
+RETURNS @result TABLE (i1 INTEGER, i2 INTEGER, product INTEGER) ...
+```
+
+jOOQ generates three artifacts:
+- **Record type** (`UNumberTableRecord`) — represents the TVP
+- **Element type** (`UNumberTableElementTypeRecord`) — models individual rows
+- **Function wrapper** (`Routines.fCrossMultiply()`) — type-safe call
+
+```java
+List<Integer> l = List.of(1, 2, 3);
+Result<FCrossMultiplyRecord> result = ctx
+    .selectFrom(fCrossMultiply(new UNumberTableRecord(
+        l.stream().map(UNumberTableElementTypeRecord::new).toList()
+    )))
+    .fetch();
+```
+
+This abstracts away native JDBC complexity (`SQLServerDataTable`) behind jOOQ's type-safe API.
+
+---
