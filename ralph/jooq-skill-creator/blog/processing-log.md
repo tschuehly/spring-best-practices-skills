@@ -105,6 +105,8 @@ Auto-appended by each iteration. Captures data for the blog post.
 
 | 65 | Why You Should Use jOOQ With Code Generation     | 2021-12-06 | jooq-api       | code-generator.md | merged  | Advocacy piece; extracted forced types, embedded types, schema mapping | | df2b678 |
 
+| 66 | Fun with PostGIS: Mandelbrot Set, Game of Life… | 2021-11-15 | skip           | -          | skipped | Creative PostGIS demos (Mandelbrot, GoL); no actionable patterns     | | ecae24b |
+
 ---
 **Run summary** (2026-02-20 18:59):
 - Iterations this run: 1
