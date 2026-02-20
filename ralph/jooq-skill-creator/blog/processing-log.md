@@ -117,6 +117,8 @@ Auto-appended by each iteration. Captures data for the blog post.
 
 | 71 | The jOOQ Parser Ignore Comment Syntax            | 2021-10-19 | jooq-api       | parser.md  | added   | New topic file; ignore markers for unsupported vendor SQL in migrations | | 2e079ae |
 
+| 72 | Use jOOλ's Sneaky Throw to Avoid Checked Excep… | 2021-10-07 | skip           | -          | skipped | Java utility piece about jOOλ Sneaky.supplier(); no SQL/jOOQ content | | e93802b |
+
 ---
 **Run summary** (2026-02-20 18:59):
 - Iterations this run: 1
