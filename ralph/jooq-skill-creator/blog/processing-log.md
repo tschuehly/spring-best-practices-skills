@@ -107,6 +107,8 @@ Auto-appended by each iteration. Captures data for the blog post.
 
 | 66 | Fun with PostGIS: Mandelbrot Set, Game of Life… | 2021-11-15 | skip           | -          | skipped | Creative PostGIS demos (Mandelbrot, GoL); no actionable patterns     | | ecae24b |
 
+| 67 | PostgreSQL 14's enable_memoize For Improved Pe… | 2021-11-05 | skip           | -          | skipped | PG optimizer internals (enable_memoize config flag); not actionable   | | 73b9892 |
+
 ---
 **Run summary** (2026-02-20 18:59):
 - Iterations this run: 1
