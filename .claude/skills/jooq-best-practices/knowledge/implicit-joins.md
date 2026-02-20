@@ -176,6 +176,37 @@ ctx.select(ACTOR.FIRST_NAME, ACTOR.LAST_NAME)
 
 ---
 
+## Pattern: Implicit joins in DML (UPDATE / DELETE)
+**Source**: [jOOQ 3.17 Supports Implicit Join also in DML](https://blog.jooq.org/jooq-3-17-supports-implicit-join-also-in-dml) (2022-08-25)
+**Since**: jOOQ 3.17
+
+Use path expressions in WHERE clauses of UPDATE and DELETE statements. jOOQ translates them to correlated subqueries (universal) or DML JOIN syntax (MySQL/MariaDB).
+
+```java
+// Update books where the language code is "en"
+ctx.update(BOOK)
+   .set(BOOK.STATUS, SOLD_OUT)
+   .where(BOOK.language().CD.eq("en"))
+   .execute();
+
+// Delete books by language
+ctx.delete(BOOK)
+   .where(BOOK.language().CD.eq("en"))
+   .execute();
+```
+
+Generated SQL (correlated subquery — most dialects):
+
+```sql
+UPDATE book SET status = 'SOLD OUT'
+WHERE (SELECT language.cd FROM language
+       WHERE book.language_id = language.id) = 'en';
+```
+
+**Dialect**: MySQL/MariaDB use DML JOIN syntax instead; Oracle may use updatable inline views.
+
+---
+
 ## Pattern: MULTISET with implicit path joins
 **Source**: [jOOQ 3.19's new Explicit and Implicit to-many path joins](https://blog.jooq.org/jooq-3-19s-new-explicit-and-implicit-to-many-path-joins) (2023-12-28)
 **Since**: jOOQ 3.19
