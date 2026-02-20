@@ -59,3 +59,23 @@ Result<FCrossMultiplyRecord> result = ctx
 This abstracts away native JDBC complexity (`SQLServerDataTable`) behind jOOQ's type-safe API.
 
 ---
+
+## Pattern: Version compatibility between runtime and code generator
+**Source**: [Cannot resolve symbol 'VERSION_3_17' in jOOQ generated code](https://blog.jooq.org/cannot-resolve-symbol-version_3_17-in-jooq-generated-code) (2022-08-30)
+**Since**: jOOQ 3.16
+
+Starting with jOOQ 3.16, generated code includes a version reference constant that triggers a compile-time error if the runtime version is older than the code generator version. This catches version mismatches early.
+
+**Rules**:
+- Generated code is **forward compatible** — older generators work with newer runtimes
+- Runtime API is **backward compatible** — newer runtimes work with older generated code
+- **Newer generators with older runtimes are NOT supported**
+
+**Best practice**: always keep runtime version >= code generator version. Ideally, match both versions exactly.
+
+To disable the check (not recommended):
+```xml
+<jooqVersionReference>false</jooqVersionReference>
+```
+
+---

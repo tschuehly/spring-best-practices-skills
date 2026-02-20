@@ -38,6 +38,7 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 30 | A Brief Overview over the Most Common jOOQ Ty… | 2022-09-06 | jooq-api       | type-system.md | added   | New topic file; type hierarchy cheat sheet: Step types, DSL vs DSLContext, Result vs Cursor | | 685b558 |
 | 31 | How to Plot an ASCII Bar Chart with SQL         | 2022-09-01 | skip           | -          | skipped | Novelty ASCII chart rendering; underlying SQL primitives already known | | cde8be2 |
 | 32 | The Second Best Way to Fetch a Spring Data JP… | 2022-08-30 | jooq-api       | multiset.md | merged  | MULTISET+mapping() DTO projection & MULTISET_AGG pattern added       | | c61e6dc |
+| 33 | Cannot resolve symbol 'VERSION_3_17' in jOOQ… | 2022-08-30 | jooq-api       | code-generator.md | merged  | Version compatibility check since 3.16; runtime >= codegen rule      | | cb39547 |
 
 ---
 **Run summary** (2026-02-20 18:28):
