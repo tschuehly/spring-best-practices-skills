@@ -33,6 +33,7 @@ Built from official docs + 783 blog articles (progressively updated).
 - [dml-returning.md](knowledge/dml-returning.md) — RETURNING data from INSERT/UPDATE/DELETE across dialects, data change delta tables
 - [computed-columns.md](knowledge/computed-columns.md) — Virtual client-side computed columns as reusable expressions, context-aware projections
 - [transactions.md](knowledge/transactions.md) — Explicit programmatic transactions, NESTED savepoints, R2DBC reactive transactions
+- [sequences.md](knowledge/sequences.md) — Fetching single/batch sequence values across dialects
 
 ## Core rules (always apply)
 

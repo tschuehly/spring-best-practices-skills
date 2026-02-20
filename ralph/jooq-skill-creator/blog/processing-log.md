@@ -80,6 +80,8 @@ Auto-appended by each iteration. Captures data for the blog post.
 - Topic files: 10
 - Open uncertainties: 1
 
+| 50 | How to Fetch Sequence Values with jOOQ           | 2022-03-01 | jooq-api       | sequences.md | added   | New topic file; nextval()/nextvals(n) across dialects, GENERATE_SERIES batch | | d8ddc5f |
+
 ---
 **Run summary** (2026-02-20 18:59):
 - Iterations this run: 1
