@@ -26,6 +26,8 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 19 | 3.18.0 Release with Support for more Diagnosti… | 2023-03-08 | skip           | -          | skipped | Release announcement; no actionable code patterns                    | | 9895c96 |
 | 20 | How to use jOOQ's Converters with UNION Operat… | 2023-03-02 | jooq-api       | fetching-mapping.md | merged  | Converter+UNION pitfall: client-side vs server-side transforms       | | 5a1ec5f |
 
+| 21 | How to Write a Derived Table in jOOQ             | 2023-02-24 | jooq-api       | derived-tables.md | added   | New topic; declare-before-use, field extraction for type safety       | | 3198aee |
+
 ---
 **Run summary** (2026-02-20 18:28):
 - Iterations this run: 3
