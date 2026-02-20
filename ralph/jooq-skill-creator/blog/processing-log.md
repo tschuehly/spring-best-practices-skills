@@ -35,6 +35,7 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 27 | LATERAL is Your Friend to Create Local Column… | 2022-11-04 | sql-pattern    | derived-tables.md | merged  | LATERAL as local column variables; CROSS APPLY for SQL Server/Oracle  | | 87215bc |
 | 28 | Calling Procedures with Default Parameters us… | 2022-10-21 | jooq-api       | stored-procedures.md | added   | New topic; named param syntax for default args across 5 dialects      | |
 | 29 | Using jOOQ's Implicit Join From Within the JO… | 2022-09-13 | jooq-api       | implicit-joins.md | merged  | ON-clause implicit paths + synthetic FK config; complements 3.19 entries | | 8d59049 | 17a3ddf |
+| 30 | A Brief Overview over the Most Common jOOQ Ty… | 2022-09-06 | jooq-api       | type-system.md | added   | New topic file; type hierarchy cheat sheet: Step types, DSL vs DSLContext, Result vs Cursor | | 685b558 |
 
 ---
 **Run summary** (2026-02-20 18:28):
