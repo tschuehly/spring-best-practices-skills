@@ -17,6 +17,7 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 10 | jOOQ 3.19's new Explicit and Implicit to-many… | 2023-12-28 | jooq-api       | implicit-joins.md | merged  | 3 new patterns: explicit path joins, path correlation, MULTISET+paths | 48005b6 |
 | 11 | Workaround for MySQL's "can't specify target … | 2023-12-20 | skip           | -          | skipped | MySQL-only limitation; PostgreSQL not affected                        | | dd29204 |
 | 12 | jOOQ 3.19.0 Released with DuckDB, Trino, Oracl… | 2023-12-15 | skip           | -          | skipped | Release announcement; join path features already in implicit-joins.md | | ac37ffc |
+| 13 | Maven Coordinates of the most popular JDBC Dri… | 2023-12-13 | skip           | -          | skipped | Reference list of JDBC driver Maven coords; no patterns              | | 2493bdd |
 
 ---
 **Run summary** (2026-02-20 18:28):
