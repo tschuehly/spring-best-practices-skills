@@ -102,6 +102,48 @@ val flux: Flux<Record1<String>> = Flux.from(
 
 ---
 
+## Pattern: Project table references as nested TableRecords
+**Source**: [Projecting Type Safe Nested TableRecords with jOOQ 3.17](https://blog.jooq.org/projecting-type-safe-nested-tablerecords-with-jooq-3-17) (2022-02-21)
+**Since**: jOOQ 3.17
+
+Project entire table expressions directly in SELECT — `Table<R>` implements `SelectField<R>`. Results are fully typed `Record2<ActorRecord, CategoryRecord>` with getter/setter access.
+
+```java
+Result<Record2<ActorRecord, CategoryRecord>> result =
+ctx.selectDistinct(ACTOR, CATEGORY)
+   .from(ACTOR)
+   .join(FILM_ACTOR).using(FILM_ACTOR.ACTOR_ID)
+   .join(FILM_CATEGORY).using(FILM_CATEGORY.FILM_ID)
+   .join(CATEGORY).using(CATEGORY.CATEGORY_ID)
+   .fetch();
+```
+
+For granular control (project only specific columns as a nested record), use ad-hoc `row()` expressions:
+
+```java
+Result<Record2<Record3<Long, String, String>, Record2<Long, String>>> result =
+ctx.selectDistinct(
+       row(ACTOR.ACTOR_ID, ACTOR.FIRST_NAME, ACTOR.LAST_NAME).as("actor"),
+       row(CATEGORY.CATEGORY_ID, CATEGORY.NAME).as("category"))
+   .from(ACTOR)
+   .join(FILM_ACTOR).using(FILM_ACTOR.ACTOR_ID)
+   .join(FILM_CATEGORY).using(FILM_CATEGORY.FILM_ID)
+   .join(CATEGORY).using(CATEGORY.CATEGORY_ID)
+   .fetch();
+```
+
+Combines elegantly with implicit joins:
+
+```java
+ctx.select(CUSTOMER, CUSTOMER.address().city().country())
+   .from(CUSTOMER)
+   .fetch();
+```
+
+**Caveat**: Projecting a table reference translates to `TABLE.*` — all columns are fetched regardless of need. For frequently used projections, consider database views or explicit column selection with `row()`.
+
+---
+
 ## Pattern: Don't use ad-hoc converters with UNION — move logic server-side
 **Source**: [How to use jOOQ's Converters with UNION Operations](https://blog.jooq.org/how-to-use-jooqs-converters-with-union-operations) (2023-03-02)
 **Since**: jOOQ 3.15 (ad-hoc converters)
