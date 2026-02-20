@@ -101,6 +101,8 @@ Auto-appended by each iteration. Captures data for the blog post.
 
 | 63 | How to customise a jOOQ Configuration that is… | 2021-12-16 | jooq-api       | spring-boot-config.md | added   | New topic file; DefaultConfigurationCustomizer since Spring Boot 2.5  | | 0f8a52b |
 
+| 64 | Using JDK Collectors to De-duplicate parent/ch… | 2021-12-09 | jooq-api       | multiset.md | skipped | Pre-MULTISET join dedup; all patterns already covered by newer entries | | 898d455 |
+
 ---
 **Run summary** (2026-02-20 18:59):
 - Iterations this run: 1
