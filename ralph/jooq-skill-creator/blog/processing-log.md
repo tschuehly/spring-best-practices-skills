@@ -24,6 +24,7 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 17 | How to Pass a Table Valued Parameter to a T-SQ… | 2023-04-25 | jooq-api       | code-generator.md | merged  | SQL Server TVP wrappers via code generator; dialect-specific          | | e4cdde9 |
 | 18 | How to Turn a List of Flat Elements into a Hie… | 2023-03-24 | jooq-api       | hierarchical-queries.md | added   | New topic; Records.intoHierarchy() collector (since 3.19)            | | 5959a3f |
 | 19 | 3.18.0 Release with Support for more Diagnosti… | 2023-03-08 | skip           | -          | skipped | Release announcement; no actionable code patterns                    | | 9895c96 |
+| 20 | How to use jOOQ's Converters with UNION Operat… | 2023-03-02 | jooq-api       | fetching-mapping.md | merged  | Converter+UNION pitfall: client-side vs server-side transforms       | | 5a1ec5f |
 
 ---
 **Run summary** (2026-02-20 18:28):

@@ -44,3 +44,33 @@ dsl.select(BOOK.TITLE, BOOK.PUBLISHED_IN.convertFrom { Year.of(it) })
 ```
 
 ---
+
+## Pattern: Don't use ad-hoc converters with UNION — move logic server-side
+**Source**: [How to use jOOQ's Converters with UNION Operations](https://blog.jooq.org/how-to-use-jooqs-converters-with-union-operations) (2023-03-02)
+**Since**: jOOQ 3.15 (ad-hoc converters)
+
+Ad-hoc converters are **client-side post-fetch** transformations. In a UNION, jOOQ only considers the row type of the **first subquery** when fetching results, and the DB doesn't know about converters during deduplication. Converters on non-first subqueries silently do nothing.
+
+```kotlin
+// BAD — converter on second subquery never executes
+dsl.select(BOOK.ID)
+    .from(BOOK)
+    .union(
+        select(AUTHOR.ID.convertFrom { -it })
+            .from(AUTHOR)
+    )
+    .fetch()
+
+// GOOD — use a server-side function instead
+dsl.select(BOOK.ID)
+    .from(BOOK)
+    .union(
+        select(AUTHOR.ID.neg())
+            .from(AUTHOR)
+    )
+    .fetch()
+```
+
+If you must use a converter with UNION, apply it to **all subqueries** (at minimum the first one).
+
+---
