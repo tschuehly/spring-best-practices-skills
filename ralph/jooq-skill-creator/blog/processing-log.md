@@ -37,6 +37,7 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 29 | Using jOOQ's Implicit Join From Within the JO… | 2022-09-13 | jooq-api       | implicit-joins.md | merged  | ON-clause implicit paths + synthetic FK config; complements 3.19 entries | | 8d59049 | 17a3ddf |
 | 30 | A Brief Overview over the Most Common jOOQ Ty… | 2022-09-06 | jooq-api       | type-system.md | added   | New topic file; type hierarchy cheat sheet: Step types, DSL vs DSLContext, Result vs Cursor | | 685b558 |
 | 31 | How to Plot an ASCII Bar Chart with SQL         | 2022-09-01 | skip           | -          | skipped | Novelty ASCII chart rendering; underlying SQL primitives already known | | cde8be2 |
+| 32 | The Second Best Way to Fetch a Spring Data JP… | 2022-08-30 | jooq-api       | multiset.md | merged  | MULTISET+mapping() DTO projection & MULTISET_AGG pattern added       | | c61e6dc |
 
 ---
 **Run summary** (2026-02-20 18:28):

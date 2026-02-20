@@ -37,6 +37,53 @@ jOOQ serializes MULTISET results as arrays of arrays, not arrays of objects. Sin
 
 ---
 
+## Pattern: Type-safe DTO projection with MULTISET + mapping()
+**Source**: [The Second Best Way to Fetch a Spring Data JPA DTO Projection](https://blog.jooq.org/the-second-best-way-to-fetch-a-spring-data-jpa-dto-projection) (2022-08-30)
+**Since**: jOOQ 3.15
+
+Use `convertFrom` with `mapping()` to map MULTISET results directly into nested DTOs/records with compile-time type safety. The constructor reference defines the mapping — change the schema, regenerate code, and mismatches become compile errors.
+
+```java
+record PostCommentDTO(Long id, String review) {}
+record PostDTO(Long id, String title, List<PostCommentDTO> comments) {}
+
+List<PostDTO> result = ctx.select(
+        POST.ID,
+        POST.TITLE,
+        multiset(
+            select(POST_COMMENT.ID, POST_COMMENT.REVIEW)
+            .from(POST_COMMENT)
+            .where(POST_COMMENT.POST_ID.eq(POST.ID))
+        ).convertFrom(r -> r.map(mapping(PostCommentDTO::new)))
+    )
+    .from(POST)
+    .where(POST.TITLE.like(postTitle))
+    .fetch(mapping(PostDTO::new));
+```
+
+---
+
+## Pattern: MULTISET_AGG for flat-to-nested without correlated subquery
+**Source**: [The Second Best Way to Fetch a Spring Data JPA DTO Projection](https://blog.jooq.org/the-second-best-way-to-fetch-a-spring-data-jpa-dto-projection) (2022-08-30)
+**Since**: jOOQ 3.15
+
+`multisetAgg()` aggregates columns from a joined table into a nested collection, avoiding the correlated subquery of `multiset()`. Combine with implicit joins for concise syntax.
+
+```java
+List<PostDTO> result = ctx.select(
+        POST_COMMENT.post().ID,
+        POST_COMMENT.post().TITLE,
+        multisetAgg(POST_COMMENT.ID, POST_COMMENT.REVIEW)
+            .convertFrom(r -> r.map(mapping(PostCommentDTO::new)))
+    )
+    .from(POST_COMMENT)
+    .where(POST_COMMENT.post().TITLE.like(postTitle))
+    .groupBy(POST_COMMENT.post().ID, POST_COMMENT.post().TITLE)
+    .fetch(mapping(PostDTO::new));
+```
+
+---
+
 ## Pattern: Configure MULTISET emulation
 **Source**: [jOOQ Official Docs — MULTISET value constructor](https://www.jooq.org/doc/3.20/manual/sql-building/column-expressions/multiset-value-constructor/) (docs)
 **Since**: jOOQ 3.15
