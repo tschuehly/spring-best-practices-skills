@@ -15,6 +15,7 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 9 | A Hidden Benefit of Implicit Joins: Join Elimin… | 2024-01-10 | jooq-api       | implicit-joins.md | added   | New topic; path joins + auto join elimination (since 3.19)           | | 8abc86a |
 
 | 10 | jOOQ 3.19's new Explicit and Implicit to-many… | 2023-12-28 | jooq-api       | implicit-joins.md | merged  | 3 new patterns: explicit path joins, path correlation, MULTISET+paths | 48005b6 |
+| 11 | Workaround for MySQL's "can't specify target … | 2023-12-20 | skip           | -          | skipped | MySQL-only limitation; PostgreSQL not affected                        | | dd29204 |
 
 ---
 **Run summary** (2026-02-20 18:28):
