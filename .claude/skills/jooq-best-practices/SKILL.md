@@ -25,6 +25,7 @@ Built from official docs + 783 blog articles (progressively updated).
 - [code-generator.md](knowledge/code-generator.md) — Code generator configuration: visibility modifiers, custom strategies, TVP wrappers
 - [hierarchical-queries.md](knowledge/hierarchical-queries.md) — Records.intoHierarchy() collector, recursive CTEs for tree structures
 - [derived-tables.md](knowledge/derived-tables.md) — Derived table declaration, type-safe column refs, simplification
+- [aggregate-functions.md](knowledge/aggregate-functions.md) — FILTER vs CASE in aggregates, performance considerations
 
 ## Core rules (always apply)
 
@@ -39,3 +40,4 @@ Built from official docs + 783 blog articles (progressively updated).
 - Use `EXISTS()` not `COUNT(*) > 0` for existence checks
 - Use `NOT EXISTS` instead of `NOT IN` with nullable columns
 - Prefer `UNION ALL` over `UNION` unless dedup is needed
+- Prefer `FILTER (WHERE ...)` over `CASE` in aggregates — more readable and faster on PostgreSQL

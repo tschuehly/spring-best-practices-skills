@@ -27,6 +27,7 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 20 | How to use jOOQ's Converters with UNION Operat… | 2023-03-02 | jooq-api       | fetching-mapping.md | merged  | Converter+UNION pitfall: client-side vs server-side transforms       | | 5a1ec5f |
 
 | 21 | How to Write a Derived Table in jOOQ             | 2023-02-24 | jooq-api       | derived-tables.md | added   | New topic; declare-before-use, field extraction for type safety       | | 3198aee |
+| 22 | The Performance Impact of SQL's FILTER Clause    | 2023-02-06 | sql-pattern    | aggregate-functions.md | added   | New topic; FILTER ~8% faster than CASE on PG 15                      | | ed1afbd |
 
 ---
 **Run summary** (2026-02-20 18:28):
