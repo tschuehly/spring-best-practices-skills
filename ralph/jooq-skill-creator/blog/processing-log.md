@@ -93,6 +93,8 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 58 | Detect Accidental Blocking Calls when Using R… | 2022-01-28 | skip           | -          | skipped | jOOQ internals: @Blocking annotation for R2DBC IDE warnings          | | 5ff5cc8 |
 | 59 | A Rarely Seen, but Useful SQL Feature: CORRE… | 2022-01-14 | skip           | -          | skipped | CORRESPONDING for set ops; only HSQLDB supports it, not actionable   | | 63ecb69 |
 
+| 60 | Using jOOQ's DiagnosticsConnection to detect N… | 2022-01-11 | jooq-api       | logging.md | merged  | N+1 detection via DiagnosticsConnection; framework-agnostic            | | 39cab94 |
+
 ---
 **Run summary** (2026-02-20 18:59):
 - Iterations this run: 1
