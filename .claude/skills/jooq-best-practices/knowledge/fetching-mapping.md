@@ -45,6 +45,63 @@ dsl.select(BOOK.TITLE, BOOK.PUBLISHED_IN.convertFrom { Year.of(it) })
 
 ---
 
+## Pattern: Choose the right fetch method for your use case
+**Source**: [The Many Different Ways to Fetch Data in jOOQ](https://blog.jooq.org/the-many-different-ways-to-fetch-data-in-jooq) (2022-05-19)
+
+| Method | When to use |
+|--------|-------------|
+| `fetch()` | Default — loads all rows into memory, closes JDBC resources immediately |
+| `fetchLazy()` | Large result sets — returns a `Cursor<R>` wrapping the JDBC ResultSet (must close via try-with-resources) |
+| `fetchStream()` | Like `fetchLazy()` but returns a `Stream<R>` (must close via try-with-resources) |
+| `collect(collector)` | Transform results directly with a JDK `Collector` — no intermediate `Result` object |
+| `fetch().stream()` | Eager fetch + stream — safe (no resource leak) but materializes all rows first |
+
+```kotlin
+// Lazy cursor for large result sets
+dsl.selectFrom(BOOK).fetchLazy().use { cursor ->
+    for (record in cursor) { /* process one at a time */ }
+}
+
+// Stream with resource management
+dsl.selectFrom(BOOK).fetchStream().use { stream ->
+    stream.forEach { /* process */ }
+}
+
+// Direct collect — no intermediate Result
+val bookMap: Map<Int, String> = dsl.select(BOOK.ID, BOOK.TITLE)
+    .from(BOOK)
+    .collect(Records.intoMap())
+```
+
+---
+
+## Pattern: Single-record fetch methods — fetchOne vs fetchOptional vs fetchSingle
+**Source**: [The Many Different Ways to Fetch Data in jOOQ](https://blog.jooq.org/the-many-different-ways-to-fetch-data-in-jooq) (2022-05-19)
+
+| Method | Returns | 0 rows | 2+ rows |
+|--------|---------|--------|---------|
+| `fetchOne()` | `R?` (nullable) | `null` | throws `TooManyRowsException` |
+| `fetchOptional()` | `Optional<R>` | `Optional.empty()` | throws `TooManyRowsException` |
+| `fetchSingle()` | `R` (non-null) | throws `NoDataFoundException` | throws `TooManyRowsException` |
+
+Use `fetchSingle()` when exactly one row is expected (e.g., lookup by PK). Use `fetchOptional()` for nullable lookups. Avoid `fetchOne()` in Kotlin — prefer `fetchOptional()` or `fetchSingle()` for clearer intent.
+
+---
+
+## Pattern: Reactive streams from ResultQuery
+**Source**: [The Many Different Ways to Fetch Data in jOOQ](https://blog.jooq.org/the-many-different-ways-to-fetch-data-in-jooq) (2022-05-19)
+**Since**: jOOQ 3.15
+
+`ResultQuery<R>` implements `Publisher<R>`, so any jOOQ query can be wrapped directly by Project Reactor or RxJava:
+
+```kotlin
+val flux: Flux<Record1<String>> = Flux.from(
+    dsl.select(BOOK.TITLE).from(BOOK)
+)
+```
+
+---
+
 ## Pattern: Don't use ad-hoc converters with UNION — move logic server-side
 **Source**: [How to use jOOQ's Converters with UNION Operations](https://blog.jooq.org/how-to-use-jooqs-converters-with-union-operations) (2023-03-02)
 **Since**: jOOQ 3.15 (ad-hoc converters)
