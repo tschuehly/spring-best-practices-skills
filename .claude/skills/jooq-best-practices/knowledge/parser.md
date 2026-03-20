@@ -99,3 +99,33 @@ Connection paddedConnection = ctx.parsingConnection();
 > **Note**: Padding is a workaround. Prefer array types or temporary tables when the database supports them — they avoid the variable-length bind parameter problem entirely.
 
 ---
+
+## Pattern: Transform Oracle-style implicit joins to ANSI JOIN
+**Source**: [Automatically Transform Oracle Style Implicit Joins to ANSI JOIN using jOOQ](https://blog.jooq.org/automatically-transform-oracle-style-implicit-joins-to-ansi-join-using-jooq) (2020-11-17)
+**Since**: jOOQ 3.14
+
+jOOQ's parser can automatically convert legacy Oracle-style implicit joins (comma-separated tables + WHERE conditions) to modern ANSI JOIN syntax:
+
+```sql
+-- Legacy Oracle implicit join style (input)
+SELECT * FROM actor a, film_actor fa, film f
+WHERE a.actor_id = fa.actor_id
+AND fa.film_id = f.film_id
+```
+
+Produces:
+
+```sql
+-- ANSI JOIN style (output)
+SELECT * FROM actor a
+JOIN film_actor fa ON a.actor_id = fa.actor_id
+JOIN film f ON fa.film_id = f.film_id
+```
+
+**Side effect**: A query missing a join predicate (cartesian product) is exposed as a `CROSS JOIN`, making the mistake syntactically obvious.
+
+**Also handles**: Oracle's `(+)` outer join notation, converting it to ANSI LEFT/RIGHT JOIN.
+
+**Access**: online at https://www.jooq.org/translate, or programmatically for batch migration of legacy SQL.
+
+---

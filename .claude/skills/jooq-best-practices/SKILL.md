@@ -36,7 +36,7 @@ Built from official docs + 783 blog articles (progressively updated).
 - [sequences.md](knowledge/sequences.md) — Fetching single/batch sequence values across dialects
 - [qom-traverser.md](knowledge/qom-traverser.md) — Query Object Model inspection, expression tree traversal, SQL transformation with $replace()
 - [spring-boot-config.md](knowledge/spring-boot-config.md) — DefaultConfigurationCustomizer for Spring Boot jOOQ config; MySQL allowMultiQueries flag
-- [parser.md](knowledge/parser.md) — Parser ignore comments, parsing connection for dialect translation, IN list padding, online SQL translation tool
+- [parser.md](knowledge/parser.md) — Parser ignore comments, parsing connection for dialect translation, IN list padding, Oracle implicit-join-to-ANSI-JOIN transformation, online SQL translation tool
 - [result-formatting.md](knowledge/result-formatting.md) — ASCII chart output, formatChart() for console visualization
 - [sql-json.md](knowledge/sql-json.md) — SQL/JSON dialect pitfalls: MySQL type degradation, Oracle CLOB, GROUP_CONCAT truncation, NULL semantics
 - [r2dbc-reactive.md](knowledge/r2dbc-reactive.md) — R2DBC setup, reactive query execution with Flux/Mono, automatic connection lifecycle management

@@ -169,3 +169,4 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 92 | Translating Stored Procedures Between Dial… | 2021-02-10 | jooq-api       | stored-procedures.md, parser.md | added  | for_().in() loop pattern; SQL translation tool reference; logged uncertainty on var() vs variable() | | 638a0d3 |
 | 93 | Implementing a generic REDUCE aggregate fun… | 2021-02-08 | sql-pattern    | aggregate-functions.md | added  | Simulating REDUCE/fold via recursive CTE + ARRAY_AGG + WITH ORDINALITY (PostgreSQL-specific) | | 24e2968 |
 | 94 | jOOQ Internals: Pushing up SQL fragments | 2021-02-04 | skip | - | skipped | jOOQ internals/development process article | | 2145e40 |
+| 95 | Automatically Transform Oracle Style Impli… | 2020-11-17 | jooq-api       | parser.md | added  | Oracle implicit join (comma FROM + WHERE) → ANSI JOIN; also handles (+) outer join notation | | 4ceb583 |
