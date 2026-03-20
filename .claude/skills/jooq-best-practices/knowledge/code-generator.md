@@ -138,6 +138,50 @@ Use Testcontainers to spin up a real database during the build for jOOQ code gen
 
 ---
 
+## Pattern: LiquibaseDatabase for code generation without a running database
+**Source**: [jOOQ 3.13 Released with More API and Tooling for DDL Management](https://blog.jooq.org/jooq-3-13-released-with-more-api-and-tooling-for-ddl-management) (2020-02-14)
+**Since**: jOOQ 3.13
+
+Use `LiquibaseDatabase` to simulate Liquibase migrations in-memory for jOOQ code generation — no real database connection required. The database schema is derived directly from Liquibase changelogs at code-gen time.
+
+```xml
+<generator>
+  <database>
+    <name>org.jooq.meta.extensions.liquibase.LiquibaseDatabase</name>
+    <properties>
+      <property>
+        <key>scripts</key>
+        <value>src/main/resources/db/changelog/db.changelog-master.xml</value>
+      </property>
+    </properties>
+  </database>
+</generator>
+```
+
+Useful in CI or offline environments where spinning up a Testcontainers database is not feasible.
+
+---
+
+## Pattern: Programmatic schema diffing with Meta.migrateTo()
+**Source**: [jOOQ 3.13 Released with More API and Tooling for DDL Management](https://blog.jooq.org/jooq-3-13-released-with-more-api-and-tooling-for-ddl-management) (2020-02-14)
+**Since**: jOOQ 3.13
+
+Use `Meta.migrateTo(Meta)` to compare two schema states and generate a migration script programmatically. Useful for custom migration tooling or schema drift detection.
+
+```java
+// Compare live database schema against target DDL
+Meta current = DSL.using(connection).meta();
+Meta target  = DSL.using(connection).meta(targetDDL); // or from another source
+Queries migration = current.migrateTo(target);
+
+// Render and execute the migration
+for (Query q : migration) {
+    System.out.println(ctx.renderInlined(q));
+}
+```
+
+---
+
 ## Pattern: Schema mapping for multitenancy
 **Source**: [Why You Should Use jOOQ With Code Generation](https://blog.jooq.org/why-you-should-use-jooq-with-code-generation) (2021-12-06)
 
