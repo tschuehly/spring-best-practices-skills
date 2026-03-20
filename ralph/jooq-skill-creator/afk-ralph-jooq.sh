@@ -8,19 +8,53 @@ if [ -z "$1" ]; then
 fi
 
 cd "$(dirname "$0")"
+PROJECT_DIR="$(cd ../.. && pwd)"
 unset CLAUDECODE
+
+CLAUDE_ARGS=(--dangerously-skip-permissions --model claude-sonnet-4-6 --add-dir ~/.claude/skills \
+  --verbose --output-format stream-json -p "@ralph/jooq-skill-creator/process-jooq-article.md")
 
 START_TIME=$(date +%s)
 ITERATIONS=0
+
+stream_output() {
+  local result_file="$1"
+  while IFS= read -r line; do
+    type=$(echo "$line" | jq -r '.type // empty' 2>/dev/null)
+    case "$type" in
+      assistant)
+        text=$(echo "$line" | jq -r '.message.content[]? | select(.type=="text") | .text' 2>/dev/null)
+        [ -n "$text" ] && echo "$text"
+        ;;
+      result)
+        result_text=$(echo "$line" | jq -r '.result // empty' 2>/dev/null)
+        echo ""
+        echo "=== Result ==="
+        echo "$result_text"
+        echo "$result_text" > "$result_file"
+        ;;
+    esac
+  done
+}
+
+run_claude() {
+  local result_file="$1"
+  if docker sandbox ls 2>/dev/null | grep -q "claude-ralph-jooq.*running"; then
+    docker sandbox exec -w "$PROJECT_DIR" claude-ralph-jooq claude "${CLAUDE_ARGS[@]}" | stream_output "$result_file"
+  else
+    echo "Starting sandbox..."
+    docker sandbox run claude-ralph-jooq -- "${CLAUDE_ARGS[@]}" | stream_output "$result_file"
+  fi
+}
 
 for ((i=1; i<=$1; i++)); do
   ((ITERATIONS++))
   echo "=== Iteration $i/$1 ==="
 
-  result=$(docker sandbox run claude-ralph-jooq -- --dangerously-skip-permissions --model claude-sonnet-4-6 --add-dir ~/.claude/skills -p \
-    "@ralph/jooq-skill-creator/process-jooq-article.md")
-
-  echo "$result"
+  RESULT_FILE=$(mktemp)
+  run_claude "$RESULT_FILE"
+  result=$(cat "$RESULT_FILE" 2>/dev/null)
+  rm -f "$RESULT_FILE"
 
   # Extract article title + action from last table row (ignore summary lines)
   last_row=$(grep '^|' blog/processing-log.md | grep -v '^|[-#]' | tail -1)
