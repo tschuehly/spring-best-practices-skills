@@ -215,3 +215,4 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 130 | Calculating Weighted Averages When Joining… | 2019-03-15 | sql-pattern    | aggregate-functions.md | added   | join-multiplication distortion; weighted avg fix and pre-aggregate alternative | | 1e650d2 |
 | 131 | How to Statically Override the Default Sett… | 2019-03-14 | jooq-api       | spring-boot-config.md | merged  | Static jooq-settings.xml classpath override; RenderNameStyle superseded by RenderQuotedNames (3.12+) | | a458273 |
 | 132 | How to Calculate a Cumulative Percentage in… | 2019-02-14 | sql-pattern    | window-functions.md | added   | Cumulative % via SUM OVER ORDER BY / SUM OVER (); nested sum(sum()) trick | | fafd59e |
+| 133 | Lesser Known jOOλ Features: Useful Collect… | 2019-02-11 | skip           | -          | skipped | Article is about jOOλ stream library, not jOOQ SQL DSL               | | b986427 |
