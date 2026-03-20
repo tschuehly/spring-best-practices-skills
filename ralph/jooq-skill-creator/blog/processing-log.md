@@ -171,3 +171,4 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 94 | jOOQ Internals: Pushing up SQL fragments | 2021-02-04 | skip | - | skipped | jOOQ internals/development process article | | 2145e40 |
 | 95 | Automatically Transform Oracle Style Impli… | 2020-11-17 | jooq-api       | parser.md | added  | Oracle implicit join (comma FROM + WHERE) → ANSI JOIN; also handles (+) outer join notation | | 4ceb583 |
 | 96 | jOOQ 3.14 Released With SQL/XML and SQL/JS… | 2020-10-20 | skip           | -          | skipped | Release announcement; JSON/XML in sql-json.md, MERGE in merge-upsert.md, Kotlin in code-generator.md | | 36b8e11 |
+| 97 | Using jOOQ 3.14 Synthetic FK to Write Im… | 2020-10-13 | jooq-api       | implicit-joins.md | added  | Composite key synthetic FKs + unique key refs for INFORMATION_SCHEMA views | | c434fe7 |

@@ -151,6 +151,43 @@ Requires **synthetic foreign keys** when the schema lacks real FKs (e.g., `pg_ca
 
 ---
 
+## Pattern: Synthetic foreign keys with composite keys and unique key references
+**Source**: [Using jOOQ 3.14 Synthetic Foreign Keys to Write Implicit Joins on Views](https://blog.jooq.org/using-jooq-3-14-synthetic-foreign-keys-to-write-implicit-joins-on-views) (2020-10-13)
+**Since**: jOOQ 3.14
+
+When views lack native FK constraints (e.g., `INFORMATION_SCHEMA` views), declare synthetic foreign keys in the code generator config to enable implicit joins. Supports composite keys and references to unique keys (not just primary keys).
+
+```xml
+<syntheticObjects>
+  <primaryKeys>
+    <primaryKey>
+      <tables>DOMAIN_CONSTRAINTS</tables>
+      <fields>
+        <field>CONSTRAINT_CATALOG</field>
+        <field>CONSTRAINT_SCHEMA</field>
+        <field>CONSTRAINT_NAME</field>
+      </fields>
+    </primaryKey>
+  </primaryKeys>
+  <foreignKeys>
+    <foreignKey>
+      <tables>CHECK_CONSTRAINTS</tables>
+      <fields>
+        <field>CONSTRAINT_CATALOG</field>
+        <field>CONSTRAINT_SCHEMA</field>
+        <field>CONSTRAINT_NAME</field>
+      </fields>
+      <referencedTable>DOMAIN_CONSTRAINTS</referencedTable>
+      <!-- Field order in <fields> must match referenced key column order -->
+    </foreignKey>
+  </foreignKeys>
+</syntheticObjects>
+```
+
+This eliminates accidental cartesian products — jOOQ ensures all composite key columns are included automatically in the generated join predicates.
+
+---
+
 ## Pattern: Implicit join path correlation (correlated subqueries)
 **Source**: [jOOQ 3.19's new Explicit and Implicit to-many path joins](https://blog.jooq.org/jooq-3-19s-new-explicit-and-implicit-to-many-path-joins) (2023-12-28)
 **Since**: jOOQ 3.19
