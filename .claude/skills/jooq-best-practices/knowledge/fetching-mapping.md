@@ -106,7 +106,7 @@ val dimField = height.convert(Dimension.class, ::Dimension, Dimension::value)
 | Method | When to use |
 |--------|-------------|
 | `fetch()` | Default — loads all rows into memory, closes JDBC resources immediately |
-| `fetchLazy()` | Large result sets — returns a `Cursor<R>` wrapping the JDBC ResultSet (must close via try-with-resources) |
+| `fetchLazy()` | Large result sets — returns a `Cursor<R>` wrapping the JDBC ResultSet (must close via try-with-resources). Use `fetchSize(n)` before `fetchLazy()` to set JDBC fetch size |
 | `fetchStream()` | Like `fetchLazy()` but returns a `Stream<R>` (must close via try-with-resources) |
 | `collect(collector)` | Transform results directly with a JDK `Collector` — no intermediate `Result` object |
 | `fetch().stream()` | Eager fetch + stream — safe (no resource leak) but materializes all rows first |
@@ -126,6 +126,21 @@ dsl.selectFrom(BOOK).fetchStream().use { stream ->
 val bookMap: Map<Int, String> = dsl.select(BOOK.ID, BOOK.TITLE)
     .from(BOOK)
     .collect(Records.intoMap())
+```
+
+---
+
+## Pattern: Configure JDBC fetch size with fetchSize()
+**Source**: [Use the jOOQ-Refaster Module for Automatic Migration off of Deprecated jOOQ API](https://blog.jooq.org/use-the-jooq-refaster-module-for-automatic-migration-off-of-deprecated-jooq-api) (2020-02-25)
+
+Use `fetchSize(int)` to set JDBC fetch size independently from the fetch mode. This allows composing it with `fetchLazy()`, `fetchStream()`, or other fetch operations, and can also be configured globally via `Settings`.
+
+```kotlin
+// BAD — deprecated fetchLazy(int) overload (removed)
+dsl.select(T.A).from(T).fetchLazy(42)
+
+// GOOD — configure fetch size separately
+dsl.select(T.A).from(T).fetchSize(42).fetchLazy()
 ```
 
 ---

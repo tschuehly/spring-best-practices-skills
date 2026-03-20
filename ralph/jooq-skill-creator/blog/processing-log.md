@@ -193,3 +193,4 @@ Auto-appended by each iteration. Captures data for the blog post.
 - Articles processed so far: 108 / 716
 - Topic files: 28
 - Open uncertainties: 1
+| 5 | Use the jOOQ-Refaster Module for Automatic Migr… | 2020-02-25 | jooq-api       | fetching-mapping.md | merged  | Refaster module removed in 3.15; extracted fetchSize() pattern; fetchExists already covered | | e33bae7 |
