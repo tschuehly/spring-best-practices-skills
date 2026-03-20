@@ -211,3 +211,4 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 126 | Using IGNORE NULLS With SQL Window Function… | 2019-04-24 | sql-pattern    | window-functions.md | added   | LAST_VALUE IGNORE NULLS for forward-filling gaps in sparse time-series data | | 3b765b5 |
 | 127 | Calling an Oracle Function with PL/SQL BOOLEAN… | 2019-04-16 | skip           | -          | skipped | Oracle PL/SQL BOOLEAN workaround; superseded by Oracle 23c native BOOLEAN | | ed1801d |
 | 128 | The Difference Between SQL's JOIN .. ON Cl… | 2019-04-09 | sql-pattern    | join-patterns.md | added   | New topic: ON vs WHERE predicate placement in outer joins | | aaba705 |
+| 129 | The Cost of Useless Surrogate Keys in Relati… | 2019-03-26 | sql-pattern    | anti-patterns.md | merged  | Enriched doc-seeded stub with clustered-index perf impact (~50% slower on InnoDB/SQL Server) and dialect comparison | | c67058e |

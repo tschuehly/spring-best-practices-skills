@@ -64,3 +64,7 @@ Created a new topic file covering the four ways Strings enter the jOOQ API: bind
 ## Iteration 128 — New topic: join-patterns.md
 **Article**: [The Difference Between SQL's JOIN .. ON Clause and the Where Clause](https://blog.jooq.org/the-difference-between-sqls-join-on-clause-and-the-where-clause) (2019-04-09)
 First entry in `join-patterns.md` — a foundational SQL correctness rule: predicates in `ON` filter during the join (preserving non-matching outer rows), while predicates in `WHERE` filter after (silently converting OUTER JOINs to INNER JOINs).
+
+## Iteration 129 — Doc-seeded entry enriched by blog post
+**Article**: [The Cost of Useless Surrogate Keys in Relationship Tables](https://blog.jooq.org/the-cost-of-useless-surrogate-keys-in-relationship-tables) (2019-03-26)
+The `anti-patterns.md` entry *"Don't add unnecessary surrogate keys"* was seeded from the official docs as a one-liner. This article added the critical context: relationship/junction tables specifically, benchmarked ~50% slower on clustered-index databases (MySQL InnoDB, SQL Server), and the dialect nuance (PostgreSQL/Oracle heap tables are unaffected).

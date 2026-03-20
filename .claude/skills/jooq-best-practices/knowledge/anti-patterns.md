@@ -193,6 +193,28 @@ Don't store dates as strings, money as floats, or IPs as integers. Use the prope
 
 If a natural key exists and is stable, use it. Not every table needs a serial/UUID primary key.
 
+> **Enriched by**: [The Cost of Useless Surrogate Keys in Relationship Tables](https://blog.jooq.org/the-cost-of-useless-surrogate-keys-in-relationship-tables) (2019-03-26)
+
+For **relationship/junction tables** specifically, a surrogate key is almost always wasteful. Use a compound primary key from the FK columns instead:
+
+```sql
+-- BAD: unnecessary surrogate id on junction table
+CREATE TABLE film_actor (
+  id         INT NOT NULL PRIMARY KEY,
+  actor_id   INT NOT NULL REFERENCES actor,
+  film_id    INT NOT NULL REFERENCES film
+);
+
+-- GOOD: compound primary key is the natural identity
+CREATE TABLE film_actor (
+  actor_id   INT NOT NULL REFERENCES actor,
+  film_id    INT NOT NULL REFERENCES film,
+  PRIMARY KEY (actor_id, film_id)
+);
+```
+
+**Dialect**: On **MySQL InnoDB** and **SQL Server** (clustered-index databases), the surrogate approach benchmarks ~50% slower for typical join queries because the natural compound key serves as a covering index. On **PostgreSQL** and **Oracle** (heap-table databases) the difference is negligible, but the compound key is still semantically correct and saves storage.
+
 ---
 
 ## Pattern: Use .eq() not .equals() for jOOQ comparisons
