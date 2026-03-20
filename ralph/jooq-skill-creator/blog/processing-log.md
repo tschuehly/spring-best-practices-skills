@@ -160,3 +160,4 @@ Auto-appended by each iteration. Captures data for the blog post.
 - Open uncertainties: 0
 0
 | 85 | How to Prevent Execution Plan Troubles whe… | 2021-06-04 | jooq-api       | type-system.md | added  | AlwaysInlineBinding pattern: inline skewed enum values to avoid bind peeking / bad execution plans | | dea261f |
+| 86 | Use ResultQuery.collect() to Implement Pow… | 2021-05-17 | jooq-api       | fetching-mapping.md | added  | collect() + Collectors.mapping() for direct bean projection; left-join null-children pattern superseded by MULTISET | | af1de8f |

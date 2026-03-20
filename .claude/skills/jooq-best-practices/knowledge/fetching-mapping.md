@@ -175,6 +175,29 @@ ctx.select(CUSTOMER, CUSTOMER.address().city().country())
 
 ---
 
+## Pattern: collect() with JDK Collectors for direct bean projection
+**Source**: [Use ResultQuery.collect() to Implement Powerful Mappings](https://blog.jooq.org/use-resultquery-collect-to-implement-powerful-mappings) (2021-05-17)
+
+Use `collect()` with `Collectors.mapping()` to project results directly into domain objects without creating an intermediate `Result`. Handles resource management automatically.
+
+```kotlin
+data class Book(val id: Int, val title: String)
+
+val books: List<Book> = ctx
+    .select(BOOK.ID, BOOK.TITLE)
+    .from(BOOK)
+    .collect(Collectors.mapping(
+        { r -> Book(r[BOOK.ID]!!, r[BOOK.TITLE]!!) },
+        Collectors.toList()
+    ))
+```
+
+For one-to-many left joins where `fetchGroups()` produces null child entries, compose `groupingBy` + `filtering` collectors. Prefer MULTISET (jOOQ 3.15+) for new code — it avoids the null problem entirely at the SQL level.
+
+> **Supersedes**: Pre-MULTISET `groupingBy`+`filtering` collector workaround for left join null children
+
+---
+
 ## Pattern: Don't use ad-hoc converters with UNION — move logic server-side
 **Source**: [How to use jOOQ's Converters with UNION Operations](https://blog.jooq.org/how-to-use-jooqs-converters-with-union-operations) (2023-03-02)
 **Since**: jOOQ 3.15 (ad-hoc converters)

@@ -18,7 +18,7 @@ Built from official docs + 783 blog articles (progressively updated).
 <!-- This section is auto-updated by the Ralph processing loop -->
 - [anti-patterns.md](knowledge/anti-patterns.md) — 18 "don't do this" rules: schema, SQL, jOOQ API, H2 compatibility modes; .eq() vs .equals(); noCondition() for dynamic SQL
 - [multiset.md](knowledge/multiset.md) — Nested collections with MULTISET, JSON emulation
-- [fetching-mapping.md](knowledge/fetching-mapping.md) — RecordMapper, fetchMap, fetchGroups, ad-hoc converters
+- [fetching-mapping.md](knowledge/fetching-mapping.md) — RecordMapper, fetchMap, fetchGroups, collect() with JDK Collectors, ad-hoc converters
 - [array-operations.md](knowledge/array-operations.md) — Array lambda functions (filter, map, match) with PostgreSQL emulation
 - [merge-upsert.md](knowledge/merge-upsert.md) — SQL MERGE as RIGHT JOIN mental model, staging table sync patterns
 - [implicit-joins.md](knowledge/implicit-joins.md) — Implicit/explicit path joins, join elimination, path correlation, to-many joins, ON-clause paths, synthetic FKs
