@@ -59,3 +59,59 @@ ctx.select(
 **Dialect**: Supported in DB2, H2, Informix, Oracle, Redshift, Sybase SQL Anywhere, Teradata. For PostgreSQL/SQL Server, use recursive CTEs as fallback.
 
 ---
+
+## Pattern: Cumulative percentage with nested window aggregates
+**Source**: [How to Calculate a Cumulative Percentage in SQL](https://blog.jooq.org/how-to-calculate-a-cumulative-percentage-in-sql) (2019-02-14)
+
+Compute what percentage of total revenue (or any metric) has accumulated by each row using two window functions: a running `SUM OVER (ORDER BY ...)` for the cumulative total and an unbounded `SUM OVER ()` for the grand total. The ratio × 100 gives the cumulative percentage.
+
+A concise version uses **nested aggregate-inside-window** syntax — `sum(sum(amount)) OVER (...)` — which works because aggregates logically execute before window functions:
+
+```kotlin
+ctx.select(
+    PAYMENT.PAYMENT_DATE.cast(SQLDataType.LOCALDATE).`as`("payment_date"),
+    sum(PAYMENT.AMOUNT).`as`("amount"),
+    (sum(sum(PAYMENT.AMOUNT))
+        .over(DSL.orderBy(PAYMENT.PAYMENT_DATE.cast(SQLDataType.LOCALDATE)))
+        .divide(sum(sum(PAYMENT.AMOUNT)).over())
+        .times(inline(BigDecimal(100))))
+        .cast(SQLDataType.NUMERIC(10, 2))
+        .`as`("percentage")
+)
+.from(PAYMENT)
+.groupBy(PAYMENT.PAYMENT_DATE.cast(SQLDataType.LOCALDATE))
+.orderBy(PAYMENT.PAYMENT_DATE.cast(SQLDataType.LOCALDATE))
+.fetch()
+```
+
+Or as a two-step approach with a derived table:
+
+```kotlin
+val p = ctx.select(
+    PAYMENT.PAYMENT_DATE.cast(SQLDataType.LOCALDATE).`as`("payment_date"),
+    sum(PAYMENT.AMOUNT).`as`("amount")
+)
+.from(PAYMENT)
+.groupBy(PAYMENT.PAYMENT_DATE.cast(SQLDataType.LOCALDATE))
+.asTable("p")
+
+val paymentDate = p.field("payment_date", SQLDataType.LOCALDATE)!!
+val amount = p.field("amount", SQLDataType.DECIMAL)!!
+
+ctx.select(
+    paymentDate,
+    amount,
+    (sum(amount).over(DSL.orderBy(paymentDate))
+        .divide(sum(amount).over())
+        .times(inline(BigDecimal(100))))
+        .cast(SQLDataType.NUMERIC(10, 2))
+        .`as`("percentage")
+)
+.from(p)
+.orderBy(paymentDate)
+.fetch()
+```
+
+**Key insight**: `SUM(col) OVER (ORDER BY ...)` = running total; `SUM(col) OVER ()` = grand total. Nested aggregates (`sum(sum(...))`) eliminate the subquery when already in a `GROUP BY` query.
+
+---
