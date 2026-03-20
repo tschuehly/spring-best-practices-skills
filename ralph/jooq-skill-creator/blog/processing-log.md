@@ -165,3 +165,4 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 88 | Use IN List Padding to Avoid Cursor Cache Con… | 2021-04-22 | jooq-api       | parser.md | added  | IN list padding via Settings.withInListPadding(true); parsingConnection() for transparent JDBC retrofit | |
 | 89 | Never Again Forget to Call .execute() in j… | 2021-03-30 | jooq-api       | anti-patterns.md | added  | @CheckReturnValue annotation; IDE warning for missing .execute() on DML/DDL | | 5b573db |
 | 90 | Calculating Pagination Metadata Without Ex… | 2021-03-11 | jooq-api       | pagination.md (new) | added  | Single-query pagination metadata via COUNT(*) OVER() in nested derived tables; no extra COUNT roundtrip | | 833818b |
+| 91 | Simulating Latency with SQL / JDBC | 2021-02-15 | jooq-api | logging.md | added | CallbackExecuteListener for uniform latency hooks; DefaultConnection/DefaultPreparedStatement as JDBC proxies | | 88e26ac |

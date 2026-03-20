@@ -37,3 +37,43 @@ For broader coverage, use `DiagnosticsDataSource` to wrap an entire `DataSource`
 **Best practice**: Enable in dev/test environments — there is some overhead. Pair with the N+1 avoidance patterns in [anti-patterns.md](anti-patterns.md).
 
 ---
+
+## Pattern: ExecuteListener / CallbackExecuteListener for lifecycle hooks
+**Source**: [Simulating Latency with SQL / JDBC](https://blog.jooq.org/simulating-latency-with-sql-jdbc) (2021-02-15)
+
+Use `CallbackExecuteListener` (or implement `ExecuteListener`) to hook into every jOOQ statement execution. Useful for latency simulation, metrics, auditing, or any cross-cutting concern at the SQL execution boundary.
+
+```kotlin
+val ctx = DSL.using(
+    DefaultConfiguration()
+        .set(connection)
+        .set(
+            CallbackExecuteListener()
+                .onExecuteStart { Thread.sleep(1000L) }
+        )
+)
+```
+
+Fires uniformly for all statement types (SELECT, INSERT, UPDATE, DELETE, DDL) — no query modification required.
+
+**Best practice**: Use `onExecuteStart` for pre-execution hooks. Use `onExecuteEnd` for post-execution hooks (timing, metrics). Enable only in dev/test profiles — never in production.
+
+---
+
+## Pattern: DefaultConnection / DefaultPreparedStatement as JDBC proxy
+**Source**: [Simulating Latency with SQL / JDBC](https://blog.jooq.org/simulating-latency-with-sql-jdbc) (2021-02-15)
+
+jOOQ ships `DefaultConnection` and `DefaultPreparedStatement` convenience classes that delegate all methods to an underlying `Connection`/`PreparedStatement`. Override only the methods you need — useful for JDBC-level interceptors without a full proxy implementation.
+
+```kotlin
+val proxied = object : DefaultConnection(realConnection) {
+    override fun prepareStatement(sql: String): PreparedStatement {
+        Thread.sleep(1000L)
+        return super.prepareStatement(sql)
+    }
+}
+```
+
+Works independently of jOOQ's query building — can wrap any JDBC `Connection` regardless of ORM.
+
+---
