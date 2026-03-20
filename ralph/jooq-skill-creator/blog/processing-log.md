@@ -216,3 +216,4 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 131 | How to Statically Override the Default Sett… | 2019-03-14 | jooq-api       | spring-boot-config.md | merged  | Static jooq-settings.xml classpath override; RenderNameStyle superseded by RenderQuotedNames (3.12+) | | a458273 |
 | 132 | How to Calculate a Cumulative Percentage in… | 2019-02-14 | sql-pattern    | window-functions.md | added   | Cumulative % via SUM OVER ORDER BY / SUM OVER (); nested sum(sum()) trick | | fafd59e |
 | 133 | Lesser Known jOOλ Features: Useful Collect… | 2019-02-11 | skip           | -          | skipped | Article is about jOOλ stream library, not jOOQ SQL DSL               | | b986427 |
+| 134 | How to Emulate PERCENTILE_DISC in MySQL and… | 2019-01-28 | sql-pattern    | aggregate-functions.md | added   | Emulate PERCENTILE_DISC via PERCENT_RANK+FIRST_VALUE across all RDBMS with window function support | | 8bf0d1d |

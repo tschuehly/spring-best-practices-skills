@@ -111,6 +111,55 @@ Wrap in a correlated subquery in `FROM` to allow `GROUP BY` in the outer query a
 
 ---
 
+## Pattern: Emulate PERCENTILE_DISC where not natively supported
+**Source**: [How to Emulate PERCENTILE_DISC in MySQL and Other RDBMS](https://blog.jooq.org/how-to-emulate-percentile_disc-in-mysql-and-other-rdbms) (2019-01-28)
+**Since**: jOOQ 3.11 (native support in some dialects)
+
+`PERCENTILE_DISC` (inverse distribution / ordered-set aggregate) is not universally available. Native support as of jOOQ 3.11:
+
+| Dialect | Aggregate | Window |
+|---------|-----------|--------|
+| MariaDB 10.3.3 | No | Yes |
+| Oracle 18c | Yes | Yes |
+| PostgreSQL 11 | Yes | No |
+| SQL Server 2017 | No | Yes |
+
+**Emulation using `PERCENT_RANK` + `FIRST_VALUE`**: Calculate percentile rank per group, then use `FIRST_VALUE` with a null-filtering sort to pick the matching value. Works across all RDBMS supporting window functions.
+
+```sql
+-- Window function form (e.g. PostgreSQL, MySQL)
+SELECT DISTINCT rating,
+  first_value(length) OVER (
+    ORDER BY CASE WHEN p1 <= 0.5 THEN p1 END DESC NULLS LAST) AS median
+FROM (
+  SELECT rating, length,
+    percent_rank() OVER (PARTITION BY rating ORDER BY length) p1
+  FROM film
+) t;
+```
+
+**Aggregate form** (MySQL — wrap with `MAX` and add outer `GROUP BY`):
+
+```sql
+SELECT rating, MAX(x1) AS median
+FROM (
+  SELECT rating,
+    first_value(length) OVER (
+      PARTITION BY rating
+      ORDER BY CASE WHEN p1 <= 0.5 THEN p1 END DESC NULLS LAST) AS x1
+  FROM (
+    SELECT rating, length,
+      percent_rank() OVER (PARTITION BY rating ORDER BY length) p1
+    FROM film
+  ) t
+) t
+GROUP BY rating;
+```
+
+**Key insight**: Null out ranks above the target threshold → sort nulls last → `FIRST_VALUE` picks the highest rank ≤ target, which is the `PERCENTILE_DISC` result.
+
+---
+
 ## Pattern: Weighted averages to fix join-multiplication distortion
 **Source**: [Calculating Weighted Averages When Joining Tables in SQL](https://blog.jooq.org/calculating-weighted-averages-when-joining-tables-in-sql) (2019-03-15)
 
