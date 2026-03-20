@@ -202,3 +202,4 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 117 | How to Map MySQL's TINYINT(1) to Boolean in jO… | 2019-09-27 | jooq-api       | code-generator.md | added   | MySQL forced type: includeTypes regex maps TINYINT(1) → boolean (since 3.12) | | 6293c91 |
 | 118 | What's Faster? COUNT(*) or COUNT(1)?         | 2019-09-19 | sql-pattern    | aggregate-functions.md | added   | COUNT(*) ~10% faster on PostgreSQL; COUNT(col) for NULL-aware counting | | 1ccd00f |
 | 119 | Oracle's BINARY_DOUBLE Can Be Much Faster T… | 2019-09-11 | sql-pattern    | type-system.md | added   | Oracle: BINARY_DOUBLE 100x faster than NUMBER for analytical math; use .cast() for inline conversion | | 7b91e4c |
+| 120 | Using DISTINCT ON in Non-PostgreSQL Databases | 2019-09-09 | sql-pattern    | window-functions.md (new) | added   | New topic file; DISTINCT ON emulated via FIRST_VALUE+DISTINCT for cross-dialect portability | | c4ed23a |
