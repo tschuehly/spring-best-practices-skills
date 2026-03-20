@@ -17,6 +17,30 @@ val authors = dsl.select(AUTHOR.FIRST_NAME, count())
 
 ---
 
+## Pattern: Dot-notation aliases for nested class mapping with fetchInto()
+**Source**: [Nesting Collections With jOOQ 3.14's SQL/XML or SQL/JSON support](https://blog.jooq.org/nesting-collections-with-jooq-3-14s-sql-xml-or-sql-json-support) (2020-10-09)
+
+Use `field.as("parent.child")` dot-notation aliases to map flat SQL columns into nested Java/Kotlin class hierarchies via `fetchInto()`. The `DefaultRecordMapper` follows the dot path to populate nested object fields.
+
+```kotlin
+data class Type(val name: String, val precision: Int, val scale: Int, val length: Int)
+data class Column(val tableSchema: String, val tableName: String, val columnName: String, val type: Type)
+
+val columns = ctx.select(
+    COLUMNS.TABLE_SCHEMA,
+    COLUMNS.TABLE_NAME,
+    COLUMNS.COLUMN_NAME,
+    COLUMNS.DATA_TYPE.`as`("type.name"),
+    COLUMNS.NUMERIC_PRECISION.`as`("type.precision"),
+    COLUMNS.NUMERIC_SCALE.`as`("type.scale"),
+    COLUMNS.CHARACTER_MAXIMUM_LENGTH.`as`("type.length")
+).from(COLUMNS).fetchInto(Column::class.java)
+```
+
+**Limitation**: Only maps flat rows — doesn't support one-to-many nesting (e.g., `List<Column>`). Use MULTISET (3.15+) or `jsonArrayAgg()` (3.14+) for collections.
+
+---
+
 ## Pattern: fetchMap / fetchGroups for indexed results
 **Source**: [jOOQ Official Docs — Fetching](https://www.jooq.org/doc/3.20/manual/sql-execution/fetching/) (docs)
 

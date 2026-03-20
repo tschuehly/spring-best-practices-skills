@@ -1,5 +1,32 @@
 # SQL/JSON Dialect Patterns & Pitfalls
 
+## Pattern: Use jsonObject() + jsonArrayAgg() for server-side nested collection building
+**Source**: [Nesting Collections With jOOQ 3.14's SQL/XML or SQL/JSON support](https://blog.jooq.org/nesting-collections-with-jooq-3-14s-sql-xml-or-sql-json-support) (2020-10-09)
+**Since**: jOOQ 3.14
+
+Build nested JSON structures entirely server-side to avoid N+1 and cartesian products. `jsonArrayAgg()` aggregates rows into a JSON array per group; `jsonObject()` shapes each row.
+
+```kotlin
+ctx.select(
+    jsonObject(
+        key("tableSchema").value(COLUMNS.TABLE_SCHEMA),
+        key("tableName").value(COLUMNS.TABLE_NAME),
+        key("columns").value(jsonArrayAgg(
+            jsonObject(
+                key("columnName").value(COLUMNS.COLUMN_NAME),
+                key("type").value(jsonObject("name", COLUMNS.DATA_TYPE))
+            )
+        ).orderBy(COLUMNS.ORDINAL_POSITION))
+    )
+).from(COLUMNS)
+ .groupBy(COLUMNS.TABLE_SCHEMA, COLUMNS.TABLE_NAME)
+ .fetchInto(Table::class.java)
+```
+
+> **Supersedes**: For jOOQ 3.15+, prefer `MULTISET` ([multiset.md](multiset.md)) — it provides type-safe mapping without manual `key()/value()` wiring and handles dialect quirks automatically. Use `jsonArrayAgg()` directly only when targeting 3.14 or when you need fine-grained JSON key naming control.
+
+---
+
 ## Pattern: SQL/JSON support is highly inconsistent across vendors — prefer jOOQ DSL
 **Source**: [Standard SQL/JSON – The Sobering Parts](https://blog.jooq.org/standard-sql-json-the-sobering-parts) (2021-07-27)
 **Since**: jOOQ 3.14

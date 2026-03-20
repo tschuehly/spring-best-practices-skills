@@ -18,7 +18,7 @@ Built from official docs + 783 blog articles (progressively updated).
 <!-- This section is auto-updated by the Ralph processing loop -->
 - [anti-patterns.md](knowledge/anti-patterns.md) — 19 "don't do this" rules: schema, SQL, jOOQ API, H2 compatibility modes; .eq() vs .equals(); noCondition() for dynamic SQL; always call .execute()
 - [multiset.md](knowledge/multiset.md) — Nested collections with MULTISET, JSON emulation
-- [fetching-mapping.md](knowledge/fetching-mapping.md) — RecordMapper, fetchMap, fetchGroups, collect() with JDK Collectors, ad-hoc converters
+- [fetching-mapping.md](knowledge/fetching-mapping.md) — RecordMapper, fetchMap, fetchGroups, collect() with JDK Collectors, ad-hoc converters, dot-notation alias for nested class mapping
 - [array-operations.md](knowledge/array-operations.md) — Array lambda functions (filter, map, match) with PostgreSQL emulation
 - [merge-upsert.md](knowledge/merge-upsert.md) — SQL MERGE as RIGHT JOIN mental model, staging table sync patterns
 - [implicit-joins.md](knowledge/implicit-joins.md) — Implicit/explicit path joins, join elimination, path correlation, to-many joins, ON-clause paths, synthetic FKs
@@ -38,7 +38,7 @@ Built from official docs + 783 blog articles (progressively updated).
 - [spring-boot-config.md](knowledge/spring-boot-config.md) — DefaultConfigurationCustomizer for Spring Boot jOOQ config; MySQL allowMultiQueries flag
 - [parser.md](knowledge/parser.md) — Parser ignore comments, parsing connection for dialect translation, IN list padding, Oracle implicit-join-to-ANSI-JOIN transformation, online SQL translation tool
 - [result-formatting.md](knowledge/result-formatting.md) — ASCII chart output, formatChart() for console visualization
-- [sql-json.md](knowledge/sql-json.md) — SQL/JSON dialect pitfalls: MySQL type degradation, Oracle CLOB, GROUP_CONCAT truncation, NULL semantics
+- [sql-json.md](knowledge/sql-json.md) — jsonObject/jsonArrayAgg nesting pattern (3.14, superseded by MULTISET 3.15+); dialect pitfalls: MySQL type degradation, Oracle CLOB, GROUP_CONCAT truncation, NULL semantics
 - [r2dbc-reactive.md](knowledge/r2dbc-reactive.md) — R2DBC setup, reactive query execution with Flux/Mono, automatic connection lifecycle management
 - [pagination.md](knowledge/pagination.md) — Single-query pagination metadata (total rows, page number, last-page flag) via COUNT(*) OVER() in nested derived tables; deterministic ordering requirement
 
