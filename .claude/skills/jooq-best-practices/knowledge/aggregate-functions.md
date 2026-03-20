@@ -224,6 +224,36 @@ ctx.select(
 
 ---
 
+## Pattern: Emulate PRODUCT() aggregate via EXP/LN
+**Source**: [How to Write a Multiplication Aggregate Function in SQL](https://blog.jooq.org/how-to-write-a-multiplication-aggregate-function-in-sql) (2018-09-21)
+
+SQL has no native `PRODUCT()` or `MUL()` aggregate. Emulate it using the logarithmic identity `x × y = e^(ln(x) + ln(y))`:
+
+```sql
+-- Basic (positive values only)
+MUL(x) = EXP(SUM(LN(x)))
+
+-- Full implementation: handles zeros, negatives, and works as a window function
+SELECT i, j,
+  CASE
+    WHEN SUM(CASE WHEN j = 0 THEN 1 END) OVER (ORDER BY i) > 0 THEN 0
+    WHEN SUM(CASE WHEN j < 0 THEN -1 END) OVER (ORDER BY i) % 2 < 0 THEN -1
+    ELSE 1
+  END * EXP(SUM(LN(ABS(NULLIF(j, 0)))) OVER (ORDER BY i)) AS multiplication
+FROM v
+```
+
+Key edge cases:
+- **Zero**: use `NULLIF(j, 0)` to exclude from LN; add a zero-check SUM to short-circuit to 0
+- **Negatives**: count how many negatives are in the group; odd count → result is negative
+- **Window variant**: add `OVER (ORDER BY ...)` to each SUM for cumulative running products
+
+In jOOQ, compose with `DSL.exp()`, `DSL.ln()`, `DSL.nullif()`, and `DSL.sum()`.
+
+**Dialect note (Oracle)**: Cast `NUMBER` columns to `BINARY_DOUBLE` before LN for ~100x faster execution.
+
+---
+
 ## Pattern: Weighted averages to fix join-multiplication distortion
 **Source**: [Calculating Weighted Averages When Joining Tables in SQL](https://blog.jooq.org/calculating-weighted-averages-when-joining-tables-in-sql) (2019-03-15)
 
