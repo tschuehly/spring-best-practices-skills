@@ -219,3 +219,4 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 134 | How to Emulate PERCENTILE_DISC in MySQL and… | 2019-01-28 | sql-pattern    | aggregate-functions.md | added   | Emulate PERCENTILE_DISC via PERCENT_RANK+FIRST_VALUE across all RDBMS with window function support | | 8bf0d1d |
 | 135 | Calculate Percentiles to Learn About Data… | 2019-01-22 | sql-pattern    | aggregate-functions.md | added   | PERCENTILE_DISC for skew detection; B-tree index implications | | 66c17b2 |
 | 136 | How to Work Around ORA-38104: Columns refere… | 2019-01-02 | sql-pattern    | merge-upsert.md | added   | Oracle ORA-38104 workarounds: row value expr, NVL derived table, WHERE clause | | a747294 |
+| 137 | How to Unit Test Your Annotation Processor… | 2018-12-07 | skip           | -          | skipped | About jOOR reflection library for annotation processor testing; not jOOQ SQL | | 75b3d79 |
