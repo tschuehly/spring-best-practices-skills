@@ -210,3 +210,4 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 125 | How to Write a Simple, yet Extensible API | 2019-06-06 | skip           | -          | skipped | General Java API design opinion piece; no jOOQ-specific or SQL patterns | | ecfdcb9 |
 | 126 | Using IGNORE NULLS With SQL Window Function… | 2019-04-24 | sql-pattern    | window-functions.md | added   | LAST_VALUE IGNORE NULLS for forward-filling gaps in sparse time-series data | | 3b765b5 |
 | 127 | Calling an Oracle Function with PL/SQL BOOLEAN… | 2019-04-16 | skip           | -          | skipped | Oracle PL/SQL BOOLEAN workaround; superseded by Oracle 23c native BOOLEAN | | ed1801d |
+| 128 | The Difference Between SQL's JOIN .. ON Cl… | 2019-04-09 | sql-pattern    | join-patterns.md | added   | New topic: ON vs WHERE predicate placement in outer joins | | aaba705 |

@@ -47,6 +47,7 @@ Built from official docs + 783 blog articles (progressively updated).
 - [naming-conventions.md](knowledge/naming-conventions.md) — Table aliasing algorithm, semantic type prefixes, singular/plural consistency
 - [window-functions.md](knowledge/window-functions.md) — DISTINCT ON emulation with FIRST_VALUE; LAST_VALUE IGNORE NULLS for gap-filling
 - [predicates.md](knowledge/predicates.md) — Quantified LIKE ANY / LIKE ALL predicates replacing verbose OR chains
+- [join-patterns.md](knowledge/join-patterns.md) — ON clause vs WHERE clause semantics in outer joins; predicate placement rules
 
 ## Core rules (always apply)
 

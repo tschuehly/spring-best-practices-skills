@@ -60,3 +60,7 @@ Created a new topic file covering the four ways Strings enter the jOOQ API: bind
 ## New topic file: predicates.md
 **Article**: [Quantified LIKE ANY predicates in jOOQ 3.12](https://blog.jooq.org/quantified-like-any-predicates-in-jooq-3-12) (2019-09-05)
 `predicates.md` created — jOOQ 3.12 introduced `like(any(...))` and `like(all(...))` to replace verbose OR chains of LIKE conditions, with cross-dialect emulation. First dedicated predicates topic file.
+
+## Iteration 128 — New topic: join-patterns.md
+**Article**: [The Difference Between SQL's JOIN .. ON Clause and the Where Clause](https://blog.jooq.org/the-difference-between-sqls-join-on-clause-and-the-where-clause) (2019-04-09)
+First entry in `join-patterns.md` — a foundational SQL correctness rule: predicates in `ON` filter during the join (preserving non-matching outer rows), while predicates in `WHERE` filter after (silently converting OUTER JOINs to INNER JOINs).
