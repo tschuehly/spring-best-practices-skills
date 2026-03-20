@@ -41,6 +41,7 @@ Built from official docs + 783 blog articles (progressively updated).
 - [sql-json.md](knowledge/sql-json.md) — jsonObject/jsonArrayAgg nesting pattern (3.14, superseded by MULTISET 3.15+); dialect pitfalls: MySQL type degradation, Oracle CLOB, GROUP_CONCAT truncation, NULL semantics
 - [r2dbc-reactive.md](knowledge/r2dbc-reactive.md) — R2DBC setup, reactive query execution with Flux/Mono, automatic connection lifecycle management
 - [pagination.md](knowledge/pagination.md) — Single-query pagination metadata (total rows, page number, last-page flag) via COUNT(*) OVER() in nested derived tables; deterministic ordering requirement
+- [set-operations.md](knowledge/set-operations.md) — Table diff with EXCEPT/UNION vs FULL JOIN USING; NULL-safe comparison with IS NOT DISTINCT FROM; row value expression NULL semantics
 
 ## Core rules (always apply)
 
