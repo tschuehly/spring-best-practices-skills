@@ -182,3 +182,4 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 106 | Create Empty Optional SQL Clauses with jOOQ | 2020-03-06 | jooq-api | dynamic-sql.md | added | New topic file; noCondition/trueCondition/falseCondition, conditional fields, conditional JOINs, conditional UNIONs | | 6b36336 |
 | 107 | Using Java 13+ Text Blocks for Plain SQL… | 2020-03-05 | jooq-api | plain-sql-templating.md | added | Text blocks for multi-line plain SQL; combining text blocks with {0} template placeholders | | 813fd5c |
 | 108 | Never Concatenate Strings With jOOQ     | 2020-03-04 | jooq-api       | plain-sql-templating.md | merged  | Custom DSL wrapper pattern encapsulating plain SQL templates; supersedes string concatenation anti-pattern | | 6df4b5b |
+| 109 | 5 Ways to Better Understand SQL by Addi… | 2020-03-03 | sql-pattern    | set-operations.md | added   | INTERSECT precedence over UNION/EXCEPT; multi-column row() IN predicates | | df47faf |

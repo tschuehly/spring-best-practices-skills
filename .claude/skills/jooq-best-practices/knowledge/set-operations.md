@@ -80,6 +80,58 @@ In jOOQ use `isNotDistinctFrom()`:
 
 ---
 
+## Pattern: INTERSECT has higher precedence than UNION/EXCEPT
+
+**Source**: [5 Ways to Better Understand SQL by Adding Optional Parentheses](https://blog.jooq.org/better-understand-sql-by-adding-optional-parentheses) (2020-03-03)
+
+INTERSECT binds more tightly than UNION and EXCEPT. This SQL:
+
+```sql
+SELECT a UNION SELECT b INTERSECT SELECT c
+-- Executes as:
+SELECT a UNION (SELECT b INTERSECT SELECT c)
+```
+
+In jOOQ, use explicit parentheses via `intersect()` chaining order to control evaluation:
+
+```kotlin
+// Explicit grouping: b INTERSECT c first, then UNION a
+selectFrom(A)
+    .union(
+        selectFrom(B).intersect(selectFrom(C))
+    )
+```
+
+**Dialect note**: Not all databases implement set-operation precedence identically — always use explicit grouping for clarity.
+
+---
+
+## Pattern: Multi-column row value expressions in IN predicates
+
+**Source**: [5 Ways to Better Understand SQL by Adding Optional Parentheses](https://blog.jooq.org/better-understand-sql-by-adding-optional-parentheses) (2020-03-03)
+
+SQL allows comparing multiple columns at once using row value expressions:
+
+```sql
+WHERE (first_name, last_name) IN (
+  ('SUSAN', 'DAVIS'),
+  ('NICK', 'WAHLBERG')
+)
+```
+
+In jOOQ use `row()` with `in()`:
+
+```kotlin
+.where(
+    row(ACTOR.FIRST_NAME, ACTOR.LAST_NAME)
+        .`in`(row("SUSAN", "DAVIS"), row("NICK", "WAHLBERG"))
+)
+```
+
+More concise and avoids multiple OR conditions. jOOQ emulates this for databases that don't natively support row value expressions in IN.
+
+---
+
 ## Pattern: Row value expression NULL logic
 
 **Source**: [Use NATURAL FULL JOIN to compare two tables in SQL](https://blog.jooq.org/use-natural-full-join-to-compare-two-tables-in-sql) (2020-08-05)
