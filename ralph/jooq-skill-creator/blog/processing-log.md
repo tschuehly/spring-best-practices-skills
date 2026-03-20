@@ -170,3 +170,4 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 93 | Implementing a generic REDUCE aggregate fun… | 2021-02-08 | sql-pattern    | aggregate-functions.md | added  | Simulating REDUCE/fold via recursive CTE + ARRAY_AGG + WITH ORDINALITY (PostgreSQL-specific) | | 24e2968 |
 | 94 | jOOQ Internals: Pushing up SQL fragments | 2021-02-04 | skip | - | skipped | jOOQ internals/development process article | | 2145e40 |
 | 95 | Automatically Transform Oracle Style Impli… | 2020-11-17 | jooq-api       | parser.md | added  | Oracle implicit join (comma FROM + WHERE) → ANSI JOIN; also handles (+) outer join notation | | 4ceb583 |
+| 96 | jOOQ 3.14 Released With SQL/XML and SQL/JS… | 2020-10-20 | skip           | -          | skipped | Release announcement; JSON/XML in sql-json.md, MERGE in merge-upsert.md, Kotlin in code-generator.md | | 36b8e11 |
