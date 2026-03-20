@@ -173,3 +173,4 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 96 | jOOQ 3.14 Released With SQL/XML and SQL/JS… | 2020-10-20 | skip           | -          | skipped | Release announcement; JSON/XML in sql-json.md, MERGE in merge-upsert.md, Kotlin in code-generator.md | | 36b8e11 |
 | 97 | Using jOOQ 3.14 Synthetic FK to Write Im… | 2020-10-13 | jooq-api       | implicit-joins.md | added  | Composite key synthetic FKs + unique key refs for INFORMATION_SCHEMA views | | c434fe7 |
 | 98 | Nesting Collections With jOOQ 3.14's SQL… | 2020-10-09 | jooq-api       | fetching-mapping.md, sql-json.md | added  | Dot-notation alias nesting + jsonObject/jsonArrayAgg pattern (superseded by MULTISET 3.15+) | | 40e881d |
+| 99 | Having "constant" columns in foreign keys | 2020-09-10 | sql-pattern    | computed-columns.md | added  | GENERATED ALWAYS AS for constant FK columns; useful for single-table inheritance discriminators | | 580a008 |

@@ -93,6 +93,36 @@ This creates dynamic "views" that adapt to user preferences without database-sid
 
 ---
 
+## Pattern: Database-side generated columns for constant values in composite foreign keys
+**Source**: [Having "constant" columns in foreign keys](https://blog.jooq.org/having-constant-columns-in-foreign-keys) (2020-09-10)
+**Dialect**: DB2, MySQL, Oracle, PostgreSQL 12+, SQL Server
+
+When a referencing table always uses a fixed value for one column of a composite foreign key (e.g., a discriminator in single-table inheritance), use a `GENERATED ALWAYS AS` column to enforce that constraint at the database level:
+
+```sql
+-- Parent table with composite PK
+CREATE TABLE t1 (
+  a INT,
+  b INT,
+  PRIMARY KEY (a, b)
+);
+
+-- Child table always references b = 1
+CREATE TABLE t2 (
+  a INT,
+  b INT GENERATED ALWAYS AS (1) STORED,
+  FOREIGN KEY (a, b) REFERENCES t1
+);
+```
+
+Advantages over `DEFAULT 1 CHECK (b = 1)`:
+- Database guarantees the value is immutable — cannot be changed even with an explicit UPDATE
+- Cleaner intent: the column is definitionally constant, not just defaulted
+
+> **Note**: PostgreSQL 12+ only supports `STORED` generated columns (materialized on disk). `VIRTUAL` (computed on read) is not yet available as of PostgreSQL 16.
+
+---
+
 ## Pattern: Computed columns are projections, not predicates
 **Source**: [Create Dynamic Views with jOOQ 3.17's new Virtual Client Side Computed Columns](https://blog.jooq.org/create-dynamic-views-with-jooq-3-17s-new-virtual-client-side-computed-columns) (2022-06-30)
 
