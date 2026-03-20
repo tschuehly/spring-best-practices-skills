@@ -205,3 +205,4 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 120 | Using DISTINCT ON in Non-PostgreSQL Databases | 2019-09-09 | sql-pattern    | window-functions.md (new) | added   | New topic file; DISTINCT ON emulated via FIRST_VALUE+DISTINCT for cross-dialect portability | | c4ed23a |
 | 121 | Quantified LIKE ANY predicates in jOOQ 3.12 | 2019-09-05 | jooq-api       | predicates.md (new) | added   | New topic; like(any(...)) replaces verbose OR chains; since 3.12, cross-dialect emulation | | 3d2a958 |
 | 122 | jOOQ 3.12 Released With a new Procedural Langua… | 2019-08-29 | skip           | -          | skipped | Release announcement; LIKE ANY + asterisk.except() already covered by dedicated later articles | | 13d4e04 |
+| 123 | How to Fetch All Current Identity Values in… | 2019-07-16 | skip           | -          | skipped | Oracle PL/SQL internals (EXECUTE IMMEDIATE, dict views); no actionable jOOQ/SQL patterns | | a875f5d |
