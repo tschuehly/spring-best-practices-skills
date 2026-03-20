@@ -149,3 +149,12 @@ Auto-appended by each iteration. Captures data for the blog post.
 - Articles processed so far: 81 / 747
 - Topic files: 23
 - Open uncertainties: 1
+
+---
+**Run summary** (2026-03-20 18:11):
+- Iterations this run: 2
+- Duration: 3m 200s total
+- Articles processed so far: 83 / 747
+- Topic files: 24
+- Open uncertainties: 0
+0
