@@ -53,3 +53,4 @@ Article "Calculating Pagination Metadata Without Extra Roundtrips in SQL" (2021-
 ## Iteration 105 — New topic: plain-sql-templating.md
 **Article**: What's a "String" in the jOOQ API? (2020-04-03)
 Created a new topic file covering the four ways Strings enter the jOOQ API: bind values (val()), literals (inline()), plain SQL templates (field/table/condition with @PlainSQL injection warning), names/identifiers (name()), and keywords (keyword()). The SQL injection safety note for plain SQL templates is a key security best practice.
+- **#106**: New topic `dynamic-sql.md` created — "Create Empty Optional SQL Clauses with jOOQ" (2020-03-06). Existing `anti-patterns.md` already had a `noCondition()` entry from a 2021 article; this older article was richer and warranted its own topic file with conditional SELECT fields, conditional JOINs, and `falseCondition()` for UNION short-circuiting.

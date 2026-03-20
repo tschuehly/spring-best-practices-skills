@@ -179,3 +179,4 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 103 | Using SQL Server FOR XML and FOR JSON Syntax on | 2020-05-05 | jooq-api | sql-json.md | added | SQL Server FOR XML/JSON cross-dialect translation, jOOQ 3.14 emits native or standard SQL | | e1ba903 |
 | 104 | The Many Flavours of the Arcane SQL MER… | 2020-04-10 | sql-pattern    | merge-upsert.md | added  | FULL JOIN in USING clause for full sync; AND in WHEN clauses + CASE emulation; Oracle WHERE/DELETE variant | | f295fff |
 | 105 | What's a "String" in the jOOQ API?      | 2020-04-03 | jooq-api       | plain-sql-templating.md | added   | New topic file; val() vs inline(), @PlainSQL injection safety, name() identifiers, keyword() rendering | | 762a794 |
+| 106 | Create Empty Optional SQL Clauses with jOOQ | 2020-03-06 | jooq-api | dynamic-sql.md | added | New topic file; noCondition/trueCondition/falseCondition, conditional fields, conditional JOINs, conditional UNIONs | | 6b36336 |
