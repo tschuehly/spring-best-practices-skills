@@ -227,3 +227,11 @@ Auto-appended by each iteration. Captures data for the blog post.
 | 142 | Writing Custom Aggregate Functions in SQL… | 2018-10-09 | sql-pattern    | aggregate-functions.md | added   | Custom UDAFs in Oracle (ODCI) and PostgreSQL (CREATE AGGREGATE); Java 8 Collector analogy | | a7cfc7d |
 | 143 | How to Use SQL UPDATE .. RETURNING to Run… | 2018-09-26 | sql-pattern    | dml-returning.md | added   | Set-based UPDATE 2.5–7x faster than row-by-row; Oracle aggregate functions in RETURNING clause | | 6020cf8 |
 | 143 | How to Write a Multiplication Aggregate Fu... | 2018-09-21 | sql-pattern | aggregate-functions.md | added | EXP/LN trick emulates PRODUCT() with zero/negative handling | | a8f2104 |
+
+---
+**Run summary** (2026-03-21 00:45):
+- Iterations this run: 50
+- Duration: 63m 3828s total
+- Articles processed so far: 143 / 716
+- Topic files: 34
+- Open uncertainties: 1
