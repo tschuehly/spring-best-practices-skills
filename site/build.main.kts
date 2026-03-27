@@ -115,10 +115,10 @@ val output = template
 distDir.mkdirs()
 outputFile.writeText(output)
 
-// Copy preview.png to dist/
-val previewSrc = File(siteDir, "preview.png")
+// Copy preview.webp to dist/
+val previewSrc = File(siteDir, "preview.webp")
 if (previewSrc.exists()) {
-    previewSrc.copyTo(File(distDir, "preview.png"), overwrite = true)
+    previewSrc.copyTo(File(distDir, "preview.webp"), overwrite = true)
 }
 
 println("✓ Built dist/index.html ($totalSkills skills across ${categories.size} categories)")
