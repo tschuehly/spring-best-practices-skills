@@ -4,6 +4,7 @@ description: >-
   until ready. Not needed for template/view changes when devtools hot-reload
   is enabled.
 repo: jvm-skills/jvm-skills
+skill_path: ".claude/skills/restart-spring-boot/SKILL.md"
 category: framework
 languages:
   - kotlin

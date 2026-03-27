@@ -4,6 +4,7 @@ description: >-
   test output. Groups failures by unique exception and launches parallel
   subagents for analysis and fixing.
 repo: jvm-skills/jvm-skills
+skill_path: ".claude/skills/test-gradle/SKILL.md"
 category: testing
 languages:
   - kotlin

@@ -5,6 +5,7 @@ description: >-
   and PostgreSQL-specific best practices. Covers update-heavy, upsert-heavy,
   and OLTP-style table patterns.
 repo: timescale/pg-aiguide
+skill_path: "skills/design-postgres-tables/SKILL.md"
 category: database
 languages:
   - kotlin

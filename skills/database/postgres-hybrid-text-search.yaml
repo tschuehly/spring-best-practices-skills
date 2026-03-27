@@ -5,6 +5,7 @@ description: >-
   pg_textsearch BM25 index setup, parallel query patterns,
   client-side RRF fusion, and optional ML reranking.
 repo: timescale/pg-aiguide
+skill_path: "skills/postgres-hybrid-text-search/SKILL.md"
 category: database
 languages:
   - kotlin

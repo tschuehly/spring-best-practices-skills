@@ -6,6 +6,7 @@ description: >-
   testing (MockMvc, ArchUnit), Maven configuration,
   and Docker Compose for local development.
 repo: sivaprasadreddy/sivalabs-agent-skills
+skill_path: "skills/spring-boot/SKILL.md"
 category: web
 languages:
   - java

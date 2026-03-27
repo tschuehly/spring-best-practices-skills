@@ -49,6 +49,7 @@ val skillCards = buildString {
             val name = skill["name"]?.toString() ?: ""
             val description = skill["description"]?.toString() ?: ""
             val repo = skill["repo"]?.toString() ?: ""
+            val skillPath = skill["skill_path"]?.toString() ?: ""
             val author = skill["author"]?.toString() ?: ""
             val trust = skill["trust"]?.toString() ?: "community"
 
@@ -71,7 +72,8 @@ val skillCards = buildString {
             append("</div>\n")
             append("""<div class="card-body">""")
             append("\n")
-            append("""<h3 class="skill-name"><a href="https://github.com/${htmlEscape(repo)}">${htmlEscape(name)}</a></h3>""")
+            val skillUrl = if (skillPath.isNotEmpty()) "https://github.com/${htmlEscape(repo)}/blob/main/${htmlEscape(skillPath)}" else "https://github.com/${htmlEscape(repo)}"
+            append("""<h3 class="skill-name"><a href="$skillUrl">${htmlEscape(name)}</a></h3>""")
             append("\n")
             append("""<p class="skill-description">${htmlEscape(description)}</p>""")
             append("\n")

@@ -4,6 +4,7 @@ description: >-
   and Java best practices. Covers DRY, null safety, exception handling,
   performance, and REST API contracts.
 repo: piomin/claude-ai-spring-boot
+skill_path: ".claude/skills/code-quality/SKILL.md"
 category: language
 languages:
   - java

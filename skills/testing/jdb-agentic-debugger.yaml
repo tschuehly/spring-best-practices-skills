@@ -5,6 +5,7 @@ description: >-
   as a reusable agent skill, making the toolkit readily callable from
   AI coding agents.
 repo: brunoborges/jdb-agentic-debugger
+skill_path: "skills/jdb-debugger/SKILL.md"
 category: testing
 languages:
   - kotlin

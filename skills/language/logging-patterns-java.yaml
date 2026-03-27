@@ -4,6 +4,7 @@ description: >-
   for request tracing. Includes AI-friendly log formats optimized for
   Claude Code debugging and correlation ID patterns.
 repo: piomin/claude-ai-spring-boot
+skill_path: ".claude/skills/logging-patterns/SKILL.md"
 category: language
 languages:
   - java

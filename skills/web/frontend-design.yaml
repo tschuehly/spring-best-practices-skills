@@ -5,6 +5,7 @@ description: >-
   generic AI aesthetics. Covers typography, color themes, motion,
   spatial composition, and background effects.
 repo: anthropics/claude-code
+skill_path: "plugins/frontend-design/skills/frontend-design/SKILL.md"
 category: web
 languages:
   - html

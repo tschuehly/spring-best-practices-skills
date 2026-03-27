@@ -4,6 +4,7 @@ description: >-
   Covers Core Web Vitals, critical rendering path, image optimization,
   font loading strategies, caching, and third-party script management.
 repo: addyosmani/web-quality-skills
+skill_path: "skills/performance/SKILL.md"
 category: web
 languages:
   - html

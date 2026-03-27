@@ -4,6 +4,7 @@ description: >-
   plan document. Analyzes coverage to identify packages and classes
   below 50% and 30% thresholds.
 repo: jvm-skills/jvm-skills
+skill_path: ".claude/skills/coverage-kover-gradle/SKILL.md"
 category: testing
 languages:
   - kotlin

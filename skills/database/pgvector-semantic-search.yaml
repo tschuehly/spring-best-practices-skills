@@ -5,6 +5,7 @@ description: >-
   HNSW index configuration, quantization strategies, filtered search,
   and performance tuning.
 repo: timescale/pg-aiguide
+skill_path: "skills/pgvector-semantic-search/SKILL.md"
 category: database
 languages:
   - kotlin

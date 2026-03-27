@@ -4,6 +4,7 @@ description: >-
   vertical slices with TDD. Each phase is a thin end-to-end slice
   delivering user-visible behavior through all layers.
 repo: jvm-skills/jvm-skills
+skill_path: ".claude/skills/spec-to-plan/SKILL.md"
 category: workflow
 languages:
   - kotlin

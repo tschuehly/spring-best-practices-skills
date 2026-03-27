@@ -4,6 +4,7 @@ description: >-
   covering SQL patterns, transactions, multiset nesting, code generation,
   Spring Boot integration, and PostgreSQL-specific features.
 repo: jvm-skills/jvm-skills
+skill_path: ".claude/skills/jooq-best-practices/SKILL.md"
 category: database
 languages:
   - kotlin

@@ -5,6 +5,7 @@ description: >-
   optimization. Covers entity relationships, projections, and
   optimistic locking.
 repo: piomin/claude-ai-spring-boot
+skill_path: ".claude/skills/jpa-patterns/SKILL.md"
 category: database
 languages:
   - java

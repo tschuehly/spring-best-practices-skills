@@ -4,6 +4,7 @@ description: >-
   encapsulating best-practice defaults and starter code so AI agents
   can rapidly generate production-ready projects.
 repo: jdubois/dr-jskill
+skill_path: "SKILL.md"
 category: framework
 languages:
   - kotlin

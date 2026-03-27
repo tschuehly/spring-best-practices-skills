@@ -3,6 +3,7 @@ description: >-
   Group uncommitted changes into logical feature commits with concise,
   action-oriented messages. Avoids conventional commit prefixes.
 repo: jvm-skills/jvm-skills
+skill_path: ".claude/skills/commit/SKILL.md"
 category: workflow
 languages:
   - kotlin

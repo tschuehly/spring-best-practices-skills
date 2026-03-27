@@ -4,6 +4,7 @@ description: >-
   and cloud-native patterns. Focuses on clean architecture, constructor
   injection, layered design, and production-ready deployments with Actuator.
 repo: piomin/claude-ai-spring-boot
+skill_path: ".claude/skills/spring-boot/SKILL.md"
 category: framework
 languages:
   - java

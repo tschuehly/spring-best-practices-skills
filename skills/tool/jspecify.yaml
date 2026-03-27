@@ -5,6 +5,7 @@ description: >-
   builds with ErrorProne/NullAway for compile-time nullability checking.
   Helps prevent NullPointerExceptions.
 repo: sivaprasadreddy/sivalabs-agent-skills
+skill_path: "skills/jspecify/SKILL.md"
 category: tool
 languages:
   - java
