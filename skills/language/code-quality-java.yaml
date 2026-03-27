@@ -1,0 +1,21 @@
+name: Java Code Quality Review
+description: >-
+  Systematic code review combining clean code principles, API design,
+  and Java best practices. Covers DRY, null safety, exception handling,
+  performance, and REST API contracts.
+repo: piomin/claude-ai-spring-boot
+category: language
+languages:
+  - java
+trust: community
+author: Piotr Minkowski
+version: "1.0.0"
+last_updated: "2026-03-27"
+scope: focused
+tech: []
+tags:
+  - code-review
+  - clean-code
+  - refactoring
+  - api-design
+  - null-safety

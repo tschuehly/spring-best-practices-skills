@@ -15,7 +15,7 @@ val templateFile = File(siteDir, "template.html")
 val distDir = File(rootDir, "dist")
 val outputFile = File(distDir, "index.html")
 
-val categories = listOf("database", "framework", "fullstack", "testing", "tool", "web", "workflow")
+val categories = listOf("database", "framework", "fullstack", "language", "testing", "tool", "web", "workflow")
 
 fun htmlEscape(s: String): String = s
     .replace("&", "&amp;")

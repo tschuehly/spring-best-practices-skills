@@ -1,0 +1,26 @@
+name: JPA/Hibernate Patterns
+description: >-
+  JPA/Hibernate patterns and common pitfalls including N+1 queries,
+  lazy loading, transaction management, fetch strategies, and query
+  optimization. Covers entity relationships, projections, and
+  optimistic locking.
+repo: piomin/claude-ai-spring-boot
+category: database
+languages:
+  - java
+trust: community
+author: Piotr Minkowski
+version: "1.0.0"
+last_updated: "2026-03-27"
+scope: focused
+tech:
+  - spring-boot
+  - jpa
+  - hibernate
+tags:
+  - jpa
+  - hibernate
+  - n-plus-one
+  - lazy-loading
+  - transactions
+  - entity-graph

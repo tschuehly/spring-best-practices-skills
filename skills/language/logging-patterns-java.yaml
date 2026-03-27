@@ -1,0 +1,23 @@
+name: Java Logging Patterns
+description: >-
+  Logging best practices with SLF4J, structured JSON logging, and MDC
+  for request tracing. Includes AI-friendly log formats optimized for
+  Claude Code debugging and correlation ID patterns.
+repo: piomin/claude-ai-spring-boot
+category: language
+languages:
+  - java
+trust: community
+author: Piotr Minkowski
+version: "1.0.0"
+last_updated: "2026-03-27"
+scope: focused
+tech:
+  - slf4j
+tags:
+  - logging
+  - slf4j
+  - structured-logging
+  - mdc
+  - json-logging
+  - debugging

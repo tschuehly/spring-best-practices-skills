@@ -1,0 +1,26 @@
+name: Spring Boot 3.x Enterprise
+description: >-
+  Spring Boot 3.x development covering REST APIs, JPA, Security, Testing,
+  and cloud-native patterns. Focuses on clean architecture, constructor
+  injection, layered design, and production-ready deployments with Actuator.
+repo: piomin/claude-ai-spring-boot
+category: framework
+languages:
+  - java
+trust: community
+author: Piotr Minkowski
+version: "1.0.0"
+last_updated: "2026-03-27"
+min_spring_boot: "3.0"
+scope: comprehensive
+tech:
+  - spring-boot
+  - spring-security
+  - spring-data
+tags:
+  - spring-boot
+  - rest-api
+  - spring-security
+  - spring-data
+  - microservices
+  - actuator
