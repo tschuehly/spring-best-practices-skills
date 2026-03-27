@@ -50,7 +50,6 @@ jvm-skills/                          # GitHub repo (github.com/jvm-skills/jvm-sk
 │       ├── grill-me.yaml
 │       └── prd-to-plan.yaml
 │
-├── experts.yaml                     # Curated list of trusted expert authors
 ├── build-site.sh                    # Shell script: reads YAML → outputs index.html
 ├── template.html                    # HTML template with embedded CSS/JS
 │
@@ -120,13 +119,14 @@ tags:
 | `category`         | yes      | One of: `database`, `web`, `infrastructure`, `testing`, `architecture`, `workflow` |
 | `tools`            | yes      | AI tools supported: `claude`, `cursor`, `copilot`, `windsurf`, `aider`     |
 | `languages`        | yes      | Languages supported: `kotlin`, `java`, or both                             |
-| `trust`            | yes      | `expert` (author is in experts.yaml) or `community`                        |
+| `trust`            | yes      | `official`, `curated`, or `community`                                        |
 | `author`           | yes      | Person or organization who created the skill                               |
 | `maintainer`       | no       | Person or org currently maintaining (if different from author)              |
 | `version`          | no       | Latest version/tag of the skill                                            |
 | `last_updated`     | no       | Date of last significant update (YYYY-MM-DD)                               |
 | `min_spring_boot`  | no       | Minimum Spring Boot version (if applicable)                                |
 | `tags`             | no       | Freeform tags for filtering                                                |
+| `scope`            | no       | `focused` (single tool/purpose) or `comprehensive` (framework guide, broad coverage) |
 | `screenshots`      | no       | List of screenshot URLs (future use)                                       |
 
 ### Categories
@@ -141,45 +141,34 @@ Skills are organized by technology layer:
 | `testing`          | Testing strategies, Testcontainers, integration testing patterns       |
 | `architecture`     | Design patterns, hexagonal architecture, modularity                    |
 | `workflow`         | Process and meta skills: planning (prd-to-plan), interview (grill-me), code review, compound engineering. These are language-agnostic but curated for JVM developers. |
+| `framework`         | Comprehensive framework guides covering multiple layers (Spring Boot full-stack, opinionated starter guides, framework-level best practices). These are `scope: comprehensive` skills that reference multiple focused sub-guides. |
 
 ### Trust Model
 
-#### Expert Authors
+#### Trust Levels
 
-You maintain a curated `experts.yaml` file listing trusted experts:
+Each skill specifies its trust level via the `trust` field:
 
-```yaml
-# experts.yaml
-experts:
-  - name: Lukas Eder
-    github: lukaseder
-    expertise: jOOQ, SQL
-  - name: Bruno Borges
-    github: brunoborges
-    expertise: Java, Azure, Spring
-  - name: Thomas Schuehly
-    github: tschuehly
-    expertise: Spring Boot, JTE, jOOQ
-```
-
-Skills where the `author` matches an expert get the **Expert** badge automatically. All other skills get the
-**Community** badge.
-
-The expert list is curated by you (Thomas). Adding someone requires a commit to `experts.yaml`.
+| Level      | Usage |
+|-----------|--------|
+| `official`  | Project's own skills |
+| `curated`   | Expert authors or recognized organizations |
+| `community`  | Community submissions via PR |
 
 #### Badge Display
 
-- **[Expert]** — Author is a recognized expert. High confidence in quality.
-- **[Community]** — Submitted by the community via PR. Passed basic review.
+- **[Official]** — Maintained by the jvm-skills project itself
+- **[Curated]** — From expert authors or recognized organizations
+- **[Community]** — Community submissions, passed basic review
 
 ### Website
 
 #### Generation
 
-A shell script (`build-site.sh`) reads all YAML files in `skills/` and `experts.yaml`, then generates a single
+A shell script (`build-site.sh`) reads all YAML files in `skills/`, then generates a single
 `dist/index.html` using an HTML template.
 
-- **Input:** `skills/**/*.yaml` + `experts.yaml` + `template.html`
+- **Input:** `skills/**/*.yaml` + `template.html`
 - **Output:** `dist/index.html` (single self-contained HTML file with embedded CSS and JS)
 - **No dependencies** beyond standard shell tools (`yq` or similar for YAML parsing)
 
@@ -208,10 +197,12 @@ A shell script (`build-site.sh`) reads all YAML files in `skills/` and `experts.
 6. Maintainer (Thomas) reviews and merges
 7. Site auto-rebuilds and deploys
 
-#### Becoming an expert
+#### Trust level assignment
 
-Expert status is by invitation only. If a tool maker (e.g., Lukas Eder for jOOQ) or recognized community expert
-wants to be listed, Thomas adds them to `experts.yaml`.
+The `trust` field is set by maintainers when reviewing PRs:
+- `official` — Skills maintained by the jvm-skills project
+- `curated` — Skills from recognized experts or organizations
+- `community` — Community submissions that pass basic review
 
 ### Seed Content
 
