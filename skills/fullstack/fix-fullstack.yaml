@@ -3,6 +3,7 @@ description: >-
   Fix a bug or missing feature using TDD methodology: write failing test
   first, then fix, refactor, verify, and beautify. Classifies by test
   approach (integration DB, mocks/stubs, or end-to-end browser).
+repo: jvm-skills/jvm-skills
 category: fullstack
 languages:
   - kotlin
@@ -12,6 +13,8 @@ author: jvm-skills
 version: "1.0.0"
 last_updated: "2026-03-27"
 scope: focused
+tech:
+  - spring-boot
 tags:
   - tdd
   - spring-boot

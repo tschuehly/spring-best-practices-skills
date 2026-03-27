@@ -3,6 +3,7 @@ description: >-
   Optimize web performance for faster loading and better user experience.
   Covers Core Web Vitals, critical rendering path, image optimization,
   font loading strategies, caching, and third-party script management.
+repo: jvm-skills/jvm-skills
 category: web
 languages:
   - html
@@ -11,6 +12,7 @@ author: jvm-skills
 version: "1.0.0"
 last_updated: "2026-03-27"
 scope: focused
+tech: []
 tags:
   - performance
   - web

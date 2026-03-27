@@ -3,6 +3,7 @@ description: >-
   Run tests headlessly with optional filter patterns, returning only failing
   test output. Groups failures by unique exception and launches parallel
   subagents for analysis and fixing.
+repo: jvm-skills/jvm-skills
 category: testing
 languages:
   - kotlin
@@ -13,6 +14,8 @@ author: jvm-skills
 version: "1.0.0"
 last_updated: "2026-03-27"
 scope: focused
+tech:
+  - gradle
 tags:
   - gradle
   - testing

@@ -3,6 +3,7 @@ description: >-
   Restart Spring Boot application via IntelliJ run configuration and wait
   until ready. Not needed for template/view changes when devtools hot-reload
   is enabled.
+repo: jvm-skills/jvm-skills
 category: framework
 languages:
   - kotlin
@@ -12,6 +13,8 @@ author: jvm-skills
 version: "1.0.0"
 last_updated: "2026-03-27"
 scope: focused
+tech:
+  - spring-boot
 tags:
   - spring-boot
   - development

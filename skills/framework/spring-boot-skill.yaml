@@ -16,6 +16,12 @@ version: "1.0.0"
 last_updated: "2026-03-27"
 min_spring_boot: "4.0"
 scope: comprehensive
+tech:
+  - spring-boot
+  - spring-data
+  - thymeleaf
+  - maven
+  - docker
 tags:
   - spring-boot
   - spring-mvc

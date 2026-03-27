@@ -15,7 +15,7 @@ val templateFile = File(siteDir, "template.html")
 val distDir = File(rootDir, "dist")
 val outputFile = File(distDir, "index.html")
 
-val categories = listOf("database", "web", "infrastructure", "testing", "architecture", "workflow")
+val categories = listOf("database", "framework", "fullstack", "testing", "tool", "web", "workflow")
 
 fun htmlEscape(s: String): String = s
     .replace("&", "&amp;")
@@ -53,18 +53,18 @@ val skillCards = buildString {
             val trust = skill["trust"]?.toString() ?: "community"
 
             val languages = (skill["languages"] as? List<*>)?.map { it.toString() } ?: emptyList()
+            val tech = (skill["tech"] as? List<*>)?.map { it.toString() } ?: emptyList()
             val tags = (skill["tags"] as? List<*>)?.map { it.toString() } ?: emptyList()
 
             val langsCsv = languages.joinToString(",")
+            val techCsv = tech.joinToString(",")
             val tagsCsv = tags.joinToString(",")
 
-            val badgeClass = trust
-            val badgeLabel = "[$trust]".uppercase()
-
             val langsHtml = languages.joinToString("") { "<span>$it</span>" }
+            val techHtml = tech.joinToString("") { "<span>${htmlEscape(it)}</span>" }
             val tagsHtml = tags.joinToString("") { "<span>${htmlEscape(it)}</span>" }
 
-            append("""<article class="skill-card" data-languages="$langsCsv" data-trust="$trust" data-tags="$tagsCsv">""")
+            append("""<article class="skill-card" data-languages="$langsCsv" data-tech="$techCsv" data-trust="$trust" data-tags="$tagsCsv">""")
             append("\n")
             append("""<div class="card-titlebar">""")
             append("""<span class="card-dots"><span></span><span></span><span></span></span>""")
@@ -76,11 +76,14 @@ val skillCards = buildString {
             append("""<p class="skill-description">${htmlEscape(description)}</p>""")
             append("\n")
             append("""<div class="skill-meta">""")
-            append("""<span class="trust-badge $badgeClass">$badgeLabel</span>""")
             append("""<span class="skill-author">by ${htmlEscape(author)}</span>""")
             append("</div>\n")
             append("""<div class="skill-languages">$langsHtml</div>""")
             append("\n")
+            if (tech.isNotEmpty()) {
+                append("""<div class="skill-tech">$techHtml</div>""")
+                append("\n")
+            }
             append("""<div class="skill-tags">$tagsHtml</div>""")
             append("\n")
             append("</div>\n</article>\n")

@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>jvm-skills — Curated AI Coding Skills for JVM Developers</title>
-  <meta name="description" content="Discover the best AI coding skills for JVM projects. Curated best-practice guides for Claude Code, Cursor, Copilot and more. Spring Boot, jOOQ, JPA, Testcontainers and beyond.">
-  <meta name="keywords" content="JVM, Java, Kotlin, AI coding, skills, Claude Code, Cursor, Copilot, Spring Boot, jOOQ">
+  <meta name="description" content="Discover the best AI coding skills for JVM projects. Curated best-practice guides for Claude Code, Cursor, Copilot and more. Spring Boot, Quarkus, Micronaut, Gradle, Maven — Java, Kotlin, Groovy and beyond.">
+  <meta name="keywords" content="JVM, Java, Kotlin, Groovy, Scala, AI coding, skills, Claude Code, Cursor, Copilot, Spring Boot, Spring Framework, Quarkus, Micronaut, Gradle, Maven, jOOQ, JPA, Hibernate, Testcontainers, PostgreSQL, Docker">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -78,12 +78,6 @@
       --text-primary: #c9d1d9;
       --text-secondary: #8b949e;
       --text-muted: #484f58;
-      --badge-expert-bg: rgba(0, 255, 65, 0.12);
-      --badge-expert-text: #00ff41;
-      --badge-curated-bg: rgba(255, 176, 32, 0.12);
-      --badge-curated-text: #ffb020;
-      --badge-community-bg: rgba(0, 212, 255, 0.12);
-      --badge-community-text: #00d4ff;
       --scanline-opacity: 0.03;
       --glow-opacity: 1;
     }
@@ -108,12 +102,6 @@
       --amber: #9a6700;
       --cyan: #0369a1;
       --magenta: #b8266a;
-      --badge-expert-bg: rgba(0, 109, 31, 0.1);
-      --badge-expert-text: #006d1f;
-      --badge-curated-bg: rgba(154, 103, 0, 0.1);
-      --badge-curated-text: #9a6700;
-      --badge-community-bg: rgba(3, 105, 161, 0.1);
-      --badge-community-text: #0369a1;
       --scanline-opacity: 0;
       --glow-opacity: 0;
     }
@@ -681,27 +669,6 @@
       font-size: 0.8rem;
     }
 
-    .trust-badge {
-      font-family: var(--font-mono);
-      font-size: 0.7rem;
-      font-weight: 600;
-      padding: 2px 8px;
-      border-radius: 3px;
-      letter-spacing: 0.04em;
-    }
-    .trust-badge.official {
-      background: var(--badge-expert-bg);
-      color: var(--badge-expert-text);
-    }
-    .trust-badge.curated {
-      background: var(--badge-curated-bg);
-      color: var(--badge-curated-text);
-    }
-    .trust-badge.community {
-      background: var(--badge-community-bg);
-      color: var(--badge-community-text);
-    }
-
     .skill-author {
       color: var(--text-muted);
       font-size: 0.8rem;
@@ -723,6 +690,22 @@
       color: var(--text-secondary);
       color: var(--cyan);
       border-color: rgba(0, 212, 255, 0.2);
+    }
+
+    .skill-tech {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      margin-bottom: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .skill-tech span {
+      padding: 1px 6px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--green-dim);
+      border-color: rgba(0, 204, 51, 0.2);
     }
 
     .skill-tags {
@@ -952,7 +935,7 @@
               <span class="prompt-symbol">$</span>
               <span class="cmd">ls</span> <span class="flag">-la</span> <span class="string">skills/</span>
             </span>
-            <span class="hero-output">database/ web/ infrastructure/ testing/ architecture/ workflow/</span>
+            <span class="hero-output">database/ framework/ fullstack/ testing/ tool/ web/ workflow/</span>
             <div class="hero-filter" role="search" aria-label="Filter skills">
               <span class="hero-line" style="margin-top: 8px;">
                 <span class="prompt-symbol">$</span>
@@ -971,17 +954,17 @@
                 <div class="filter-group" role="group" aria-labelledby="filter-lang-label">
                   <span class="filter-label" id="filter-lang-label">--lang</span>
                   <div class="filter-options">
-                    <button class="filter-chip" data-filter="lang" data-value="kotlin" aria-pressed="false" type="button">kotlin</button>
                     <button class="filter-chip" data-filter="lang" data-value="java" aria-pressed="false" type="button">java</button>
+                    <button class="filter-chip" data-filter="lang" data-value="kotlin" aria-pressed="false" type="button">kotlin</button>
+                    <button class="filter-chip" data-filter="lang" data-value="groovy" aria-pressed="false" type="button">groovy</button>
                   </div>
                 </div>
-
-                <div class="filter-group" role="group" aria-labelledby="filter-trust-label">
-                  <span class="filter-label" id="filter-trust-label">--trust</span>
+                <div class="filter-group" role="group" aria-labelledby="filter-tech-label">
+                  <span class="filter-label" id="filter-tech-label">--tech</span>
                   <div class="filter-options">
-                    <button class="filter-chip" data-filter="trust" data-value="official" aria-pressed="false" type="button">official</button>
-                    <button class="filter-chip" data-filter="trust" data-value="curated" aria-pressed="false" type="button">curated</button>
-                    <button class="filter-chip" data-filter="trust" data-value="community" aria-pressed="false" type="button">community</button>
+                    <button class="filter-chip" data-filter="tech" data-value="spring-boot" aria-pressed="false" type="button">spring-boot</button>
+                    <button class="filter-chip" data-filter="tech" data-value="postgresql" aria-pressed="false" type="button">postgresql</button>
+                    <button class="filter-chip" data-filter="tech" data-value="gradle" aria-pressed="false" type="button">gradle</button>
                   </div>
                 </div>
               </div>
@@ -1112,6 +1095,7 @@
       var filters = {
         search: '',
         lang: [],
+        tech: [],
         trust: []
       };
 
@@ -1122,6 +1106,7 @@
         var params = new URLSearchParams(hash);
         filters.search = params.get('q') || '';
         filters.lang = params.get('lang') ? params.get('lang').split(',') : [];
+        filters.tech = params.get('tech') ? params.get('tech').split(',') : [];
         filters.trust = params.get('trust') ? params.get('trust').split(',') : [];
 
         // Update UI
@@ -1129,7 +1114,7 @@
         chips.forEach(function (chip) {
           var filterType = chip.getAttribute('data-filter');
           var value = chip.getAttribute('data-value');
-          var arr = filters[filterType === 'lang' ? 'lang' : 'trust'];
+          var arr = filters[filterType] || [];
           var active = arr.indexOf(value) !== -1;
           chip.setAttribute('aria-pressed', active ? 'true' : 'false');
           chip.classList.toggle('active', active);
@@ -1141,6 +1126,7 @@
         var params = new URLSearchParams();
         if (filters.search) params.set('q', filters.search);
         if (filters.lang.length) params.set('lang', filters.lang.join(','));
+        if (filters.tech.length) params.set('tech', filters.tech.join(','));
         if (filters.trust.length) params.set('trust', filters.trust.join(','));
         var str = params.toString();
         history.replaceState(null, '', str ? '#' + str : window.location.pathname);
@@ -1149,23 +1135,25 @@
       function applyFilters() {
         var query = filters.search.toLowerCase();
         var visibleCount = 0;
-        var hasActiveFilters = query || filters.lang.length || filters.trust.length;
+        var hasActiveFilters = query || filters.lang.length || filters.tech.length || filters.trust.length;
 
         cards.forEach(function (card) {
           var langs = (card.getAttribute('data-languages') || '').split(',');
+          var techs = (card.getAttribute('data-tech') || '').split(',');
           var trust = card.getAttribute('data-trust') || '';
           var tags = (card.getAttribute('data-tags') || '').split(',');
           var name = (card.querySelector('.skill-name') || {}).textContent || '';
           var desc = (card.querySelector('.skill-description') || {}).textContent || '';
           var author = (card.querySelector('.skill-author') || {}).textContent || '';
 
-          var searchText = (name + ' ' + desc + ' ' + author + ' ' + tags.join(' ')).toLowerCase();
+          var searchText = (name + ' ' + desc + ' ' + author + ' ' + tags.join(' ') + ' ' + techs.join(' ')).toLowerCase();
           var matchSearch = !query || searchText.indexOf(query) !== -1;
 
           var matchLang = !filters.lang.length || filters.lang.some(function (l) { return langs.indexOf(l) !== -1; });
+          var matchTech = !filters.tech.length || filters.tech.some(function (f) { return techs.indexOf(f) !== -1; });
           var matchTrust = !filters.trust.length || filters.trust.indexOf(trust) !== -1;
 
-          var visible = matchSearch && matchLang && matchTrust;
+          var visible = matchSearch && matchLang && matchTech && matchTrust;
           card.classList.toggle('hidden', !visible);
           if (visible) visibleCount++;
         });
@@ -1198,8 +1186,7 @@
         chip.addEventListener('click', function () {
           var filterType = chip.getAttribute('data-filter');
           var value = chip.getAttribute('data-value');
-          var key = filterType === 'lang' ? 'lang' : 'trust';
-          var arr = filters[key];
+          var arr = filters[filterType] || [];
           var idx = arr.indexOf(value);
 
           if (idx === -1) {
@@ -1218,7 +1205,7 @@
 
       // Clear filters
       clearBtn.addEventListener('click', function () {
-        filters = { search: '', lang: [], trust: [] };
+        filters = { search: '', lang: [], tech: [], trust: [] };
         searchInput.value = '';
         chips.forEach(function (chip) {
           chip.setAttribute('aria-pressed', 'false');

@@ -14,6 +14,9 @@ version: "1.0.0"
 last_updated: "2026-03-27"
 min_java: "17"
 scope: focused
+tech:
+  - jspecify
+  - errorprone
 tags:
   - nullability
   - errorprone

@@ -3,6 +3,7 @@ description: >-
   Run test coverage report using Kover/Gradle and create test improvement
   plan document. Analyzes coverage to identify packages and classes
   below 50% and 30% thresholds.
+repo: jvm-skills/jvm-skills
 category: testing
 languages:
   - kotlin
@@ -12,6 +13,9 @@ author: jvm-skills
 version: "1.0.0"
 last_updated: "2026-03-27"
 scope: focused
+tech:
+  - gradle
+  - kover
 tags:
   - gradle
   - kover

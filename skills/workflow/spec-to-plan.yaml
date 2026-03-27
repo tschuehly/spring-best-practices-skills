@@ -3,6 +3,7 @@ description: >-
   Turn a spec into a multi-phase implementation plan using tracer-bullet
   vertical slices with TDD. Each phase is a thin end-to-end slice
   delivering user-visible behavior through all layers.
+repo: jvm-skills/jvm-skills
 category: workflow
 languages:
   - kotlin
@@ -12,6 +13,7 @@ author: jvm-skills
 version: "1.0.0"
 last_updated: "2026-03-27"
 scope: focused
+tech: []
 tags:
   - planning
   - tdd

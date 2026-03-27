@@ -3,6 +3,7 @@ description: >-
   Interview user relentlessly about a plan or design until reaching shared
   understanding, resolving each branch of the decision tree. Outputs a spec
   with user stories that cover all roles, entry points, and edge cases.
+repo: jvm-skills/jvm-skills
 category: workflow
 languages:
   - kotlin
@@ -12,6 +13,7 @@ author: jvm-skills
 version: "1.0.0"
 last_updated: "2026-03-27"
 scope: focused
+tech: []
 tags:
   - planning
   - interview
