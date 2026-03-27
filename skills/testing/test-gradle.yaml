@@ -1,8 +1,7 @@
 name: Gradle Test Runner
 description: >-
-  Run tests headlessly with optional filter patterns, returning only failing
-  test output. Groups failures by unique exception and launches parallel
-  subagents for analysis and fixing.
+  Run Gradle tests headlessly with optional filter patterns. Returns only
+  failing output, grouped by unique exception, for fast diagnosis.
 repo: jvm-skills/jvm-skills
 skill_path: ".claude/skills/test-gradle/SKILL.md"
 category: testing

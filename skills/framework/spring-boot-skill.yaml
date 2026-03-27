@@ -1,10 +1,8 @@
 name: Spring Boot 4.x
 description: >-
-  Build Spring Boot 4.x applications following best practices. Covers
-  recommended package structure, Spring Data JPA, service layer,
-  REST APIs with Spring MVC, Spring Modulith, Thymeleaf,
-  testing (MockMvc, ArchUnit), Maven configuration,
-  and Docker Compose for local development.
+  Spring Boot 4.x with Spring Modulith boundaries, Thymeleaf server-side
+  rendering, ArchUnit architecture tests, and Docker Compose dev services.
+  Opinionated package structure and Maven configuration.
 repo: sivaprasadreddy/sivalabs-agent-skills
 skill_path: "skills/spring-boot/SKILL.md"
 category: web

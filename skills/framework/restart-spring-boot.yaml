@@ -1,8 +1,8 @@
 name: Restart Spring Boot
 description: >-
-  Restart Spring Boot application via IntelliJ run configuration and wait
-  until ready. Not needed for template/view changes when devtools hot-reload
-  is enabled.
+  Restart the app via IntelliJ run configuration and wait until ready.
+  Skips restart for template changes where LiveReload handles it
+  automatically.
 repo: jvm-skills/jvm-skills
 skill_path: ".claude/skills/restart-spring-boot/SKILL.md"
 category: framework

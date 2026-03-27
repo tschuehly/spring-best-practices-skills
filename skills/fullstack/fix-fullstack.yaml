@@ -1,8 +1,8 @@
 name: Fullstack Fix
 description: >-
-  Fix a bug or missing feature using TDD methodology: write failing test
-  first, then fix, refactor, verify, and beautify. Classifies by test
-  approach (integration DB, mocks/stubs, or end-to-end browser).
+  TDD-driven bug fixing: write a failing test first, implement the fix,
+  refactor, then verify. Automatically picks the right test type —
+  integration with DB, mocks/stubs, or end-to-end browser.
 repo: jvm-skills/jvm-skills
 skill_path: ".claude/skills/fix/SKILL.md"
 category: fullstack

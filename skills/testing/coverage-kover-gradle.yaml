@@ -1,8 +1,7 @@
 name: Kover Gradle Coverage
 description: >-
-  Run test coverage report using Kover/Gradle and create test improvement
-  plan document. Analyzes coverage to identify packages and classes
-  below 50% and 30% thresholds.
+  Run Kover coverage via Gradle, identify packages and classes below
+  coverage thresholds, and generate a prioritized test improvement plan.
 repo: jvm-skills/jvm-skills
 skill_path: ".claude/skills/coverage-kover-gradle/SKILL.md"
 category: testing

@@ -1,8 +1,9 @@
 name: Spring Boot 3.x Enterprise
 description: >-
-  Spring Boot 3.x development covering REST APIs, JPA, Security, Testing,
-  and cloud-native patterns. Focuses on clean architecture, constructor
-  injection, layered design, and production-ready deployments with Actuator.
+  Enterprise Spring Boot 3.x patterns: layered architecture with
+  constructor injection, Spring Security with OAuth2, Spring Data JPA
+  repositories, Actuator health checks, and integration testing with
+  @SpringBootTest.
 repo: piomin/claude-ai-spring-boot
 skill_path: ".claude/skills/spring-boot/SKILL.md"
 category: framework

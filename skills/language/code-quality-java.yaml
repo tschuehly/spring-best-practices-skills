@@ -1,8 +1,8 @@
 name: Java Code Quality Review
 description: >-
-  Systematic code review combining clean code principles, API design,
-  and Java best practices. Covers DRY, null safety, exception handling,
-  performance, and REST API contracts.
+  Java code review checklist: DRY violations, null-safety gaps, exception
+  anti-patterns, REST API contract issues, and performance pitfalls.
+  Findings ranked by severity (Critical to Minor).
 repo: piomin/claude-ai-spring-boot
 skill_path: ".claude/skills/code-quality/SKILL.md"
 category: language

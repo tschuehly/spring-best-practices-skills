@@ -1,8 +1,8 @@
 name: Java Design Patterns
 description: >-
-  Common design patterns with Java examples including Factory, Builder,
-  Strategy, Observer, Decorator, and Adapter. Quick reference for when
-  to use each pattern and implementation templates.
+  When-to-use guide for Java design patterns with implementation
+  templates. Covers Builder, Factory, Strategy, Observer, Decorator,
+  and Adapter with problem-to-pattern mapping.
 repo: piomin/claude-ai-spring-boot
 skill_path: ".claude/skills/design-patterns/SKILL.md"
 category: language

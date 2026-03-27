@@ -1,9 +1,8 @@
 name: Frontend Design
 description: >-
-  Create distinctive, production-grade frontend interfaces with high
-  design quality. Generates creative, polished code that avoids
-  generic AI aesthetics. Covers typography, color themes, motion,
-  spatial composition, and background effects.
+  Break out of generic AI-generated UIs. Opinionated design system
+  covering typography scales, color themes, motion choreography,
+  spatial composition, and layered background effects.
 repo: anthropics/claude-code
 skill_path: "plugins/frontend-design/skills/frontend-design/SKILL.md"
 category: web
