@@ -68,7 +68,6 @@ val skillCards = buildString {
             append("\n")
             append("""<div class="card-titlebar">""")
             append("""<span class="card-dots"><span></span><span></span><span></span></span>""")
-            append("""<span class="card-title">${htmlEscape(yamlFile.name)}</span>""")
             append("</div>\n")
             append("""<div class="card-body">""")
             append("\n")

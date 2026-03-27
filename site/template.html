@@ -302,7 +302,7 @@
        HERO
        ══════════════════════════════════════════════ */
     .hero {
-      padding: 64px 0 48px;
+      padding: 64px 0 40px;
       text-align: center;
     }
 
@@ -313,9 +313,8 @@
       border-radius: 6px;
       overflow: hidden;
       text-align: left;
-      max-width: 600px;
+      max-width: 700px;
       width: 100%;
-      margin-bottom: 24px;
       box-shadow: 0 0 40px var(--green-glow);
     }
 
@@ -393,12 +392,53 @@
     }
 
     .hero-tagline {
-      font-family: var(--font-body);
-      font-size: 1.05rem;
-      color: var(--text-secondary);
-      max-width: 520px;
-      margin: 0 auto;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin: 16px auto 0;
       line-height: 1.6;
+    }
+
+    .hero-filter {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .hero-filter .hero-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .hero-filter .search-input {
+      flex: 1;
+      background: var(--bg-input);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 6px 10px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--text-primary);
+      caret-color: var(--green);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .hero-filter .search-input::placeholder {
+      color: var(--text-muted);
+    }
+    .hero-filter .search-input:focus {
+      outline: none;
+      border-color: var(--green-dim);
+      box-shadow: 0 0 0 3px var(--green-glow);
+    }
+
+    .hero-filter .filter-groups {
+      padding-left: 20px;
+    }
+
+    .hero-filter .results-count {
+      padding-left: 20px;
     }
 
     /* Typewriter effect */
@@ -418,50 +458,7 @@
     /* ══════════════════════════════════════════════
        FILTER BAR
        ══════════════════════════════════════════════ */
-    .filter-bar {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 20px;
-      margin-bottom: 40px;
-    }
-
-    .search-row {
-      display: flex;
-      align-items: center;
-      margin-bottom: 16px;
-      position: relative;
-    }
-
-    .search-prompt {
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--green);
-      margin-right: 8px;
-      user-select: none;
-      white-space: nowrap;
-    }
-
-    .search-input {
-      flex: 1;
-      background: var(--bg-input);
-      border: 1px solid var(--border);
-      border-radius: 3px;
-      padding: 8px 12px;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      color: var(--text-primary);
-      caret-color: var(--green);
-      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-    }
-    .search-input::placeholder {
-      color: var(--text-muted);
-    }
-    .search-input:focus {
-      outline: none;
-      border-color: var(--green-dim);
-      box-shadow: 0 0 0 3px var(--green-glow);
-    }
+    /* filter-groups and chips are now inside .hero-filter */
 
     .filter-groups {
       display: flex;
@@ -640,10 +637,6 @@
     .card-dots span:nth-child(2) { background: var(--yellow); }
     .card-dots span:nth-child(3) { background: var(--green-dot); }
 
-    .card-title {
-      color: var(--text-muted);
-      margin-left: 4px;
-    }
 
     .card-body {
       padding: 16px;
@@ -808,17 +801,82 @@
     }
 
     /* ══════════════════════════════════════════════
+       VISION SECTION
+       ══════════════════════════════════════════════ */
+    .vision {
+      margin-top: 64px;
+      padding-top: 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    .vision-heading {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-primary);
+    }
+    .vision-heading .prompt {
+      color: var(--green);
+    }
+    .vision-heading .string {
+      color: var(--green);
+    }
+
+    .vision-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .vision-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 20px;
+      transition: border-color var(--transition-base);
+    }
+    .vision-card:hover {
+      border-color: var(--border-hover);
+    }
+
+    .vision-card-title {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--cyan);
+      margin-bottom: 8px;
+    }
+
+    .vision-card-text {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .vision-card-text code {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      background: var(--bg-secondary);
+      padding: 2px 6px;
+      border-radius: 3px;
+      color: var(--green);
+    }
+
+    /* ══════════════════════════════════════════════
        RESPONSIVE
        ══════════════════════════════════════════════ */
     @media (max-width: 768px) {
       .hero { padding: 40px 0 32px; }
       .hero-body { font-size: 0.8rem; padding: 16px; }
-      .hero-tagline { font-size: 0.95rem; }
-
       .filter-groups { gap: 12px; }
       .filter-group { width: 100%; }
 
-      .skills-grid {
+      .skills-grid,
+      .vision-grid {
         grid-template-columns: 1fr;
       }
 
@@ -830,8 +888,8 @@
 
     @media (max-width: 480px) {
       .container { padding: 0 12px; }
-      .filter-bar { padding: 14px; }
-      .search-prompt { display: none; }
+      .hero-filter .cmd { display: none; }
+      .hero-filter .prompt-symbol { display: none; }
       .hero-terminal { border-radius: 0; border-left: none; border-right: none; }
     }
 
@@ -895,54 +953,49 @@
               <span class="cmd">ls</span> <span class="flag">-la</span> <span class="string">skills/</span>
             </span>
             <span class="hero-output">database/ web/ infrastructure/ testing/ architecture/ workflow/</span>
-            <span class="hero-line" style="margin-top: 8px;">
-              <span class="prompt-symbol">$</span> <span class="cursor-blink"></span>
-            </span>
+            <div class="hero-filter" role="search" aria-label="Filter skills">
+              <span class="hero-line" style="margin-top: 8px;">
+                <span class="prompt-symbol">$</span>
+                <label for="searchInput" class="cmd" aria-hidden="true">grep</label>
+                <input
+                  type="search"
+                  id="searchInput"
+                  class="search-input"
+                  placeholder="search skills..."
+                  aria-label="Search skills by name, description, author, or tags"
+                  autocomplete="off"
+                >
+              </span>
+
+              <div class="filter-groups">
+                <div class="filter-group" role="group" aria-labelledby="filter-lang-label">
+                  <span class="filter-label" id="filter-lang-label">--lang</span>
+                  <div class="filter-options">
+                    <button class="filter-chip" data-filter="lang" data-value="kotlin" aria-pressed="false" type="button">kotlin</button>
+                    <button class="filter-chip" data-filter="lang" data-value="java" aria-pressed="false" type="button">java</button>
+                  </div>
+                </div>
+
+                <div class="filter-group" role="group" aria-labelledby="filter-trust-label">
+                  <span class="filter-label" id="filter-trust-label">--trust</span>
+                  <div class="filter-options">
+                    <button class="filter-chip" data-filter="trust" data-value="official" aria-pressed="false" type="button">official</button>
+                    <button class="filter-chip" data-filter="trust" data-value="curated" aria-pressed="false" type="button">curated</button>
+                    <button class="filter-chip" data-filter="trust" data-value="community" aria-pressed="false" type="button">community</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="results-count" role="status" aria-live="polite">
+                <span class="count-num" id="resultCount">0</span> skills found
+                <button class="clear-filters" id="clearFilters" type="button" style="display:none;">clear filters</button>
+              </div>
+            </div>
           </div>
         </div>
         <p class="hero-tagline">
-          Best-practice guides that make your AI coding tools actually write idiomatic JVM code.
-          Browse skills below, or <a href="https://github.com/jvm-skills/jvm-skills/blob/main/CONTRIBUTING.md">contribute your own</a>.
+          Opinionated by default — tell your agent to adjust any skill to your stack.
         </p>
-      </section>
-
-      <!-- ═══════════ FILTERS ═══════════ -->
-      <section class="filter-bar" aria-label="Filter skills" role="search">
-        <div class="search-row">
-          <label for="searchInput" class="search-prompt" aria-hidden="true">$ grep</label>
-          <input
-            type="search"
-            id="searchInput"
-            class="search-input"
-            placeholder="search skills..."
-            aria-label="Search skills by name, description, author, or tags"
-            autocomplete="off"
-          >
-        </div>
-
-        <div class="filter-groups">
-          <div class="filter-group" role="group" aria-labelledby="filter-lang-label">
-            <span class="filter-label" id="filter-lang-label">--lang</span>
-            <div class="filter-options">
-              <button class="filter-chip" data-filter="lang" data-value="kotlin" aria-pressed="false" type="button">kotlin</button>
-              <button class="filter-chip" data-filter="lang" data-value="java" aria-pressed="false" type="button">java</button>
-            </div>
-          </div>
-
-          <div class="filter-group" role="group" aria-labelledby="filter-trust-label">
-            <span class="filter-label" id="filter-trust-label">--trust</span>
-            <div class="filter-options">
-              <button class="filter-chip" data-filter="trust" data-value="official" aria-pressed="false" type="button">official</button>
-              <button class="filter-chip" data-filter="trust" data-value="curated" aria-pressed="false" type="button">curated</button>
-              <button class="filter-chip" data-filter="trust" data-value="community" aria-pressed="false" type="button">community</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="results-count" role="status" aria-live="polite">
-          <span class="count-num" id="resultCount">0</span> skills found
-          <button class="clear-filters" id="clearFilters" type="button" style="display:none;">clear filters</button>
-        </div>
       </section>
 
       <!-- ═══════════ SKILL CARDS (injected by build script) ═══════════ -->
@@ -955,6 +1008,38 @@
         <p class="no-results-text">$ grep: no matches found</p>
         <p class="no-results-hint">Try adjusting your filters or search term.</p>
       </div>
+
+      <!-- ═══════════ VISION ═══════════ -->
+      <section class="vision" aria-label="Project vision">
+        <h2 class="vision-heading">
+          <span class="prompt">$</span> cat <span class="string">ROADMAP.md</span>
+        </h2>
+
+        <div class="vision-grid">
+          <div class="vision-card">
+            <h3 class="vision-card-title">One-liner bootstrap</h3>
+            <p class="vision-card-text">
+              <code>curl -fsSL jvmskills.com/install | sh</code> — auto-detects your stack from build files, picks matching skills, and generates AI config. Zero dependencies.
+            </p>
+          </div>
+
+          <div class="vision-card">
+            <h3 class="vision-card-title">Compose, don't duplicate</h3>
+            <p class="vision-card-text">
+              Skills compose from a base + language/database overlays. Detect jOOQ + Kotlin + PostgreSQL? You get the base skill plus only the overlays that matter.
+            </p>
+          </div>
+
+          <div class="vision-card">
+            <h3 class="vision-card-title">Every AI tool</h3>
+            <p class="vision-card-text">
+              Claude Code is the v1 target. The same skill content compiles to Cursor, Copilot, Windsurf, Aider, and Codex formats — one source of truth, every editor.
+            </p>
+          </div>
+
+
+        </div>
+      </section>
 
     </div>
   </main>
