@@ -1,0 +1,18 @@
+name: Commit
+description: >-
+  Group uncommitted changes into logical feature commits using ANSI-C quoting.
+  Applies concise, action-oriented messages without conventional commit prefixes.
+category: workflow
+languages:
+  - kotlin
+  - java
+  - groovy
+trust: curated
+author: jvm-skills
+version: "1.0.0"
+last_updated: "2026-03-27"
+scope: focused
+tags:
+  - git
+  - commit
+  - version-control

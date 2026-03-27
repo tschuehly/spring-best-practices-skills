@@ -1,0 +1,19 @@
+name: Fullstack Fix
+description: >-
+  Fix a bug or missing feature using TDD methodology: write failing test
+  first, then fix, refactor, verify, and beautify. Classifies by test
+  approach (integration DB, mocks/stubs, or end-to-end browser).
+category: fullstack
+languages:
+  - kotlin
+  - java
+trust: curated
+author: jvm-skills
+version: "1.0.0"
+last_updated: "2026-03-27"
+scope: focused
+tags:
+  - tdd
+  - spring-boot
+  - testing
+  - bug-fixing
