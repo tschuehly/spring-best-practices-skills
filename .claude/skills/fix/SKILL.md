@@ -1,5 +1,5 @@
 ---
-name: fix-spring-tdd
+name: fix
 description: Fix a bug or missing feature using TDD — write failing test first, then fix, refactor, verify, beautify. Use when a bug is discovered or a feature doesn't work as expected.
 ---
 
