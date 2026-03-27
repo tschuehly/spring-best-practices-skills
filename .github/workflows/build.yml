@@ -1,0 +1,29 @@
+name: Build & Validate
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Kotlin
+        run: |
+          curl -sL https://github.com/JetBrains/kotlin/releases/download/v2.1.20/kotlin-compiler-2.1.20.zip -o kotlin.zip
+          unzip -q kotlin.zip -d /opt
+          echo "/opt/kotlinc/bin" >> $GITHUB_PATH
+
+      - name: Validate skill YAML files
+        run: kotlin site/validate.main.kts
+
+      - name: Build site
+        run: kotlin site/build.main.kts
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: dist/

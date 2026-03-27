@@ -1,0 +1,83 @@
+name: Submit a Skill
+description: Suggest a new AI coding skill for the jvm-skills directory
+title: "[Skill] "
+labels: ["new-skill"]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Skill name
+      placeholder: e.g. jOOQ Best Practices
+    validations:
+      required: true
+
+  - type: input
+    id: repo
+    attributes:
+      label: Repository
+      description: GitHub repository in owner/repo format
+      placeholder: e.g. your-username/your-skill-repo
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A short paragraph describing what this skill teaches AI coding tools.
+      placeholder: Describe the technologies and patterns covered...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - database
+        - web
+        - infrastructure
+        - testing
+        - architecture
+        - workflow
+    validations:
+      required: true
+
+  - type: input
+    id: tools
+    attributes:
+      label: Supported tools
+      description: Comma-separated list of AI coding tools
+      placeholder: e.g. claude, cursor, copilot
+    validations:
+      required: true
+
+  - type: input
+    id: languages
+    attributes:
+      label: Languages
+      description: Comma-separated list of programming languages
+      placeholder: e.g. kotlin, java
+    validations:
+      required: true
+
+  - type: input
+    id: author
+    attributes:
+      label: Author
+      placeholder: Your name
+    validations:
+      required: true
+
+  - type: input
+    id: tags
+    attributes:
+      label: Tags
+      description: Comma-separated list of relevant tags
+      placeholder: e.g. sql, orm, best-practices
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Anything else you'd like to share about this skill?
