@@ -1,0 +1,23 @@
+name: jOOQ Best Practices
+description: >-
+  Comprehensive jOOQ DSL best practices for Kotlin/Java. Expert knowledge base
+  covering SQL patterns, transactions, multiset nesting, code generation,
+  Spring Boot integration, and PostgreSQL-specific features.
+repo: jvm-skills/jvm-skills
+category: database
+languages:
+  - kotlin
+  - java
+trust: curated
+author: jvm-skills
+version: "1.0.0"
+last_updated: "2026-03-27"
+scope: focused
+tags:
+  - jooq
+  - sql
+  - dsl
+  - database
+  - postgres
+  - transactions
+  - multiset

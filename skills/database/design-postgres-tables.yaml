@@ -1,0 +1,24 @@
+name: Design PostgreSQL Tables
+description: >-
+  Comprehensive reference covering PostgreSQL table design, data types,
+  indexing strategies, constraints, JSONB patterns, partitioning,
+  and PostgreSQL-specific best practices. Covers update-heavy, upsert-heavy,
+  and OLTP-style table patterns.
+repo: timescale/pg-aiguide
+category: database
+languages:
+  - kotlin
+  - java
+trust: curated
+author: TimescaleDB
+version: "1.0.0"
+last_updated: "2026-03-27"
+scope: focused
+tags:
+  - postgres
+  - schema
+  - table-design
+  - indexing
+  - jsonb
+  - constraints
+  - partitioning

@@ -1,0 +1,24 @@
+name: PostgreSQL Hybrid Text Search
+description: >-
+  Implementing hybrid search combining BM25 keyword search with semantic
+  vector search using Reciprocal Rank Fusion (RRF). Covers
+  pg_textsearch BM25 index setup, parallel query patterns,
+  client-side RRF fusion, and optional ML reranking.
+repo: timescale/pg-aiguide
+category: database
+languages:
+  - kotlin
+  - java
+trust: curated
+author: TimescaleDB
+version: "1.0.0"
+last_updated: "2026-03-27"
+scope: focused
+tags:
+  - hybrid-search
+  - bm25
+  - pg_textsearch
+  - rrf
+  - keyword-search
+  - full-text-search
+  - reranking

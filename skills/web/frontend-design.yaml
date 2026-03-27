@@ -1,0 +1,24 @@
+name: Frontend Design
+description: >-
+  Create distinctive, production-grade frontend interfaces with high
+  design quality. Generates creative, polished code that avoids
+  generic AI aesthetics. Covers typography, color themes, motion,
+  spatial composition, and background effects.
+repo: anthropics/claude-code
+category: web
+languages:
+  - typescript
+  - javascript
+trust: curated
+author: Anthropic
+version: "1.0.0"
+last_updated: "2026-03-27"
+scope: focused
+tags:
+  - frontend
+  - design
+  - ui
+  - ux
+  - animations
+  - typography
+  - css

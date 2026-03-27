@@ -1,0 +1,21 @@
+name: JSpecify Nullability
+description: >-
+  JSpecify provides annotations to explicitly declare nullness expectations
+  of Java code. Adds jspecify dependency and configures Maven or Gradle
+  builds with ErrorProne/NullAway for compile-time nullability checking.
+  Helps prevent NullPointerExceptions.
+repo: sivaprasadreddy/sivalabs-agent-skills
+category: tool
+languages:
+  - java
+trust: curated
+author: K. Siva Prasad Reddy
+version: "1.0.0"
+last_updated: "2026-03-27"
+min_java: "17"
+scope: focused
+tags:
+  - nullability
+  - errorprone
+  - nullaway
+  - npe-prevention

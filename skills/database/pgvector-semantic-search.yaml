@@ -1,0 +1,24 @@
+name: pgvector Semantic Search
+description: >-
+  Setting up vector similarity search with pgvector for AI/ML embeddings,
+  RAG applications, or semantic search. Covers halfvec storage,
+  HNSW index configuration, quantization strategies, filtered search,
+  and performance tuning.
+repo: timescale/pg-aiguide
+category: database
+languages:
+  - kotlin
+  - java
+trust: curated
+author: TimescaleDB
+version: "1.0.0"
+last_updated: "2026-03-27"
+scope: focused
+tags:
+  - pgvector
+  - embeddings
+  - semantic-search
+  - vector-similarity
+  - hnsw
+  - rag
+  - llm

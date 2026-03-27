@@ -1,0 +1,21 @@
+name: JDB Agentic Debugger
+description: >-
+  Multi-agent debugger orchestrator that drives JDB CLI to set breakpoints,
+  step through code, and collect thread dumps. Each capability is packaged
+  as a reusable agent skill, making the toolkit readily callable from
+  AI coding agents.
+repo: brunoborges/jdb-agentic-debugger
+category: testing
+languages:
+  - kotlin
+  - java
+trust: curated
+author: Bruno Borges
+version: "1.0.0"
+last_updated: "2026-03-27"
+scope: focused
+tags:
+  - debugging
+  - jdb
+  - breakpoints
+  - thread-dumps

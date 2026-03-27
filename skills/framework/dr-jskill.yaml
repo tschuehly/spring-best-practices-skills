@@ -1,0 +1,21 @@
+name: Dr-JSkill Spring Boot Scaffolding
+description: >-
+  An Agent Skill that scaffolds opinionated Spring Boot applications,
+  encapsulating best-practice defaults and starter code so AI agents
+  can rapidly generate production-ready projects.
+repo: jdubois/dr-jskill
+category: framework
+languages:
+  - kotlin
+  - java
+trust: curated
+author: Julien Dubois
+version: "1.0.0"
+last_updated: "2026-03-27"
+min_spring_boot: "3.0"
+scope: comprehensive
+tags:
+  - spring-boot
+  - scaffolding
+  - project-structure
+  - bootstrapping
