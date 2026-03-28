@@ -24,7 +24,7 @@ fi
 
 build() {
   if command -v kotlin &>/dev/null; then
-    kotlin "$SITE_DIR/build.main.kts" 2>&1
+    (cd "$ROOT_DIR" && kotlin "$SITE_DIR/build.main.kts" 2>&1)
   else
     echo "ERROR: kotlin is required. Install via: sdk install kotlin" >&2
     return 1
@@ -46,7 +46,10 @@ echo "Watching for changes... (Ctrl+C to stop)"
 if [[ "$WATCHER" == "fswatch" ]]; then
   fswatch -o \
     "$SITE_DIR/template.html" \
+    "$SITE_DIR/blog-post-template.html" \
+    "$SITE_DIR/blog-index-template.html" \
     "$ROOT_DIR/skills/" \
+    "$ROOT_DIR/blog/" \
   | while read -r; do
     echo ""
     echo "Change detected, rebuilding..."
@@ -56,7 +59,8 @@ elif [[ "$WATCHER" == "inotifywait" ]]; then
   while true; do
     inotifywait -q -r -e modify,create,delete \
       "$SITE_DIR/template.html" \
-      "$ROOT_DIR/skills/" 2>/dev/null
+      "$ROOT_DIR/skills/" \
+      "$ROOT_DIR/blog/" 2>/dev/null
     echo ""
     echo "Change detected, rebuilding..."
     build
@@ -64,8 +68,8 @@ elif [[ "$WATCHER" == "inotifywait" ]]; then
 else
   # Polling fallback
   get_hash() {
-    find "$SITE_DIR/template.html" "$ROOT_DIR/skills" \
-      \( -name '*.yaml' -o -name '*.html' \) 2>/dev/null | \
+    find "$SITE_DIR/template.html" "$ROOT_DIR/skills" "$ROOT_DIR/blog" \
+      \( -name '*.yaml' -o -name '*.html' -o -name '*.md' \) 2>/dev/null | \
       xargs stat -f '%m' 2>/dev/null || \
       xargs stat -c '%Y' 2>/dev/null || echo ""
   }
