@@ -88,7 +88,7 @@ Claude Code is the first target, but the architecture supports compiling the sam
 
 ### The Incubator Model
 
-Skills start in the jvm-skills monorepo where they can be reviewed and refined. When a library maintainer decides to adopt their skill, it graduates to their own repository. The registry simply points to the new location. This creates a clear path from community contribution to official, maintainer-backed guidance.
+Skills start in the jvm-skills repo where they can be reviewed and refined. When a library maintainer decides to adopt their skill, it graduates to their own repository. The registry simply points to the new location. This creates a clear path from community contribution to official, maintainer-backed guidance.
 
 ## Get Involved
 
