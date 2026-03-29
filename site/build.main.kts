@@ -15,12 +15,15 @@ val siteDir = __FILE__.absoluteFile.parentFile
 val rootDir = siteDir.parentFile
 val skillsDir = File(rootDir, "skills")
 val blogDir = File(rootDir, "blog")
+val evalsDir = File(rootDir, "evals")
 val templateFile = File(siteDir, "template.html")
 val blogPostTemplate = File(siteDir, "blog-post-template.html")
 val blogIndexTemplate = File(siteDir, "blog-index-template.html")
+val evalViewerTemplate = File(siteDir, "eval-viewer-template.html")
 val distDir = File(rootDir, "dist")
 val outputFile = File(distDir, "index.html")
 val blogDistDir = File(distDir, "blog")
+val evalsDistDir = File(distDir, "evals")
 
 val categories = listOf("framework", "language", "database", "testing", "fullstack", "web", "workflow", "tool")
 
@@ -40,7 +43,17 @@ data class SkillInfo(
     val trust: String,
     val languages: List<String>,
     val tech: List<String>,
-    val tags: List<String>
+    val tags: List<String>,
+    val eval: String  // path to benchmark.json relative to repo root, empty if none
+)
+
+// Parsed eval summary for rendering
+data class EvalSummary(
+    val withSkillPassRate: Double,
+    val withoutSkillPassRate: Double,
+    val delta: String,
+    val evalsCount: Int,
+    val slug: String  // for linking to /evals/<slug>/
 )
 
 val yaml = Yaml()
@@ -66,8 +79,58 @@ for (category in categories) {
             trust = skill["trust"]?.toString() ?: "community",
             languages = (skill["languages"] as? List<*>)?.map { it.toString() } ?: emptyList(),
             tech = (skill["tech"] as? List<*>)?.map { it.toString() } ?: emptyList(),
-            tags = (skill["tags"] as? List<*>)?.map { it.toString() } ?: emptyList()
+            tags = (skill["tags"] as? List<*>)?.map { it.toString() } ?: emptyList(),
+            eval = skill["eval"]?.toString() ?: ""
         )
+    }
+}
+
+// ── Parse eval benchmarks ──
+@Suppress("UNCHECKED_CAST")
+fun parseEvalSummary(evalPath: String, slug: String): EvalSummary? {
+    val benchmarkFile = File(rootDir, evalPath)
+    if (!benchmarkFile.exists()) {
+        System.err.println("  WARN: eval file not found: $evalPath")
+        return null
+    }
+    try {
+        val json = yaml.load<Map<String, Any>>(benchmarkFile.readText()) // snakeyaml parses JSON too
+        val runSummary = json["run_summary"] as? Map<String, Any> ?: return null
+        val delta = runSummary["delta"] as? Map<String, Any> ?: emptyMap()
+
+        // Find with_skill and without_skill configs dynamically
+        val configs = runSummary.keys.filter { it != "delta" }
+        val withConfig = configs.firstOrNull { it.contains("with") && !it.contains("without") }
+        val withoutConfig = configs.firstOrNull { it.contains("without") }
+
+        fun extractMeanPassRate(config: String?): Double {
+            if (config == null) return 0.0
+            val c = runSummary[config] as? Map<String, Any> ?: return 0.0
+            val pr = c["pass_rate"] as? Map<String, Any> ?: return 0.0
+            return (pr["mean"] as? Number)?.toDouble() ?: 0.0
+        }
+
+        val metadata = json["metadata"] as? Map<String, Any> ?: emptyMap()
+        val evalsRun = metadata["evals_run"] as? List<*> ?: emptyList<Any>()
+
+        return EvalSummary(
+            withSkillPassRate = extractMeanPassRate(withConfig),
+            withoutSkillPassRate = extractMeanPassRate(withoutConfig),
+            delta = delta["pass_rate"]?.toString() ?: "",
+            evalsCount = evalsRun.size,
+            slug = slug
+        )
+    } catch (e: Exception) {
+        System.err.println("  WARN: failed to parse eval: $evalPath — ${e.message}")
+        return null
+    }
+}
+
+val evalSummaries = mutableMapOf<String, EvalSummary>()
+for ((key, skill) in skillsMap) {
+    if (skill.eval.isNotEmpty()) {
+        val slug = key.substringAfterLast("/")
+        parseEvalSummary(skill.eval, slug)?.let { evalSummaries[key] = it }
     }
 }
 
@@ -130,6 +193,31 @@ val skillCards = buildString {
             }
             append("""<div class="skill-tags">$tagsHtml</div>""")
             append("\n")
+
+            // Eval badge
+            val evalSummary = evalSummaries[key]
+            if (evalSummary != null) {
+                val withPct = (evalSummary.withSkillPassRate * 100).toInt()
+                val withoutPct = (evalSummary.withoutSkillPassRate * 100).toInt()
+                val deltaStr = evalSummary.delta
+                // Convert raw delta (e.g., "+0.26") to percentage (e.g., "+26%")
+                val deltaPct = try {
+                    val raw = deltaStr.trim().replace("+", "").replace("-", "").toDoubleOrNull() ?: 0.0
+                    val pct = (raw * 100).toInt()
+                    if (deltaStr.startsWith("-")) "-$pct%" else "+$pct%"
+                } catch (e: Exception) {
+                    deltaStr
+                }
+                val evalUrl = "/evals/${evalSummary.slug}/"
+                append("""<a href="$evalUrl" class="skill-eval-badge" title="Skill eval: ${withPct}% pass rate with skill vs ${withoutPct}% baseline">""")
+                append("""<span class="eval-label">eval</span>""")
+                append("""<span class="eval-pass">${withPct}%</span>""")
+                append("""<span class="eval-vs">vs ${withoutPct}%</span>""")
+                append("""<span class="eval-delta">($deltaPct)</span>""")
+                append("""<span class="eval-count">${evalSummary.evalsCount} tests</span>""")
+                append("</a>\n")
+            }
+
             append("</div>\n</article>\n")
             totalSkills++
         }
@@ -301,6 +389,31 @@ if (blogPosts.isNotEmpty()) {
             postFile.writeText(postFile.readText().replace("{{GENERATED_DATE}}", generatedDateOnly))
         }
     }
+}
+
+// ── Generate eval viewer pages ──
+if (evalSummaries.isNotEmpty() && evalViewerTemplate.exists()) {
+    val viewerTemplate = evalViewerTemplate.readText()
+
+    for ((key, evalSum) in evalSummaries) {
+        val skill = skillsMap[key] ?: continue
+        val benchmarkFile = File(rootDir, skill.eval)
+        if (!benchmarkFile.exists()) continue
+
+        val benchmarkJson = benchmarkFile.readText().trim()
+        val skillName = htmlEscape(skill.name)
+
+        val viewerHtml = viewerTemplate
+            .replace("{{SKILL_NAME}}", skillName)
+            .replace("{{SKILL_SLUG}}", evalSum.slug)
+            .replace("{{GENERATED_DATE}}", generatedDateOnly)
+            .replace("/*__EMBEDDED_DATA__*/", "const BENCHMARK_DATA = $benchmarkJson;")
+
+        val evalDir = File(evalsDistDir, evalSum.slug)
+        evalDir.mkdirs()
+        File(evalDir, "index.html").writeText(viewerHtml)
+    }
+    println("✓ Built ${evalSummaries.size} eval viewer page(s) in dist/evals/")
 }
 
 // Copy preview.webp to dist/

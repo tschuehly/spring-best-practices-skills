@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eval: {{SKILL_NAME}} — jvm-skills</title>
+  <meta name="description" content="Benchmark results for the {{SKILL_NAME}} skill — with vs without skill pass rates, per-eval breakdown, and assertion details.">
+
+  <!-- Favicon: terminal prompt -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230d1117'/%3E%3Ctext x='4' y='23' font-family='monospace' font-size='20' font-weight='bold' fill='%2300ff41'%3E%3E_%3C/text%3E%3C/svg%3E">
+
+  <!-- Prevent theme flash -->
+  <script>
+    (function() {
+      var t = localStorage.getItem('jvmskills-theme');
+      if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ══════════════════════════════════════════════
+       CSS CUSTOM PROPERTIES (same as main site)
+       ══════════════════════════════════════════════ */
+    :root {
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', monospace;
+      --font-body: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+      --green: #00ff41;
+      --green-dim: #00cc33;
+      --green-glow: rgba(0, 255, 65, 0.15);
+      --green-glow-strong: rgba(0, 255, 65, 0.3);
+      --amber: #ffb020;
+      --cyan: #00d4ff;
+      --red: #ff5f57;
+      --yellow: #febc2e;
+      --green-dot: #28c840;
+      --magenta: #ff79c6;
+      --transition-fast: 150ms ease;
+      --transition-base: 250ms ease;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #0a0e14;
+      --bg-secondary: #0d1117;
+      --bg-card: #111820;
+      --bg-card-hover: #151d27;
+      --bg-titlebar: #1a2233;
+      --border: #1e2d3d;
+      --border-hover: #2a3f55;
+      --text-primary: #c9d1d9;
+      --text-secondary: #8b949e;
+      --text-muted: #484f58;
+      --scanline-opacity: 0.03;
+      --row-with-bg: rgba(0, 255, 65, 0.04);
+      --row-with-hover: rgba(0, 255, 65, 0.08);
+      --row-without-bg: rgba(255, 176, 32, 0.04);
+      --row-without-hover: rgba(255, 176, 32, 0.08);
+      --row-avg-with-bg: rgba(0, 255, 65, 0.10);
+      --row-avg-without-bg: rgba(255, 176, 32, 0.10);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f0f2f5;
+      --bg-secondary: #ffffff;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f6f8fa;
+      --bg-titlebar: #e8ecf0;
+      --border: #d0d7de;
+      --border-hover: #a8b3c0;
+      --text-primary: #1f2328;
+      --text-secondary: #57606a;
+      --text-muted: #8b949e;
+      --green: #006d1f;
+      --green-dim: #005a19;
+      --green-glow: rgba(0, 109, 31, 0.08);
+      --green-glow-strong: rgba(0, 109, 31, 0.15);
+      --amber: #9a6700;
+      --cyan: #0369a1;
+      --magenta: #b8266a;
+      --scanline-opacity: 0;
+      --row-with-bg: rgba(0, 109, 31, 0.04);
+      --row-with-hover: rgba(0, 109, 31, 0.08);
+      --row-without-bg: rgba(154, 103, 0, 0.04);
+      --row-without-hover: rgba(154, 103, 0, 0.08);
+      --row-avg-with-bg: rgba(0, 109, 31, 0.10);
+      --row-avg-without-bg: rgba(154, 103, 0, 0.10);
+    }
+
+    /* ══════════════════════════════════════════════
+       RESET & BASE
+       ══════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background var(--transition-base), color var(--transition-base);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* CRT scanline overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,var(--scanline-opacity)) 2px, rgba(0,0,0,var(--scanline-opacity)) 4px);
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    a { color: var(--green); text-decoration: none; transition: color var(--transition-fast); }
+    a:hover { color: var(--cyan); }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    /* ══════════════════════════════════════════════
+       HEADER (same as main site)
+       ══════════════════════════════════════════════ */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .logo {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+    .logo:hover { color: var(--green); }
+    .logo .prompt-char { opacity: 0.5; font-weight: 400; }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .github-link {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: all var(--transition-fast);
+    }
+    .github-link:hover {
+      color: var(--text-primary);
+      border-color: var(--border-hover);
+      background: var(--bg-card);
+    }
+    .github-link svg { width: 16px; height: 16px; fill: currentColor; }
+
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .theme-toggle:hover {
+      color: var(--text-primary);
+      border-color: var(--border-hover);
+    }
+
+    /* ══════════════════════════════════════════════
+       BREADCRUMB
+       ══════════════════════════════════════════════ */
+    .breadcrumb {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      padding: 16px 0 0;
+    }
+    .breadcrumb a { color: var(--text-secondary); }
+    .breadcrumb a:hover { color: var(--green); }
+    .breadcrumb .sep { margin: 0 6px; opacity: 0.5; }
+
+    /* ══════════════════════════════════════════════
+       PAGE TITLE
+       ══════════════════════════════════════════════ */
+    .page-title {
+      font-family: var(--font-mono);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--green);
+      margin: 16px 0 4px;
+    }
+    .page-subtitle {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    /* ══════════════════════════════════════════════
+       BENCHMARK TABLES
+       ══════════════════════════════════════════════ */
+    .benchmark-section {
+      flex: 1;
+      padding-bottom: 40px;
+    }
+
+    .section-heading {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 24px 0 12px;
+    }
+    .section-heading .prompt { color: var(--green); opacity: 0.5; margin-right: 6px; }
+
+    .benchmark-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      margin-bottom: 20px;
+    }
+    .benchmark-table th,
+    .benchmark-table td {
+      padding: 8px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .benchmark-table th {
+      background: var(--bg-titlebar);
+      color: var(--text-secondary);
+      font-weight: 500;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .benchmark-table tr:last-child td { border-bottom: none; }
+    .benchmark-table tr:hover { background: var(--bg-card-hover); }
+
+    .benchmark-table tr.row-with { background: var(--row-with-bg); }
+    .benchmark-table tr.row-without { background: var(--row-without-bg); }
+    .benchmark-table tr.row-with:hover { background: var(--row-with-hover); }
+    .benchmark-table tr.row-without:hover { background: var(--row-without-hover); }
+    .benchmark-table tr.row-avg { font-weight: 600; border-top: 2px solid var(--border); }
+    .benchmark-table tr.row-avg.row-with { background: var(--row-avg-with-bg); }
+    .benchmark-table tr.row-avg.row-without { background: var(--row-avg-without-bg); }
+
+    .delta-pos { color: var(--green); font-weight: 600; }
+    .delta-neg { color: var(--red); font-weight: 600; }
+    .delta-neutral { color: var(--text-muted); }
+
+    .pass-icon { color: var(--green); font-weight: 600; }
+    .fail-icon { color: var(--red); font-weight: 600; }
+
+    /* ══════════════════════════════════════════════
+       NOTES PANEL
+       ══════════════════════════════════════════════ */
+    .notes-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 16px;
+      margin-top: 20px;
+    }
+    .notes-panel h3 {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+    }
+    .notes-panel ul {
+      list-style: none;
+      padding: 0;
+    }
+    .notes-panel li {
+      font-size: 0.8rem;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      padding: 4px 0;
+      padding-left: 16px;
+      position: relative;
+    }
+    .notes-panel li::before {
+      content: '#';
+      position: absolute;
+      left: 0;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* ══════════════════════════════════════════════
+       ATTRIBUTION
+       ══════════════════════════════════════════════ */
+    .attribution {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 24px;
+      padding: 12px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+    .attribution a { color: var(--text-secondary); }
+    .attribution a:hover { color: var(--green); }
+
+    /* ══════════════════════════════════════════════
+       FOOTER (same as main site)
+       ══════════════════════════════════════════════ */
+    footer {
+      margin-top: 40px;
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .footer-terminal {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 2;
+    }
+    .footer-terminal .green { color: var(--green); }
+    .footer-terminal .cyan { color: var(--cyan); }
+    .footer-terminal .amber { color: var(--amber); }
+    .footer-terminal a { color: var(--text-secondary); }
+    .footer-terminal a:hover { color: var(--green); }
+    .footer-build {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-top: 16px;
+      opacity: 0.6;
+    }
+
+    /* ══════════════════════════════════════════════
+       RESPONSIVE
+       ══════════════════════════════════════════════ */
+    @media (max-width: 640px) {
+      .header-inner { height: 48px; }
+      .benchmark-table { font-size: 0.65rem; }
+      .benchmark-table th, .benchmark-table td { padding: 6px 8px; }
+      .page-title { font-size: 1rem; }
+      .gh-text { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════ HEADER ═══════════ -->
+  <header role="banner">
+    <div class="container header-inner">
+      <a href="/" class="logo" aria-label="jvm-skills home">
+        <span class="prompt-char">$</span> jvm-skills
+      </a>
+      <div class="header-actions">
+        <a href="/blog/" class="github-link" aria-label="Blog">Blog</a>
+        <a href="https://github.com/jvm-skills/jvm-skills" class="github-link" aria-label="View on GitHub">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span class="gh-text">GitHub</span>
+        </a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme" type="button">
+          <span class="theme-icon" aria-hidden="true">◐</span>
+          <span class="theme-label">theme</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/">skills</a><span class="sep">/</span><span>evals</span><span class="sep">/</span><span>{{SKILL_SLUG}}</span>
+      </div>
+
+      <h1 class="page-title">$ eval --benchmark {{SKILL_SLUG}}</h1>
+      <p class="page-subtitle" id="benchmark-meta"></p>
+
+      <div class="benchmark-section" id="benchmark-content">
+        <p style="color: var(--text-muted); font-style: italic; text-align: center; padding: 3rem;">No benchmark data available.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ═══════════ FOOTER ═══════════ -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-terminal">
+        <span class="green">$</span> <span class="cyan">echo</span> <span class="amber">"Want to add a skill?"</span><br>
+        Fork the repo &rarr; add a YAML file &rarr; <a href="https://github.com/jvm-skills/jvm-skills/blob/main/CONTRIBUTING.md">open a PR</a><br>
+        <br>
+        <span class="green">$</span> Curated by <a href="https://github.com/tschuehly">Thomas Schilling</a>
+        &middot; <a href="https://github.com/jvm-skills/jvm-skills">source</a>
+        &middot; <a href="https://github.com/jvm-skills/jvm-skills/blob/main/LICENSE">license</a>
+      </div>
+      <div class="footer-build">
+        built {{GENERATED_DATE}} // jvmskills.com
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Theme Toggle ──
+    (function() {
+      var html = document.documentElement;
+      var btn = document.getElementById('themeToggle');
+      var icon = btn.querySelector('.theme-icon');
+
+      function getTheme() {
+        var t = localStorage.getItem('jvmskills-theme');
+        if (t) return t;
+        return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      }
+      function setTheme(t) {
+        html.setAttribute('data-theme', t);
+        localStorage.setItem('jvmskills-theme', t);
+        icon.textContent = t === 'dark' ? '\u25D0' : '\u25D1';
+      }
+      setTheme(getTheme());
+      btn.addEventListener('click', function() {
+        setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+      });
+    })();
+
+    // ── Embedded benchmark data ──
+    /*__EMBEDDED_DATA__*/
+
+    // ── Render ──
+    function escapeHtml(text) {
+      var d = document.createElement("div");
+      d.textContent = text;
+      return d.innerHTML;
+    }
+
+    function renderBenchmark() {
+      if (typeof BENCHMARK_DATA === "undefined") return;
+      var data = BENCHMARK_DATA;
+      var container = document.getElementById("benchmark-content");
+      var summary = data.run_summary || {};
+      var metadata = data.metadata || {};
+      var notes = data.notes || [];
+
+      // Meta line
+      var metaParts = [];
+      if (metadata.timestamp) metaParts.push(metadata.timestamp);
+      if (metadata.evals_run) metaParts.push(metadata.evals_run.length + " evals: " + metadata.evals_run.join(", "));
+      if (metadata.runs_per_configuration) metaParts.push(metadata.runs_per_configuration + " runs/config");
+      if (metadata.executor_model) metaParts.push("model: " + metadata.executor_model);
+      document.getElementById("benchmark-meta").textContent = metaParts.join("  \u00b7  ");
+
+      var html = "";
+
+      // ── Summary table ──
+      html += '<h2 class="section-heading"><span class="prompt">$</span> Summary</h2>';
+      html += '<table class="benchmark-table">';
+
+      function fmtStat(stat, pct) {
+        if (!stat) return "\u2014";
+        var m = pct ? (stat.mean * 100).toFixed(0) + "%" : stat.mean.toFixed(1);
+        var s = pct ? (stat.stddev * 100).toFixed(0) + "%" : stat.stddev.toFixed(1);
+        return m + " \u00b1 " + s;
+      }
+
+      function dClass(val) {
+        if (!val) return "delta-neutral";
+        var n = parseFloat(val);
+        return n > 0 ? "delta-pos" : n < 0 ? "delta-neg" : "delta-neutral";
+      }
+
+      var configs = Object.keys(summary).filter(function(k) { return k !== "delta"; });
+      var configA = configs[0] || "with_skill";
+      var configB = configs[1] || "without_skill";
+      var labelA = configA.replace(/_/g, " ");
+      var labelB = configB.replace(/_/g, " ");
+      var a = summary[configA] || {};
+      var b = summary[configB] || {};
+      var delta = summary.delta || {};
+
+      html += "<thead><tr><th>Metric</th><th>" + escapeHtml(labelA) + "</th><th>" + escapeHtml(labelB) + "</th><th>Delta</th></tr></thead>";
+      html += "<tbody>";
+
+      html += "<tr><td>Pass Rate</td>";
+      html += "<td>" + fmtStat(a.pass_rate, true) + "</td>";
+      html += "<td>" + fmtStat(b.pass_rate, true) + "</td>";
+      html += '<td class="' + dClass(delta.pass_rate) + '">' + (delta.pass_rate || "\u2014") + "</td></tr>";
+
+      if (a.time_seconds || b.time_seconds) {
+        html += "<tr><td>Time (s)</td>";
+        html += "<td>" + fmtStat(a.time_seconds, false) + "</td>";
+        html += "<td>" + fmtStat(b.time_seconds, false) + "</td>";
+        html += '<td class="' + dClass(delta.time_seconds) + '">' + (delta.time_seconds ? delta.time_seconds + "s" : "\u2014") + "</td></tr>";
+      }
+
+      if (a.tokens || b.tokens) {
+        html += "<tr><td>Tokens</td>";
+        html += "<td>" + fmtStat(a.tokens, false) + "</td>";
+        html += "<td>" + fmtStat(b.tokens, false) + "</td>";
+        html += '<td class="' + dClass(delta.tokens) + '">' + (delta.tokens || "\u2014") + "</td></tr>";
+      }
+      html += "</tbody></table>";
+
+      // ── Per-eval breakdown ──
+      var runs = data.runs || [];
+      if (runs.length > 0) {
+        var evalIds = [];
+        var seenIds = {};
+        runs.forEach(function(r) {
+          if (!seenIds[r.eval_id]) { evalIds.push(r.eval_id); seenIds[r.eval_id] = true; }
+        });
+
+        html += '<h2 class="section-heading"><span class="prompt">$</span> Per-Eval Breakdown</h2>';
+
+        var hasTime = runs.some(function(r) { return r.result && r.result.time_seconds != null; });
+        var hasErrors = runs.some(function(r) { return r.result && r.result.errors > 0; });
+
+        evalIds.forEach(function(evalId) {
+          var evalRuns = runs.filter(function(r) { return r.eval_id === evalId; });
+          var evalName = evalRuns[0] && evalRuns[0].eval_name ? evalRuns[0].eval_name : "Eval " + evalId;
+
+          html += '<h3 class="section-heading" style="font-size:0.8rem; margin-top:16px;">' + escapeHtml(evalName) + '</h3>';
+          html += '<table class="benchmark-table">';
+          html += "<thead><tr><th>Config</th><th>Run</th><th>Pass Rate</th>";
+          if (hasTime) html += "<th>Time (s)</th>";
+          if (hasErrors) html += "<th>Errors</th>";
+          html += "</tr></thead><tbody>";
+
+          var configGroups = [];
+          var seenConfigs = {};
+          evalRuns.forEach(function(r) {
+            if (!seenConfigs[r.configuration]) { configGroups.push(r.configuration); seenConfigs[r.configuration] = true; }
+          });
+
+          configGroups.forEach(function(config, ci) {
+            var configRuns = evalRuns.filter(function(r) { return r.configuration === config; });
+            if (configRuns.length === 0) return;
+
+            var rowClass = ci === 0 ? "row-with" : "row-without";
+            var configLabel = config.replace(/_/g, " ");
+
+            configRuns.forEach(function(run) {
+              var r = run.result || {};
+              var prClass = r.pass_rate >= 0.8 ? "delta-pos" : r.pass_rate < 0.5 ? "delta-neg" : "";
+              html += '<tr class="' + rowClass + '">';
+              html += "<td>" + configLabel + "</td>";
+              html += "<td>" + run.run_number + "</td>";
+              html += '<td class="' + prClass + '">' + ((r.pass_rate || 0) * 100).toFixed(0) + "% (" + (r.passed || 0) + "/" + (r.total || 0) + ")</td>";
+              if (hasTime) html += "<td>" + (r.time_seconds != null ? r.time_seconds.toFixed(1) : "\u2014") + "</td>";
+              if (hasErrors) html += "<td>" + (r.errors || 0) + "</td>";
+              html += "</tr>";
+            });
+
+            // Average row
+            var rates = configRuns.map(function(r) { return (r.result || {}).pass_rate || 0; });
+            var avgRate = rates.reduce(function(a, b) { return a + b; }, 0) / rates.length;
+            var avgClass = avgRate >= 0.8 ? "delta-pos" : avgRate < 0.5 ? "delta-neg" : "";
+            html += '<tr class="row-avg ' + rowClass + '">';
+            html += "<td>" + configLabel + "</td><td>avg</td>";
+            html += '<td class="' + avgClass + '">' + (avgRate * 100).toFixed(0) + "%</td>";
+            if (hasTime) {
+              var times = configRuns.map(function(r) { return (r.result || {}).time_seconds; }).filter(function(t) { return t != null; });
+              html += "<td>" + (times.length ? (times.reduce(function(a, b) { return a + b; }, 0) / times.length).toFixed(1) : "\u2014") + "</td>";
+            }
+            if (hasErrors) html += "<td></td>";
+            html += "</tr>";
+          });
+          html += "</tbody></table>";
+
+          // Per-assertion detail
+          var runsWithExp = {};
+          configGroups.forEach(function(config) {
+            runsWithExp[config] = evalRuns.filter(function(r) { return r.configuration === config && r.expectations && r.expectations.length > 0; });
+          });
+          var hasExp = configGroups.some(function(c) { return runsWithExp[c].length > 0; });
+
+          if (hasExp) {
+            var allAssertions = [];
+            var seenAssert = {};
+            configGroups.forEach(function(config) {
+              runsWithExp[config].forEach(function(run) {
+                (run.expectations || []).forEach(function(exp) {
+                  if (!seenAssert[exp.text]) { seenAssert[exp.text] = true; allAssertions.push(exp.text); }
+                });
+              });
+            });
+
+            html += '<table class="benchmark-table" style="margin-top:8px;">';
+            html += "<thead><tr><th>Assertion</th>";
+            configGroups.forEach(function(config) {
+              html += "<th>" + escapeHtml(config.replace(/_/g, " ")) + "</th>";
+            });
+            html += "</tr></thead><tbody>";
+
+            allAssertions.forEach(function(text) {
+              html += "<tr><td>" + escapeHtml(text) + "</td>";
+              configGroups.forEach(function(config) {
+                html += "<td>";
+                runsWithExp[config].forEach(function(run) {
+                  var exp = (run.expectations || []).filter(function(e) { return e.text === text; })[0];
+                  if (exp) {
+                    var cls = exp.passed ? "pass-icon" : "fail-icon";
+                    var icon = exp.passed ? "\u2713" : "\u2717";
+                    html += '<span class="' + cls + '" title="Run ' + run.run_number + ': ' + escapeHtml(exp.evidence || '') + '">' + icon + '</span> ';
+                  } else {
+                    html += "\u2014 ";
+                  }
+                });
+                html += "</td>";
+              });
+              html += "</tr>";
+            });
+            html += "</tbody></table>";
+          }
+        });
+      }
+
+      // ── Notes ──
+      if (notes.length > 0) {
+        html += '<div class="notes-panel">';
+        html += "<h3># Analysis Notes</h3><ul>";
+        notes.forEach(function(note) {
+          html += "<li>" + escapeHtml(note) + "</li>";
+        });
+        html += "</ul></div>";
+      }
+
+      // ── Attribution ──
+      html += '<div class="attribution">';
+      html += 'Evals generated with <a href="https://github.com/anthropics/skills/tree/main/skills/skill-creator">skill-creator</a>';
+      html += '</div>';
+
+      container.innerHTML = html;
+    }
+
+    renderBenchmark();
+  </script>
+</body>
+</html>

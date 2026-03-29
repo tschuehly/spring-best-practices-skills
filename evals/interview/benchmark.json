@@ -1,0 +1,191 @@
+{
+  "metadata": {
+    "skill_name": "interview",
+    "skill_path": ".claude/skills/interview/SKILL.md",
+    "executor_model": "claude-sonnet-4-6",
+    "timestamp": "2026-03-29T08:34:48Z",
+    "evals_run": ["guest-favorites", "audio-guestbook", "live-slideshow"],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 0,
+      "eval_name": "guest-favorites",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 9,
+        "failed": 0,
+        "total": 9,
+        "time_seconds": 151.1,
+        "tokens": 71258,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "has_user_stories", "passed": true, "evidence": "US-1 through US-10 in structured User Stories section"},
+        {"text": "has_roles_section", "passed": true, "evidence": "Roles table with Guest, Manager, Unauthenticated visitor"},
+        {"text": "has_entry_points", "passed": true, "evidence": "Dedicated Entry Points section describing gallery filter dropdown and heart button"},
+        {"text": "has_edge_cases", "passed": true, "evidence": "Edge Cases section covering empty states, unauthenticated, demo submissions, double-click, mobile, pagination, hidden gallery"},
+        {"text": "has_state_transitions", "passed": true, "evidence": "State Transitions Across Roles table with Guest sees / Manager sees columns"},
+        {"text": "has_terminal_states", "passed": true, "evidence": "Dedicated Terminal States table with end state and forward action columns"},
+        {"text": "uses_codebase_patterns", "passed": true, "evidence": "References GalleryController, actual /gallery routes, existing Alpine.js patterns"},
+        {"text": "user_stories_cover_all_roles", "passed": true, "evidence": "Guest stories (US-1..5), Manager stories (US-6..8), cross-role (US-9..10)"},
+        {"text": "navigation_stories_first", "passed": true, "evidence": "US-1 is navigation: 'As a guest, I open the gallery and see a favorites filter'"}
+      ]
+    },
+    {
+      "eval_id": 0,
+      "eval_name": "guest-favorites",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.89,
+        "passed": 8,
+        "failed": 1,
+        "total": 9,
+        "time_seconds": 179.3,
+        "tokens": 78953,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "has_user_stories", "passed": true, "evidence": "US-1 through US-10 in structured User Stories section"},
+        {"text": "has_roles_section", "passed": true, "evidence": "Roles table with Guest, Manager, Unauthenticated visitor"},
+        {"text": "has_entry_points", "passed": true, "evidence": "Entry Points section with Guest and Manager subsections"},
+        {"text": "has_edge_cases", "passed": true, "evidence": "Edge Cases table covering double-tap, session expired, deletion, demo, audio, mobile, anonymous"},
+        {"text": "has_state_transitions", "passed": true, "evidence": "State Transitions table with Guest sees / Manager sees columns"},
+        {"text": "has_terminal_states", "passed": false, "evidence": "No terminal states section. No explicit forward actions from end states documented."},
+        {"text": "uses_codebase_patterns", "passed": true, "evidence": "References existing controllers and routes"},
+        {"text": "user_stories_cover_all_roles", "passed": true, "evidence": "Stories cover Guest and Manager roles"},
+        {"text": "navigation_stories_first", "passed": true, "evidence": "First stories describe navigation entry points"}
+      ]
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "audio-guestbook",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 9,
+        "failed": 0,
+        "total": 9,
+        "time_seconds": 193.6,
+        "tokens": 78558,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "has_user_stories", "passed": true, "evidence": "US-1 through US-16 in structured User Stories section"},
+        {"text": "has_roles_section", "passed": true, "evidence": "Roles clearly identified: Guest journey, Manager journey sections"},
+        {"text": "has_entry_points", "passed": true, "evidence": "Dedicated Entry Points table with QR code, WhatsApp link, dock tab, share modal"},
+        {"text": "has_edge_cases", "passed": true, "evidence": "Edge Cases covering Mobile Safari, multiple messages, blank name, 60s limit, no microphone, concurrent uploads"},
+        {"text": "has_state_transitions", "passed": true, "evidence": "State Transitions Across Roles table showing Guest sees / Manager sees"},
+        {"text": "has_terminal_states", "passed": true, "evidence": "After submission: Guest stays on /audio-gaestebuch with Noch eine aufnehmen button"},
+        {"text": "uses_codebase_patterns", "passed": true, "evidence": "References existing audio guestbook partial implementation in codebase"},
+        {"text": "user_stories_cover_all_roles", "passed": true, "evidence": "Guest and Manager both have dedicated story sets"},
+        {"text": "navigation_stories_first", "passed": true, "evidence": "Entry point stories precede feature stories"}
+      ]
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "audio-guestbook",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.56,
+        "passed": 5,
+        "failed": 4,
+        "total": 9,
+        "time_seconds": 209.5,
+        "tokens": 75247,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "has_user_stories", "passed": true, "evidence": "US-1 through US-10 in User Stories section"},
+        {"text": "has_roles_section", "passed": false, "evidence": "No dedicated roles section. Guest/Manager appear as headers but roles not enumerated."},
+        {"text": "has_entry_points", "passed": false, "evidence": "No entry points section. Route mentioned in overview but no navigation-from description."},
+        {"text": "has_edge_cases", "passed": true, "evidence": "Mobile Safari mime types, multi-instance safety covered in Non-Functional Requirements"},
+        {"text": "has_state_transitions", "passed": false, "evidence": "No state transitions section showing what each role sees when events occur"},
+        {"text": "has_terminal_states", "passed": false, "evidence": "No terminal states section with forward actions from end states."},
+        {"text": "uses_codebase_patterns", "passed": true, "evidence": "Discovered existing audio guestbook implementation and found bugs"},
+        {"text": "user_stories_cover_all_roles", "passed": true, "evidence": "Stories reference Guest and Manager roles"},
+        {"text": "navigation_stories_first", "passed": true, "evidence": "First story describes entry navigation"}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "live-slideshow",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.89,
+        "passed": 8,
+        "failed": 1,
+        "total": 9,
+        "time_seconds": 276.3,
+        "tokens": 79512,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "has_user_stories", "passed": true, "evidence": "US-1 through US-9 in structured User Stories section"},
+        {"text": "has_roles_section", "passed": true, "evidence": "Roles identified: Manager, Guest, non-player spectators"},
+        {"text": "has_entry_points", "passed": true, "evidence": "Manager entry point: Beamer starten in Mehr menu"},
+        {"text": "has_edge_cases", "passed": true, "evidence": "Edge Cases covering no photos, video vs image, multiple managers, SSE reconnect, tab focus"},
+        {"text": "has_state_transitions", "passed": true, "evidence": "Manager journey and guest journey describe cross-role interactions"},
+        {"text": "has_terminal_states", "passed": false, "evidence": "No dedicated terminal states section. Manager close tab to end mentioned but no structured forward actions."},
+        {"text": "uses_codebase_patterns", "passed": true, "evidence": "References SSE infrastructure, existing Beamer controller patterns"},
+        {"text": "user_stories_cover_all_roles", "passed": true, "evidence": "Manager and Guest roles both have user stories"},
+        {"text": "navigation_stories_first", "passed": true, "evidence": "US-1 is dashboard navigation story"}
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "live-slideshow",
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.67,
+        "passed": 6,
+        "failed": 3,
+        "total": 9,
+        "time_seconds": 232.8,
+        "tokens": 65271,
+        "errors": 0
+      },
+      "expectations": [
+        {"text": "has_user_stories", "passed": true, "evidence": "US-1 through US-6 with detailed acceptance criteria"},
+        {"text": "has_roles_section", "passed": false, "evidence": "No dedicated roles section. Manager and Guest mentioned in user stories but not enumerated."},
+        {"text": "has_entry_points", "passed": true, "evidence": "US-1 describes Beamer starten button entry point"},
+        {"text": "has_edge_cases", "passed": true, "evidence": "Edge cases in acceptance criteria: no photos, hideSlideshow, full-screen API, background tab throttling"},
+        {"text": "has_state_transitions", "passed": false, "evidence": "No cross-role state transition table"},
+        {"text": "has_terminal_states", "passed": false, "evidence": "No terminal states section with forward actions from end states"},
+        {"text": "uses_codebase_patterns", "passed": true, "evidence": "References existing Beamer controller and SSE endpoints"},
+        {"text": "user_stories_cover_all_roles", "passed": true, "evidence": "Manager and Guest stories present"},
+        {"text": "navigation_stories_first", "passed": true, "evidence": "First story is navigation entry point"}
+      ]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {"mean": 0.96, "stddev": 0.05, "min": 0.89, "max": 1.0},
+      "time_seconds": {"mean": 207.0, "stddev": 52.0, "min": 151.1, "max": 276.3},
+      "tokens": {"mean": 76443, "stddev": 3500, "min": 71258, "max": 79512}
+    },
+    "without_skill": {
+      "pass_rate": {"mean": 0.70, "stddev": 0.14, "min": 0.56, "max": 0.89},
+      "time_seconds": {"mean": 207.2, "stddev": 22.0, "min": 179.3, "max": 232.8},
+      "tokens": {"mean": 73157, "stddev": 5800, "min": 65271, "max": 78953}
+    },
+    "delta": {
+      "pass_rate": "+0.26",
+      "time_seconds": "-0.2",
+      "tokens": "+3286"
+    }
+  },
+  "notes": [
+    "The skill consistently ensures structural completeness — roles section, entry points, state transitions, and terminal states are reliably included.",
+    "Without the skill, audio-guestbook scored worst (5/9) — missing roles section, entry points, state transitions, terminal states, and navigation-first user stories.",
+    "The favorites eval was closest (9/9 vs 8/9) — CLAUDE.md already has strong conventions that the model followed without the skill.",
+    "Time and token usage are roughly equivalent — the skill adds no overhead."
+  ]
+}

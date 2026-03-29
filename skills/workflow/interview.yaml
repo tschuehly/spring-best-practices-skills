@@ -20,3 +20,4 @@ tags:
   - interview
   - user-stories
   - requirements
+eval: evals/interview/benchmark.json

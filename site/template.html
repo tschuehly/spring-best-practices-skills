@@ -696,6 +696,48 @@
       border-color: var(--green-dim);
     }
 
+    /* ── Eval badge ── */
+    .skill-eval-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      padding: 5px 10px;
+      background: rgba(0, 255, 65, 0.04);
+      border: 1px solid rgba(0, 255, 65, 0.15);
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      text-decoration: none;
+      color: var(--text-secondary);
+      transition: border-color var(--transition-fast), background var(--transition-fast);
+    }
+    .skill-eval-badge:hover {
+      border-color: rgba(0, 255, 65, 0.35);
+      background: rgba(0, 255, 65, 0.08);
+    }
+    .eval-label {
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.65rem;
+    }
+    .eval-pass {
+      color: var(--green);
+      font-weight: 600;
+    }
+    .eval-vs {
+      color: var(--text-muted);
+    }
+    .eval-delta {
+      color: var(--green);
+      font-weight: 500;
+    }
+    .eval-count {
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
     /* ── Install modal ── */
     .modal-overlay {
       display: none;
