@@ -1,0 +1,24 @@
+name: Agent Browser
+description: >-
+  Browser automation CLI for AI agents. Navigate, fill forms, click, take
+  screenshots, scrape data, and run exploratory QA via Chrome/Chromium over
+  CDP. Covers browsers, Electron apps, Slack, and cloud browser backends.
+repo: vercel-labs/agent-browser
+skill_path: "skills/agent-browser/SKILL.md"
+category: tool
+languages:
+  - javascript
+  - typescript
+trust: curated
+author: Vercel Labs
+version: "1.0.0"
+last_updated: "2026-04-13"
+scope: focused
+tech: []
+tags:
+  - browser
+  - automation
+  - testing
+  - qa
+  - screenshots
+  - scraping
