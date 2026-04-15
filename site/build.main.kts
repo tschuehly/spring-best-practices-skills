@@ -422,6 +422,37 @@ if (previewSrc.exists()) {
     previewSrc.copyTo(File(distDir, "preview.webp"), overwrite = true)
 }
 
+// ── Generate Spring I/O landing page ──
+val springIoTemplate = File(siteDir, "spring-io-template.html")
+if (springIoTemplate.exists()) {
+    val springIoDir = File(distDir, "spring-io-2026")
+    springIoDir.mkdirs()
+    File(springIoDir, "index.html").writeText(springIoTemplate.readText())
+    println("✓ Built dist/spring-io-2026/index.html")
+}
+
+// ── Copy Spring I/O 2026 talk slides ──
+val slidesSrc = File(siteDir, "spring-io-2026-slides")
+if (slidesSrc.isDirectory) {
+    val slidesDest = File(distDir, "spring-io-2026/slides")
+    slidesSrc.copyRecursively(slidesDest, overwrite = true)
+    println("✓ Copied ${slidesSrc.name}/ → dist/spring-io-2026/slides/")
+}
+
+// ── Copy learn.md (interactive Claude Code tutor) ──
+val learnMd = File(siteDir, "learn.md")
+if (learnMd.exists()) {
+    learnMd.copyTo(File(distDir, "spring-io-2026/learn.md"), overwrite = true)
+    println("✓ Copied learn.md → dist/spring-io-2026/learn.md")
+}
+
+// ── Generate 404 page ──
+val notFoundTemplate = File(siteDir, "404-template.html")
+if (notFoundTemplate.exists()) {
+    File(distDir, "404.html").writeText(notFoundTemplate.readText())
+    println("✓ Built dist/404.html")
+}
+
 println("✓ Built dist/index.html ($totalSkills skills across ${categories.size} categories)")
 if (blogPosts.isNotEmpty()) {
     println("✓ Built ${blogPosts.size} blog post(s) in dist/blog/")

@@ -1,0 +1,2634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code for Spring Developers - Spring I/O 2026</title>
+
+  <link rel="stylesheet" href="./assets/fonts/fonts.css">
+
+  <link rel="stylesheet" href="./vendor/reveal.js/dist/reveal.css">
+  <link rel="stylesheet" href="./vendor/reveal.js/dist/theme/simple.css" id="theme">
+  <link rel="stylesheet" href="./vendor/reveal.js/plugin/highlight/monokai.css">
+
+  <style>
+    :root {
+      --r-background-color: #dee3ea;
+      --r-main-color: #0c1520;
+      --r-heading-color: #0c1520;
+      --r-link-color: #52ad3c;
+      --r-link-color-hover: #45a032;
+      --r-selection-background-color: #52ad3c;
+      --r-heading-font: 'Anton', 'Bebas Neue', 'Impact', sans-serif;
+      --r-main-font: 'Space Mono', monospace;
+      --r-heading-text-transform: uppercase;
+      --r-heading-letter-spacing: 0.04em;
+      --accent: #52ad3c;
+      --accent-dim: #45a032;
+      --surface: #ffffff;
+      --surface-light: #ffffff;
+      --green: #52ad3c;
+      --yellow: #c79a00;
+      --blue: #0e8a8a;
+    }
+
+    .reveal {
+      font-size: 32px;
+      font-family: 'Space Mono', monospace;
+      color: #0c1520;
+    }
+
+    .reveal .slides section {
+      color: #0c1520;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3 {
+      text-transform: uppercase;
+      font-weight: 400;
+      font-family: 'Anton', 'Bebas Neue', 'Impact', sans-serif;
+      letter-spacing: 0.04em;
+      color: #0c1520;
+    }
+
+    .reveal h1 {
+      font-size: 2.2em;
+      line-height: 1.1;
+    }
+
+    .reveal h2 {
+      font-size: 1.7em;
+      color: #0c1520;
+      margin: 0 0 0.8em 0;
+    }
+
+    /* When a subtitle follows the title, tighten the gap between them */
+    .reveal h2:has(+ .slide-subtitle) {
+      margin-bottom: 0.2em;
+    }
+
+    .reveal h3 {
+      font-size: 1.2em;
+      color: #0c1520;
+    }
+
+    .reveal .subtitle {
+      font-size: 0.7em;
+      color: #4a5568;
+      margin-top: 0.3em;
+    }
+
+    .reveal .slide-subtitle {
+      font-size: 1.2em;
+      color: #4a5568;
+      margin: 0 0 0.8em 0;
+    }
+
+    /* Slide body wrapper — owns content spacing after title/subtitle.
+       First child's own top margin is suppressed so the gap is fixed
+       by h2 (or .slide-subtitle) margin-bottom alone. */
+    .reveal .slide-body {
+      margin: 0;
+    }
+
+    .reveal .slide-body > *:first-child {
+      margin-top: 0 !important;
+    }
+
+    .reveal .accent {
+      color: #52ad3c;
+      font-weight: 700;
+    }
+
+    .reveal strong, .reveal b {
+      color: #52ad3c;
+    }
+
+    .reveal a {
+      color: #52ad3c;
+      pointer-events: none;
+    }
+
+    .reveal a:hover {
+      color: #45a032;
+    }
+
+    .reveal .highlight-box {
+      background: #ffffff;
+      border: 1px solid #242f27;
+      border-left: 4px solid #52ad3c;
+      padding: 0.6em 1em;
+      margin: 0.5em 0;
+      border-radius: 6px;
+      text-align: left;
+      font-size: 0.85em;
+    }
+
+    .reveal .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1em;
+      margin: 1em 0;
+    }
+
+    .reveal .stat-card {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 1em;
+      text-align: center;
+      border: 1px solid #242f27;
+    }
+
+    .reveal .stat-card .number {
+      font-size: 2em;
+      font-weight: 800;
+      color: #52ad3c;
+      display: block;
+    }
+
+    .reveal .stat-card .label {
+      font-size: 0.6em;
+      color: #4a5568;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .reveal .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5em;
+      font-size: 0.85em;
+    }
+
+    .reveal .col-header {
+      font-weight: 700;
+      color: #52ad3c;
+      margin-bottom: 0.4em;
+      font-size: 1.1em;
+    }
+
+    .reveal .green { color: #52ad3c; }
+    .reveal .red { color: #eb3b5a; }
+    .reveal .blue { color: #0e8a8a; }
+    .reveal .yellow { color: #c79a00; }
+
+    .reveal ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .reveal ul li {
+      padding: 0.3em 0;
+      padding-left: 1.2em;
+      position: relative;
+      text-align: left;
+    }
+
+    .reveal ul li::before {
+      content: '\25B8';
+      color: #52ad3c;
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+
+    .reveal .slide-number {
+      color: #0c1520;
+      background: rgba(255, 255, 255, 0.85);
+      font-size: 18px;
+      font-weight: 700;
+      font-family: 'Space Mono', monospace;
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid rgba(12, 21, 32, 0.15);
+      right: 12px;
+      bottom: 12px;
+    }
+
+    .reveal .slide-number a {
+      color: #0c1520;
+    }
+
+    .reveal .progress span {
+      background: #52ad3c;
+    }
+
+    .reveal blockquote {
+      background: #ffffff;
+      border-left: 4px solid #52ad3c;
+      padding: 0.8em 1.2em;
+      font-style: italic;
+      width: 85%;
+      margin: 0.5em auto;
+      border-radius: 6px;
+      font-size: 0.9em;
+      color: #0c1520;
+    }
+
+    .reveal table {
+      font-size: 0.7em;
+      border-collapse: collapse;
+      margin: 0.5em auto;
+      color: #0c1520;
+    }
+
+    .reveal table th {
+      background: #e8ede6;
+      color: #0c1520;
+      padding: 0.5em 0.8em;
+      text-align: left;
+      border-bottom: 2px solid #c8cdd4;
+    }
+
+    .reveal table td {
+      padding: 0.4em 0.8em;
+      border-bottom: 1px solid #c8cdd4;
+    }
+
+    .reveal table tr:nth-child(even) {
+      background: #e8ede6;
+    }
+
+    .reveal pre {
+      font-size: 1em;
+      width: 95%;
+      box-shadow: 0 2px 8px rgba(12,21,32,0.08);
+      border-radius: 8px;
+      border: 1px solid #242f27;
+    }
+
+    .reveal pre code {
+      padding: 1em;
+      border-radius: 8px;
+      background: #ffffff;
+      color: #0c1520;
+      font-family: 'Space Mono', monospace;
+      white-space: pre-wrap !important;
+      word-wrap: break-word !important;
+      overflow-wrap: break-word !important;
+    }
+
+    .reveal code {
+      font-family: 'Space Mono', monospace;
+      color: #52ad3c;
+    }
+
+    .reveal .ladder {
+      text-align: left;
+      font-size: 0.85em;
+      display: inline-block;
+    }
+
+    .reveal .ladder .step {
+      padding: 0.3em 0.8em;
+      margin: 0.2em 0;
+      border-radius: 4px;
+      position: relative;
+    }
+
+    .reveal .ladder .step::before {
+      content: '';
+      position: absolute;
+      left: 1em;
+      top: -0.4em;
+      width: 2px;
+      height: 0.4em;
+      background: #52ad3c;
+    }
+
+    .reveal .ladder .step:first-child::before {
+      display: none;
+    }
+
+    .section-label {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      font-size: 0.7em;
+      color: #0c1520;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-family: 'Space Mono', monospace;
+    }
+
+    /* Journey map — progress bar on section title slides */
+    .journey-map {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-top: 1.5em;
+      position: relative;
+      padding: 0;
+      width: 100%;
+    }
+
+    .journey-map::before {
+      content: '';
+      position: absolute;
+      top: 18px;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 2.5px;
+      background: #c8cdd4;
+    }
+
+    .journey-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 1;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .journey-node .node-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 2.5px solid #c8cdd4;
+      background: #dee3ea;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.5em;
+      font-weight: 700;
+      color: #c8cdd4;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .journey-node .node-label {
+      font-size: 0.38em;
+      color: #c8cdd4;
+      margin-top: 0.4em;
+      font-family: 'Space Mono', monospace;
+      white-space: nowrap;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .journey-node.past .node-circle {
+      border-color: #52ad3c;
+      color: #52ad3c;
+      background: #dee3ea;
+    }
+
+    .journey-node.past .node-label {
+      color: #52ad3c;
+    }
+
+    .journey-node.active .node-circle {
+      border-color: #52ad3c;
+      background: #52ad3c;
+      color: #ffffff;
+      animation: journey-pulse 2s ease-in-out infinite;
+    }
+
+    .journey-node.active .node-label {
+      color: #52ad3c;
+      font-weight: 700;
+    }
+
+    @keyframes journey-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(82, 173, 60, 0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(82, 173, 60, 0); }
+    }
+
+    /* Section opener: center title/subtitle across full slide,
+       journey map pinned near bottom out of flow.
+       Reveal.js centering is JS-based (top offset on position:absolute sections).
+       We set height:100% so the section fills the 720px slide, making
+       the JS centering a no-op (top=0), then center content ourselves. */
+    .reveal section.section-opener {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      height: 100% !important;
+    }
+
+    .reveal section.section-opener .journey-map {
+      position: absolute;
+      bottom: 10%;
+      left: 0;
+      right: 0;
+      margin-top: 0 !important;
+      width: 100%;
+    }
+
+    .reveal .flow-arrow {
+      color: #52ad3c;
+      font-size: 1.4em;
+      margin: 0 0.3em;
+    }
+
+    .reveal .tag {
+      display: inline-block;
+      background: #ffffff;
+      color: #0c1520;
+      padding: 0.15em 0.5em;
+      border-radius: 4px;
+      font-size: 0.75em;
+      font-weight: 600;
+      margin: 0.1em;
+      border: 1px solid #242f27;
+    }
+
+    .reveal .tag.green { background: #ffffff; border-color: #242f27; color: #0c1520; }
+    .reveal .tag.blue { background: #ffffff; border-color: #242f27; color: #0c1520; }
+    .reveal .tag.yellow { background: #ffffff; border-color: #242f27; color: #0c1520; }
+
+    .reveal .comparison {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 0.5em;
+      align-items: center;
+      font-size: 0.85em;
+    }
+
+    .reveal .vs {
+      font-size: 1.5em;
+      font-weight: 800;
+      color: #52ad3c;
+    }
+
+    .reveal .round-badge {
+      display: inline-block;
+      background: #ffffff;
+      color: #0c1520;
+      padding: 0.2em 0.6em;
+      border-radius: 20px;
+      font-size: 0.7em;
+      font-weight: 700;
+      margin-right: 0.3em;
+      border: 1px solid #242f27;
+    }
+
+    .reveal .round-badge.green { background: #ffffff; border-color: #242f27; color: #0c1520; }
+    .reveal .round-badge.blue { background: #ffffff; border-color: #242f27; color: #0c1520; }
+
+    /* Section title slides with green background — all text white */
+    .reveal section[data-background-color="#6dbf54"],
+    .reveal section[data-background-color="#6dbf54"] h1,
+    .reveal section[data-background-color="#6dbf54"] h2,
+    .reveal section[data-background-color="#6dbf54"] h3,
+    .reveal section[data-background-color="#6dbf54"] p,
+    .reveal section[data-background-color="#6dbf54"] li,
+    .reveal section[data-background-color="#6dbf54"] a,
+    .reveal section[data-background-color="#6dbf54"] strong,
+    .reveal section[data-background-color="#6dbf54"] b,
+    .reveal section[data-background-color="#6dbf54"] em,
+    .reveal section[data-background-color="#6dbf54"] span,
+    .reveal section[data-background-color="#6dbf54"] .accent,
+    .reveal section[data-background-color="#6dbf54"] .section-label,
+    .reveal section[data-background-color="#6dbf54"] .vs,
+    .reveal section[data-background-color="#6dbf54"] .flow-arrow,
+    .reveal section[data-background-color="#6dbf54"] blockquote {
+      color: #ffffff !important;
+    }
+    .reveal section[data-background-color="#6dbf54"] .tag,
+    .reveal section[data-background-color="#6dbf54"] .round-badge {
+      background: rgba(255,255,255,0.2);
+      border-color: rgba(255,255,255,0.5);
+      color: #ffffff !important;
+    }
+    /* Asciinema player — white theme for presentation */
+    .asciinema-player-theme-white {
+      --term-color-foreground: #2e3440;
+      --term-color-background: #ffffff;
+      --term-color-0: #3b4252;
+      --term-color-1: #bf616a;
+      --term-color-2: #a3be8c;
+      --term-color-3: #ebcb8b;
+      --term-color-4: #81a1c1;
+      --term-color-5: #b48ead;
+      --term-color-6: #88c0d0;
+      --term-color-7: #eceff4;
+    }
+
+    .reveal .asciinema-player-wrapper {
+      margin: 0 auto;
+      max-width: 95%;
+    }
+
+    /* Terminal mockup — matches real Claude Code light theme */
+    .reveal .terminal {
+      background: #f8f8f8;
+      border-radius: 0;
+      text-align: left;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.56em;
+      line-height: 1.45;
+      color: #2a2b33;
+      overflow: hidden;
+      border: none;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .reveal .terminal .term-header {
+      padding: 0.5em 1em 0.3em;
+      line-height: 0.9;
+      flex-shrink: 0;
+    }
+
+    .reveal .terminal .term-header .mascot {
+      color: #d2722a;
+      font-weight: 700;
+      white-space: pre;
+      font-size: 0.9em;
+    }
+
+    .reveal .terminal .term-header .version {
+      color: #2a2b33;
+    }
+
+    .reveal .terminal .term-header .version-dim {
+      color: #888;
+    }
+
+    .reveal .terminal .term-content {
+      flex: 1;
+      padding: 0 1em;
+      overflow: hidden;
+    }
+
+    .reveal .terminal .term-footer {
+      flex-shrink: 0;
+      border-top: 1px solid #d0d0d0;
+      padding: 0.3em 1em;
+    }
+
+    .reveal .terminal .term-footer .term-input {
+      padding: 0.2em 0;
+    }
+
+    .reveal .terminal .term-footer .term-statusbar {
+      border-top: 1px solid #d0d0d0;
+      padding-top: 0.3em;
+      color: #888;
+      font-size: 0.85em;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .reveal .terminal.content-fit {
+      height: auto;
+      max-height: 100%;
+    }
+
+    .reveal section.terminal-slide {
+      height: 670px !important;
+      width: 1280px !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    .reveal .terminal .term-prompt {
+      color: #3e953a;
+      font-weight: 700;
+    }
+
+    .reveal .terminal .term-cmd {
+      color: #2a2b33;
+    }
+
+    .reveal .terminal .term-agent {
+      color: #950095;
+    }
+
+    .reveal .terminal .term-dim {
+      color: #888;
+    }
+
+    .reveal .terminal .term-green {
+      color: #3e953a;
+    }
+
+    .reveal .terminal .term-answer {
+      color: #d2b67b;
+      font-weight: 700;
+    }
+
+    .reveal .terminal .term-block {
+      margin: 0.3em 0;
+      padding: 0;
+    }
+
+    /* Dim all visible blocks when the current-fragment class is active */
+    .reveal .terminal .term-block.fragment.visible {
+      opacity: 0.35;
+      transition: opacity 0.3s ease;
+    }
+
+    .reveal .terminal .term-block.fragment.current-fragment {
+      opacity: 1;
+    }
+
+    /* Dim static (non-fragment) term-blocks once any fragment is revealed */
+    .reveal .terminal .term-content:has(.fragment.visible) > .term-block:not(.fragment) {
+      opacity: 0.35;
+      transition: opacity 0.3s ease;
+    }
+
+    .reveal .terminal .term-hr {
+      border: none;
+      border-top: 1px solid #d0d0d0;
+      margin: 0.4em 0;
+    }
+
+    .reveal .terminal .term-checkbox {
+      color: #888;
+      font-size: 0.9em;
+      margin: 0.2em 0;
+    }
+
+    .reveal .terminal .term-checkbox .checked {
+      color: #3e953a;
+    }
+
+    .reveal .terminal .term-option {
+      padding-left: 1.5em;
+      margin: 0.1em 0;
+    }
+
+    .reveal .terminal .term-option .option-desc {
+      color: #888;
+      font-size: 0.9em;
+    }
+
+    .reveal .terminal .term-option.selected {
+      color: #2f5af3;
+    }
+
+    .reveal .terminal .term-thinking {
+      color: #888;
+      font-style: italic;
+    }
+
+    .reveal .terminal pre.term-ascii {
+      background: none;
+      border: none;
+      box-shadow: none;
+      margin: 0;
+      padding: 0;
+      width: auto;
+      font-size: 1em;
+      line-height: 1.2;
+      color: #2a2b33;
+      white-space: pre !important;
+    }
+
+    .reveal .terminal pre.term-ascii code {
+      background: none;
+      padding: 0;
+      color: inherit;
+    }
+
+    /* Stacked mockups — second replaces first in same position */
+    .reveal .terminal .term-mockup-stack {
+      position: relative;
+      min-height: 14em;
+    }
+
+    .reveal .terminal .term-mockup-stack .term-block {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      margin: 0;
+    }
+  .reveal .slide-number {
+    bottom: 8px;
+    left: 8px;
+    right: auto;
+    top: auto;
+  }
+  </style>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<!-- ============================================================ -->
+<!-- SECTION 1: OPENING — THE SDLC IS DEAD -->
+<!-- ============================================================ -->
+
+<!-- Title Slide -->
+<section>
+  <section data-background-color="#dee3ea">
+    <h1 style="font-size: 3em;">Claude Code for<br><span class="accent">Spring Developers</span></h1>
+    <p class="subtitle" style="margin-top: 1.2em; font-size: 1em;">
+      Thomas Schilling &middot; <a href="https://tschuehly.de">tschuehly.de</a>
+    </p>
+    <p class="subtitle" style="font-size: 1em;">
+      Spring I/O 2026 &middot; Barcelona
+    </p>
+    
+  </section>
+
+  <!-- About Me -->
+  <section>
+    <div class="two-col" style="align-items: center; gap: 1em; grid-template-columns: 2fr 3fr;">
+      <div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
+        <img src="sections/profilepic_small.jpeg" alt="Thomas Schilling speaking at Spring I/O 2023"
+             style="width: 70%; border-radius: 12px; object-fit: cover;">
+        <p style="font-size: 0.6em; margin: 0.3em 0 0.1em; color: #4a5568;">&#x2B07; Add me on LinkedIn</p>
+        <img src="./assets/qr/linkedin.png"
+             alt="LinkedIn QR Code" style="width: 48%; border-radius: 8px;">
+      </div>
+      <div style="text-align: left;">
+        <h2 style="margin-bottom: 0.3em;">Thomas Schilling</h2>
+        <p style="font-size: 0.8em; color: #4a5568; margin-bottom: 0.3em;">@tschuehly &middot; tschuehly.de &middot; Stuttgart</p>
+        <ul style="font-size: 0.9em; line-height: 1.6;">
+          <li>Founder &mdash; <strong>PhotoQuest</strong></li>
+          <li>Spring Boot + Kotlin + HTMX = ❤️</li>
+          <li>OSS: <strong>Spring ViewComponent</strong></li>
+          <li>Speaker: Spring I/O '23 &amp; '24, JavaZone, W-JAX, Devoxx BE</li>
+          <li>Open to new opportunities</li>
+        </ul>
+      </div>
+    </div>
+    
+  </section>
+
+  <!-- Credibility — velocity chart -->
+  <section>
+    <img src="assets/velocity-chart.svg" alt="GitHub contribution trend" style="width: 90%;">
+    <div style="margin-top: 0.5em; display: flex; justify-content: center; gap: 1.5em;">
+      <div class="stat-card" style="min-width: 7em;">
+        <span class="number">3,700+</span>
+        <span class="label">commits</span>
+      </div>
+      <div class="stat-card" style="min-width: 7em;">
+        <span class="number">1,700+</span>
+        <span class="label">sessions</span>
+      </div>
+      <div class="stat-card" style="min-width: 7em;">
+        <span class="number">11k</span>
+        <span class="label">prompts sent</span>
+      </div>
+      <div class="stat-card" style="min-width: 7em;">
+        <span class="number">5x</span>
+        <span class="label">commit velocity</span>
+      </div>
+    </div>
+    
+  </section>
+</section>
+<!-- ============================================================ -->
+<!-- SECTION 2: CLAUDE CODE BASICS -->
+<!-- ============================================================ -->
+
+<section>
+  <section class="section-opener">
+    <span class="section-label">Section 2</span>
+    <div class="opener-content">
+      <h2>Meet Your New Teammate</h2>
+      <img src="./assets/02_claude-code.png">
+    </div>
+
+    <div class="journey-map">
+      <div class="journey-node past"><div class="node-circle">1</div><div class="node-label">Intro</div></div>
+      <div class="journey-node active"><div class="node-circle">2</div><div class="node-label">Basics</div></div>
+      <div class="journey-node"><div class="node-circle">3</div><div class="node-label">Context</div></div>
+      <div class="journey-node"><div class="node-circle">4</div><div class="node-label">Skills</div></div>
+      <div class="journey-node"><div class="node-circle">5</div><div class="node-label">Hooks</div></div>
+      <div class="journey-node"><div class="node-circle">6</div><div class="node-label">MCP</div></div>
+      <div class="journey-node"><div class="node-circle">7</div><div class="node-label">Workflows</div></div>
+      <div class="journey-node"><div class="node-circle">8</div><div class="node-label">Tips</div></div>
+      <div class="journey-node"><div class="node-circle">9</div><div class="node-label">Outlook</div></div>
+    </div>
+
+    
+  </section>
+
+  <!-- Progressive Demo Setup — moved here so audience has context for all demos -->
+  <section>
+    <h2>The Demo Project</h2>
+    <div class="slide-body">
+      <pre style="font-size: 1em; white-space: pre-wrap; word-wrap: break-word;"><code class="language-text">A photo reaction game on a beamer. The manager starts a round, guests join via QR code. Guests see the photos on the beamer and spend their reaction budget (3 &#10084;&#65039; + 3 &#128514; + 3 &#128558;) during a timer. Top 3 photos per category are revealed at the end.</code></pre>
+      <div style="display: flex; justify-content: center; gap: 2em; margin-top: 0.8em;">
+        <div style="text-align: center;">
+          <img src="assets/round1-lobby.png" alt="Guests join via QR code"
+               style="max-height: 350px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.12);">
+        </div>
+        <div style="text-align: center;">
+          <img src="assets/round1-results.png" alt="Top 3 photos per category reveal"
+               style="max-height: 350px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.12);">
+        </div>
+      </div>
+    </div>
+    
+  </section>
+
+  <!-- What it is -->
+  <section>
+    <h2>The Agentic Loop</h2>
+    <div class="slide-body">
+      <p style="font-size: 1em;">An agentic coding tool that operates in a loop:</p>
+      <p style="font-size: 1.1em; margin-top: 0.8em;">
+        <span class="accent">Read</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="accent">Plan</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="accent">Act</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="accent">Observe</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="accent">Repeat</span>
+      </p>
+    </div>
+    
+  </section>
+
+  <!-- What it is — terminal demo -->
+  <section class="terminal-slide">
+    <div class="terminal">
+      <div class="term-header">
+        <span class="mascot"> ▐▛███▜▌</span>&nbsp;&nbsp;&nbsp;<span class="version">Opus 4.6 · Claude Max</span><br>
+        <span class="mascot">▝▜█████▛▘</span><br>
+        <span class="mascot">  ▘▘ ▝▝</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="version-dim">~/PhotoQuest</span>
+      </div>
+
+      <div class="term-content">
+        <div class="term-block">
+          <span class="term-prompt">❯</span> <span class="term-cmd">The RankingGameService.createSession method is missing input validation for the timer duration. Add validation that the duration must be between 1 and 30 minutes</span>
+        </div>
+
+        <div class="term-block fragment" data-fragment-index="0">
+          <span class="term-dim">Searched for 1 pattern, read 1 file</span><br>
+          <span class="term-agent">⏺</span> Now I'll look at the existing exceptions to follow the pattern:<br>
+          <span class="term-dim">Searched for 1 pattern, read 1 file</span>
+        </div>
+
+        <div class="term-block fragment" data-fragment-index="1">
+          <span class="term-agent">⏺ Update</span><span class="term-dim">(…/core/rankinggame/RankingGameService.kt)</span><br>
+          <span class="term-dim">Added 5 lines</span><br>
+<pre class="term-ascii">  class InvalidTimerDurationException : PhotoQuestException(
+      "Die Timer-Dauer muss zwischen 1 und 30 Minuten liegen.",
+      "Timer duration must be between 1 and 30 minutes"
+  )</pre>
+        </div>
+
+        <div class="term-block fragment" data-fragment-index="2">
+          <span class="term-agent">⏺ Update</span><span class="term-dim">(…/core/rankinggame/RankingGameService.kt)</span><br>
+          <span class="term-dim">Added 1 line</span><br>
+<pre class="term-ascii">  if (timerSeconds &lt; 60 || timerSeconds &gt; 1800) throw InvalidTimerDurationException()</pre>
+        </div>
+
+        <div class="term-block fragment" data-fragment-index="3">
+          <span class="term-agent">⏺</span> Now let me compile to verify:<br>
+          <span class="term-dim">Ran 1 bash command</span><br><br>
+          <span class="term-green">Compilation succeeds.</span> Validation runs before the advisory lock — invalid requests fail early without acquiring any locks.<br>
+          <span class="term-thinking">✻ Cogitated for 1m 24s</span>
+        </div>
+      </div>
+
+      <div class="term-footer">
+        <div class="term-input"><span class="term-prompt">❯</span></div>
+        <div class="term-statusbar">
+          <span>PhotoQuest (master) | Opus 4.6 (1M context) | Ctx: 5%</span>
+          <span>25244 tokens</span>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+
+  <!-- Where it runs -->
+  <section>
+    <h2>Pick Your Interface</h2>
+    <div class="slide-body">
+      <ul>
+        <li>Terminal (CLI)</li>
+        <li>VS Code &amp; IntelliJ</li>
+        <li>Desktop app</li>
+        <li>Web app</li>
+        <li>Smartphone app</li>
+        <li>Slack &amp; GitHub Actions</li>
+      </ul>
+    </div>
+    
+  </section>
+
+  <!-- What it can do -->
+  <section>
+    <h2>Your Fastest Coworker</h2>
+    <div class="slide-body">
+      <div style="font-size: 1em; text-align: left; max-width: 900px; margin: 0.5em auto;">
+        <ul>
+          <li class="fragment" data-fragment-index="0"><strong>Design your architecture</strong> together</li>
+          <li class="fragment" data-fragment-index="0"><strong>Challenge your assumptions</strong></li>
+          <li class="fragment" data-fragment-index="1"><strong>Create a plan</strong>, then implement it</li>
+          <li class="fragment" data-fragment-index="1"><strong>Build features</strong> &amp; fix bugs</li>
+          <li class="fragment" data-fragment-index="1"><strong>Design your UI</strong></li>
+          <li class="fragment" data-fragment-index="1"><strong>Write your tests</strong></li>
+        </ul>
+      </div>
+    </div>
+    
+  </section>
+
+  <!-- Why Spring -->
+  <section>
+    <h2>The Spring Advantage</h2>
+    <div class="slide-body">
+      <ul>
+        <li class="fragment" data-fragment-index="0"><strong>Conventions are strong</strong></li>
+        <li class="fragment" data-fragment-index="1"><strong>Compile-time verification</strong></li>
+        <li class="fragment" data-fragment-index="2"><strong>Testability is built-in</strong></li>
+        <li class="fragment" data-fragment-index="3"><strong>Structure is predictable</strong></li>
+      </ul>
+      <p class="fragment" data-fragment-index="4" style="font-size: 1.2em; margin-top: 0.8em;"><span class="accent">Your stack is your advantage.</span></p>
+    </div>
+    
+  </section>
+
+  <!-- Model & Effort -->
+  <section>
+    <h2>Pick Your Brain</h2>
+    <div class="slide-body">
+      <div class="two-col" style="padding: 0 2em; align-items: start;">
+        <div>
+          <div class="col-header">Sonnet</div>
+          <ul>
+            <li>Fast iteration</li>
+            <li>Simple fixes</li>
+            <li>High-volume tasks</li>
+            <li>Cheap subagents</li>
+          </ul>
+        </div>
+        <div>
+          <div class="col-header">Opus</div>
+          <ul>
+            <li>Complex architecture</li>
+            <li>Multi-file refactors</li>
+            <li>Planning</li>
+            <li>Debugging</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fragment highlight-box" style="margin-top: 1.2em; padding: 0.6em 1.5em; font-size: 0.95em; display: grid; grid-template-columns: 1fr 1fr; gap: 0.3em 2em;">
+        <div><span class="tag">/effort low</span> Quick lookups</div>
+        <div><span class="tag">/effort medium</span> Straightforward tasks</div>
+        <div><span class="tag">/effort high</span> Planning &amp; specs</div>
+        <div><span class="tag">/effort max</span> Hard debugging</div>
+      </div>
+    </div>
+    
+  </section>
+
+  <!-- Checkpoints, /rewind & /fork -->
+  <section>
+    <h2>Your Safety Net</h2>
+    <p class="slide-subtitle">Checkpoints</p>
+    <div class="slide-body">
+      <div class="highlight-box" style="display:inline-block; margin: 0 auto;">
+        <p style="font-size: 1em;">Wrong direction? <code>/rewind</code>. Want to branch? <code>/branch</code>.</p>
+      </div>
+      <p class="fragment" style="font-size: 1.1em; margin-top: 1em;"><span class="accent">Experimentation is free.</span></p>
+    </div>
+    
+  </section>
+
+  <!-- /rewind terminal demo -->
+  <section class="terminal-slide">
+    <div class="terminal">
+      <div class="term-header">
+        <span class="mascot"> ▐▛███▜▌</span>&nbsp;&nbsp;&nbsp;<span class="version">Opus 4.6 · Claude Max</span><br>
+        <span class="mascot">▝▜█████▛▘</span><br>
+        <span class="mascot">  ▘▘ ▝▝</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="version-dim">~/PhotoQuest</span>
+      </div>
+
+      <div class="term-content">
+        <div class="term-block">
+          <span class="term-prompt">❯</span> <span class="term-cmd">refactor RankingGameService to use a sealed interface for game state instead of the enum</span>
+        </div>
+
+        <div class="term-block fragment" data-fragment-index="0">
+          <span class="term-agent">⏺ Update</span><span class="term-dim">(…/rankinggame/RankingGameService.kt)</span> <span class="term-dim">Added 19 lines</span><br>
+          <span class="term-agent">⏺ Update</span><span class="term-dim">(…/rankinggame/RankingGameService.kt)</span> <span class="term-dim">Added 2 lines, removed 1 line</span><br>
+          <span class="term-agent">⏺ Update</span><span class="term-dim">(…/rankinggame/RankingGameService.kt)</span> <span class="term-dim">Added 5 lines, removed 8 lines</span><br>
+          <span class="term-agent">⏺ Update</span><span class="term-dim">(…/rankinggame/RankingGameService.kt)</span> <span class="term-dim">Added 11 lines, removed 14 lines</span><br>
+          <span class="term-dim">Refactor react:</span><br>
+          <span style="color: #bf616a; font-weight: 700;">Interrupted · What should Claude do instead?</span>
+        </div>
+
+        <div class="term-block fragment" data-fragment-index="1">
+          <span class="term-prompt">❯</span> <span class="term-cmd">/rewind</span><br><br>
+          <span style="color: #81a1c1; font-weight: 700;">Rewind</span><br>
+          Restore the code and/or conversation to the point before…<br><br>
+          &nbsp;&nbsp;❯ refactor RankingGameService to use a sealed interface…<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;RankingGameService.kt <span class="term-green">+37</span> <span style="color: #bf616a;">-23</span><br><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<em>(current)</em><br><br>
+          <span class="term-dim">Enter to continue · Esc to exit</span>
+        </div>
+      </div>
+
+      <div class="term-footer">
+        <div class="term-input"><span class="term-prompt">❯</span></div>
+        <div class="term-statusbar">
+          <span>PhotoQuest (master) | Opus 4.6 (1M context) | Ctx: 8%</span>
+          <span>38421 tokens</span>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+
+  <!-- Subagents -->
+  <section>
+    <h2>Delegate Without Losing Focus</h2>
+    <div class="slide-body">
+      <p style="font-size: 1.6em; margin-top: 1.2em;"><span class="accent">Separate context window.</span></p>
+      <p style="font-size: 1.4em; margin-top: 0.4em;">Your session stays lean.</p>
+      <p class="fragment" style="font-size: 1em; margin-top: 1.6em; opacity: 0.75;">"Research X with a subagent"</p>
+    </div>
+    
+  </section>
+
+  <!-- Subagent terminal demo -->
+  <section class="terminal-slide">
+    <div class="terminal">
+      <div class="term-header">
+        <span class="mascot"> ▐▛███▜▌</span>&nbsp;&nbsp;&nbsp;<span class="version">Opus 4.6 · Claude Max</span><br>
+        <span class="mascot">▝▜█████▛▘</span><br>
+        <span class="mascot">  ▘▘ ▝▝</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="version-dim">~/PhotoQuest</span>
+      </div>
+
+      <div class="term-content">
+        <div class="term-block">
+          <span class="term-prompt">❯</span> <span class="term-cmd">Use a subagent to analyze how the SSE notification system works in this project, then summarize the findings</span>
+        </div>
+
+        <div class="term-block fragment" data-fragment-index="0">
+          <span class="term-agent">⏺ Explore</span><span class="term-dim">(Analyze SSE notification system)</span><br>
+          <span class="term-dim">&nbsp;&nbsp;Done (49 tool uses · 84.4k tokens · 1m 33s)</span>
+        </div>
+
+        <div class="term-block fragment" data-fragment-index="1">
+          <span class="term-agent">⏺</span> <strong>SSE Notification System Overview</strong><br><br>
+          The project uses <strong>PostgreSQL LISTEN/NOTIFY</strong> as the event transport, with Spring WebFlux Flux streams delivering events to browsers.<br><br>
+          <strong>1. Slideshow Updates</strong> (live photo feed)<br>
+          <span class="term-dim">&nbsp;&nbsp;Guest uploads photo → pg_notify → SlideshowNotificationService → Reactor Sink → SSE stream</span><br><br>
+          <strong>2. Ranking Game</strong> (live multiplayer game events)<br>
+          <span class="term-dim">&nbsp;&nbsp;Game action → pg_notify('ranking_game_$sessionId') → per-session listener → SSE stream</span><br><br>
+          <strong>Architecture:</strong><br>
+<pre class="term-ascii">  Browser (EventSource / HTMX)
+    ↕ HTTP SSE stream
+  Spring Controller (Flux&lt;ServerSentEvent&gt;)
+    ↕ Reactor Sink
+  NotificationService (listener thread)
+    ↕ JDBC polling pgConn.getNotifications(500ms)
+  PostgreSQL LISTEN/NOTIFY
+    ↑ pg_notify() called by business services</pre>
+        </div>
+      </div>
+
+      <div class="term-footer">
+        <div class="term-input"><span class="term-prompt">❯</span></div>
+        <div class="term-statusbar">
+          <span>PhotoQuest (master) | Opus 4.6 (1M context) | Ctx: 3%</span>
+          <span>31205 tokens</span>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+
+  <!-- @claude in PR Comments -->
+  <section>
+    <h2>No UI, No Problem</h2>
+    <div class="slide-body">
+      <div style="font-size: 1em; text-align: left; max-width: 800px; margin: 0.5em auto;">
+        <p><code>claude -p "query"</code> &mdash; headless mode for scripting</p>
+        <p style="margin-top: 0.8em;"><code>@claude</code> in PR comments &mdash; GitHub App triggers a GitHub Actions workflow</p>
+      </div>
+    </div>
+    
+  </section>
+
+  <!-- Headless terminal demo -->
+  <section class="terminal-slide">
+    <div class="terminal content-fit" style="font-size: 0.65em;">
+      <div class="term-content" style="padding: 1.2em 1.2em;">
+        <div class="term-block">
+          <span class="term-green">tschuehly@Mac</span> <span class="term-agent">PhotoQuest %</span> claude -p --model haiku "What database tables does the ranking game feature use?"
+        </div>
+
+        <div class="term-block fragment" data-fragment-index="0">
+          The ranking game feature uses three main database tables:<br><br>
+          <strong>ranking_game_session</strong><br>
+          <span class="term-dim">Main session table — id, event_id, status (LOBBY/ACTIVE/FINISHED/REVEAL),</span><br>
+          <span class="term-dim">timer_duration_seconds, budget_heart/funny/wow, timestamps</span><br><br>
+          <strong>ranking_game_participant</strong><br>
+          <span class="term-dim">Tracks which guests are playing — session_id, event_guest_id, joined_at</span><br>
+          <span class="term-dim">Unique constraint: one participant per guest per session</span><br><br>
+          <strong>ranking_game_reaction</strong><br>
+          <span class="term-dim">Records each reaction — participant_id, submission_id, reaction_type (HEART/FUNNY/WOW)</span><br>
+          <span class="term-dim">Unique constraint: one reaction per participant per photo per session</span>
+        </div>
+
+      </div>
+    </div>
+    
+  </section>
+
+  <!-- Iteration 1 — stats slide -->
+  <section>
+    <h2>The Vibe Coding Baseline</h2>
+    <p class="slide-subtitle">Iteration 1: no config, no skills, no plan</p>
+    <div class="slide-body">
+      <pre style="font-size: 1em; width: 100%; white-space: pre-wrap; word-wrap: break-word;"><code class="language-text">❯ A photo reaction game on a beamer. The manager starts a round, guests join via QR code. Guests see the photos on the beamer and spend their reaction budget (3 &#10084;&#65039; + 3 &#128514; + 3 &#128558;) during a timer. Top 3 photos per category are revealed at the end.</code></pre>
+      <div style="margin-top: 1.4em; text-align: center;">
+        <p class="fragment" style="font-size: 1.2em; margin: 0.6em 0;">No tests written.</p>
+        <p class="fragment" style="font-size: 1.2em; margin: 0.6em 0;">8 bugs I had to find by hand.</p>
+        <p class="fragment" style="font-size: 1.2em; margin: 0.6em 0;">The whole <span class="accent">REVEAL</span> state skipped.</p>
+      </div>
+    </div>
+    
+  </section>
+
+  <!-- Iteration 1 — firefighting payoff -->
+  <section class="terminal-slide">
+    <div class="terminal" style="font-size: 0.8em; line-height: 1.2em;">
+      <div class="term-header">
+        <span class="mascot"> ▐▛███▜▌</span>&nbsp;&nbsp;&nbsp;<span class="version">Opus 4.6 &middot; Claude Max</span><br>
+        <span class="mascot">▝▜█████▛▘</span><br>
+        <span class="mascot">  ▘▘ ▝▝</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="version-dim">~/PhotoQuest.wt-demo-round1</span>
+      </div>
+
+      <div class="term-content" style="padding: 1em 1.2em;">
+        <div class="term-block">
+          <span class="term-prompt">❯</span> <span class="term-cmd">A photo reaction game on a beamer. The manager starts a round, guests join via QR code. Guests see the photos on the beamer and spend their reaction budget (3 &#10084;&#65039; + 3 &#128514; + 3 &#128558;) during a timer. Top 3 photos per category are revealed at the end.</span>
+        </div>
+
+        <div class="term-block fragment" data-fragment-index="0" style="margin-bottom: 0.7em;">
+          <span class="term-prompt">❯</span> <span class="term-cmd">When joining the game it shows {JSON&hellip;} instead of the rendered html</span>
+        </div>
+
+        <div class="term-block fragment" data-fragment-index="1" style="margin-bottom: 0.7em;">
+          <span class="term-prompt">❯</span> <span class="term-cmd">The images overlap and are all shown at the same time and the game doesn't autostart for the participants</span>
+        </div>
+
+        <div class="term-block fragment" data-fragment-index="2" style="margin-bottom: 0.7em;">
+          <span class="term-prompt">❯</span> <span class="term-cmd">There is no result at the end. I voted but it says "No votes"</span>
+        </div>
+
+        <div class="term-block fragment" data-fragment-index="3">
+          <span class="">&nbsp;&nbsp;&hellip; 5 more bug reports from me, back-to-back</span>
+        </div>
+      </div>
+
+      <div class="term-footer">
+        <div class="term-input"><span class="term-prompt">❯</span></div>
+        <div class="term-statusbar">
+          <span>PhotoQuest.wt-demo-round1 (talk-demo-1-vibe) | Opus 4.6 (1M context) | Ctx: 98%</span>
+          <span>202,719 tokens</span>
+        </div>
+      </div>
+    </div>
+    <p class="fragment" data-fragment-index="3" style="font-size: 1em; margin-top: 0.6em;">What if Claude had <span class="accent">knowledge</span>, <span class="accent">skills</span>, and a <span class="accent">plan</span>?</p>
+    
+  </section>
+</section>
+<!-- ============================================================ -->
+<!-- SECTION 3: SETTING UP CLAUDE FOR SUCCESS -->
+<!-- ============================================================ -->
+
+<section>
+  <!-- S3.1 — Section Opener -->
+  <section class="section-opener">
+    <span class="section-label">Section 3</span>
+    <div class="opener-content">
+      <h2>Every Session Is Day One</h2>
+      <div style="font-size: 1.1em; line-height: 1.8; margin-top: 1em;">
+        <p>A new deveveloper onboards once.</p>
+        <p class="fragment">Claude onboards <strong>every session</strong>.</p>
+        <p class="fragment" style="margin-top: 0.6em;"><strong>Context is how you onboard.</strong></p>
+      </div>
+    </div>
+
+    <div class="journey-map">
+      <div class="journey-node past">
+        <div class="node-circle">1</div>
+        <div class="node-label">Intro</div>
+      </div>
+      <div class="journey-node past">
+        <div class="node-circle">2</div>
+        <div class="node-label">Basics</div>
+      </div>
+      <div class="journey-node active">
+        <div class="node-circle">3</div>
+        <div class="node-label">Context</div>
+      </div>
+      <div class="journey-node">
+        <div class="node-circle">4</div>
+        <div class="node-label">Skills</div>
+      </div>
+      <div class="journey-node">
+        <div class="node-circle">5</div>
+        <div class="node-label">Hooks</div>
+      </div>
+      <div class="journey-node">
+        <div class="node-circle">6</div>
+        <div class="node-label">MCP</div>
+      </div>
+      <div class="journey-node">
+        <div class="node-circle">7</div>
+        <div class="node-label">Workflows</div>
+      </div>
+      <div class="journey-node">
+        <div class="node-circle">8</div>
+        <div class="node-label">Tips</div>
+      </div>
+      <div class="journey-node">
+        <div class="node-circle">9</div>
+        <div class="node-label">Outlook</div>
+      </div>
+    </div>
+
+    
+  </section>
+
+  <!-- S3.2 — The Cost of Missing Context -->
+  <section>
+    <h2>The Cost of Missing Context</h2>
+    <div class="slide-body">
+      <div class="highlight-box">
+        "Add a download pop-up for digital-only subscribers"<br>
+        <span style="font-size: 0.85em; opacity: 0.8;">&mdash; from my phone, no plan mode</span>
+      </div>
+
+      <p class="fragment" style="margin-top: 1em; font-size: 1em;">
+        Claude hardcoded <strong>6 cards per A4 sheet</strong>.
+      </p>
+
+      <p class="fragment" style="margin-top: 0.6em; font-size: 1em;">
+        Reality: <strong>1 card per A6 page</strong>.
+      </p>
+
+      <p class="fragment" style="margin-top: 1.2em; font-weight: bold; font-size: 1.05em;">
+        The agent only knows what's in context.
+      </p>
+    </div>
+
+    
+  </section>
+
+  <!-- ===== LAYER 1: CLAUDE.md ===== -->
+
+  <!-- S3.4 — Start Small, Iterate by Friction -->
+  <section>
+    <h2>The Onboarding Doc</h2>
+    <p class="slide-subtitle">CLAUDE.md</p>
+    <div class="slide-body">
+      <div style="font-size: 1em; text-align: left; max-width: 900px; margin: 1em auto;">
+        <p><span class="tag blue">1</span> Start with 5 lines</p>
+        <p class="fragment"><span class="tag blue">2</span> Use Claude Code &rarr; observe what goes wrong</p>
+        <p class="fragment"><span class="tag blue">3</span> Undesired behaviour &rarr; add a rule</p>
+        <p class="fragment"><span class="tag blue">4</span> Repeat</p>
+      </div>
+
+      <p class="fragment" style="font-size: 1em; margin-top: 1em;">
+        Every rule needs to earn its place through a <strong>real failure</strong>.
+      </p>
+    </div>
+    
+  </section>
+
+  <!-- S3.5 — Inside my CLAUDE.md -->
+  <section>
+    <h2>Inside my CLAUDE.md</h2>
+    <div class="slide-body">
+      <pre style="font-size: 1em; line-height: 1.6; padding: 1em; background: #ffffff; color: #0c1520; border-radius: 8px; font-family: 'Space Mono', monospace; white-space: pre-wrap; word-wrap: break-word;"># Critical Rules<span class="fragment">
+- Compile after .kt changes:
+  ./gradlew compileKotlin compileTestKotlin</span><span class="fragment">
+- Verify before done: never mark a task complete without
+  proving it works (run tests, demonstrate correctness)</span><span class="fragment">
+- Multi-instance safe: no in-memory state for dedup/guards;
+  use DB checks. AdvisoryLock.kt for distributed consensus</span></pre>
+    </div>
+
+    
+  </section>
+
+  <!-- ===== LAYER 2: .claude/rules/ ===== -->
+
+  <!-- S3.8 — Path-Scoped Rules -->
+  <section>
+    <h2>Scoped Rules, Clean Context</h2>
+    <p class="slide-subtitle">.claude/rules/</p>
+    <div class="slide-body">
+      <pre style="font-size: 1em; line-height: 1.6; padding: 1em; background: #ffffff; color: #0c1520; border-radius: 8px; font-family: 'Space Mono', monospace;">.claude/rules/
+├── kotlin-conventions.md<span class="fragment" data-fragment-index="0">    → src/main/kotlin/**</span>
+├── viewcomponent.md<span class="fragment" data-fragment-index="0">         → src/main/kotlin/page/**</span>
+├── tailwind-daisyui.md<span class="fragment" data-fragment-index="0">      → src/**/*.html</span>
+├── testing.md<span class="fragment" data-fragment-index="0">               → src/test/**</span>
+└── payment.md<span class="fragment" data-fragment-index="0">               → src/**/payment/**</span></pre>
+
+      <p class="fragment" data-fragment-index="0" style="margin-top: 0.8em; font-size: 1em;">
+        Each file loads <strong>only when Claude touches matching paths.</strong>
+      </p>
+    </div>
+
+    
+  </section>
+
+  <!-- ===== LAYER 3: Auto-Memory ===== -->
+
+  <!-- S3.9 — Auto-Memory -->
+  <section>
+    <h2>Claude Remembers</h2>
+    <p class="slide-subtitle">Auto-memory &mdash; local, not in git</p>
+    <div class="slide-body">
+      <p style="font-size: 1em;">Claude takes notes across sessions &mdash; <strong>stored locally</strong>, not in git</p>
+
+      <div class="fragment" style="font-size: 1em; max-width: 900px; margin: 1.2em auto; line-height: 1.8; display: grid; grid-template-columns: auto auto auto; column-gap: 0.5em; justify-content: center; align-items: baseline;">
+        <strong style="text-align: right;">CLAUDE.md</strong><span>➡️</span><span style="text-align: left;">most important information</span>
+        <strong style="text-align: right;">.claude/rules/</strong><span>➡️</span><span style="text-align: left;">path-specific conventions</span>
+        <strong style="text-align: right;">Auto-memory</strong><span>➡️</span><span style="text-align: left;">personal</span>
+      </div>
+    </div>
+
+    
+  </section>
+
+  <!-- ===== CONTEXT MANAGEMENT ===== -->
+
+  <!-- S3.12 — /context -->
+  <section>
+    <h2>/context &mdash; Your Context Budget</h2>
+    <div class="slide-body">
+      <p style="font-size: 1em;"><code>/context</code> shows where you're spending it.</p>
+
+      <p class="fragment" style="font-size: 1em;"><code>/compact</code> manual compression.</p>
+    </div>
+    
+  </section>
+
+  <!-- S3.13 — How I Manage Context Across Sessions -->
+  <section>
+    <h2>Fresh Session, Fresh Attention</h2>
+    <p class="slide-subtitle">Why I don't use /compact</p>
+    <div class="slide-body">
+      <div style="font-size: 1em; text-align: left; max-width: 900px; margin: 0.5em auto;">
+        <p><strong>Performance degrades</strong> as context fills up</p>
+        <p class="fragment"><strong>Resuming a stale session</strong> re-reads everything uncached</p>
+        <ul style="margin-top: 0.8em;">
+          <li class="fragment">Track state in <strong>markdown plan files</strong></li>
+          <li class="fragment">Wrap up the session manually</li>
+          <li class="fragment">Write a <strong>continuation prompt</strong></li>
+        </ul>
+      </div>
+    </div>
+    
+  </section>
+</section>
+<!-- ============================================================ -->
+<!-- SECTION 4: HOW DO I TEACH THE AGENT HOW MY TEAM WORKS? -->
+<!-- ============================================================ -->
+
+<section>
+  <section class="section-opener">
+    <span class="section-label">Section 4</span>
+    <div class="opener-content">
+      <h2>The Documentation You<br>Should Have Written</h2>
+      <div class="fragment">
+        <blockquote style="margin-top: 1em;">
+          If a senior dev wrote down how they approach architecture, git flow, and domain knowledge &mdash; that's a skill.
+        </blockquote>
+        <p style="font-size: 1.1em; margin-top: 0.8em;">
+          Working with an agent forces you to <strong>write it down</strong>.
+        </p>
+      </div>
+    </div>
+
+    <div class="journey-map">
+      <div class="journey-node past"><div class="node-circle">1</div><div class="node-label">Intro</div></div>
+      <div class="journey-node past"><div class="node-circle">2</div><div class="node-label">Basics</div></div>
+      <div class="journey-node past"><div class="node-circle">3</div><div class="node-label">Context</div></div>
+      <div class="journey-node active"><div class="node-circle">4</div><div class="node-label">Skills</div></div>
+      <div class="journey-node"><div class="node-circle">5</div><div class="node-label">Hooks</div></div>
+      <div class="journey-node"><div class="node-circle">6</div><div class="node-label">MCP</div></div>
+      <div class="journey-node"><div class="node-circle">7</div><div class="node-label">Workflows</div></div>
+      <div class="journey-node"><div class="node-circle">8</div><div class="node-label">Tips</div></div>
+      <div class="journey-node"><div class="node-circle">9</div><div class="node-label">Outlook</div></div>
+    </div>
+
+    
+  </section>
+
+  <!-- CLAUDE.md vs Skills -->
+  <section>
+    <h2>Always-On vs On-Demand</h2>
+    <div class="slide-body">
+      <table>
+        <thead>
+          <tr><th></th><th>CLAUDE.md</th><th>Skill</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Loads</strong></td><td>Once at session start</td><td>Descriptions at start, full content when invoked</td></tr>
+          <tr><td><strong>Best for</strong></td><td>"Always do X" rules</td><td>Reference docs, repeatable workflows</td></tr>
+          <tr><td><strong>Context cost</strong></td><td>Always present, drifts from attention</td><td>Fresh context at moment of action</td></tr>
+        </tbody>
+      </table>
+
+      <p class="fragment" style="margin-top: 1em;">
+        Skills load <strong>fresh context</strong> at the moment of action.
+      </p>
+    </div>
+
+    
+  </section>
+
+  <!-- 9 Skills -->
+  <section>
+    <h2>My Core Skills</h2>
+    <div class="slide-body">
+      <div style="text-align: left; max-width: 700px; margin: 0.5em auto;">
+        <p><span class="tag">/interview</span> AI interviews YOU before implementation</p>
+        <p><span class="tag">/tdd-task</span> Strict TDD: RED &rarr; GREEN &rarr; REFACTOR</p>
+        <p><span class="tag">/test</span> Run tests, report failures only</p>
+        <p><span class="tag">/commit</span> Create feature commits</p>
+      </div>
+    </div>
+    
+  </section>
+
+  <!-- Skill structure -->
+  <section>
+    <h2>8 Lines, Better Commits</h2>
+    <div class="slide-body">
+      <p style="font-family: monospace; color: #4a5568; margin-bottom: 0.3em;">.claude/skills/commit/SKILL.md</p>
+      <pre style="font-size: 1em; line-height: 1.6; padding: 1em; background: #ffffff; color: #0c1520; border-radius: 8px; font-family: 'Space Mono', monospace; white-space: pre-wrap; word-wrap: break-word;"><span class="fragment">---
+name: commit
+description: Group uncommitted changes into feature commits.
+---</span>
+<span class="fragment">1. Run `git status` and `git diff` to understand all changes
+2. Group changed files by logical feature
+3. Stage and commit each group with action-oriented message
+4. Repeat until all changes are committed</span></pre>
+    </div>
+
+    
+  </section>
+
+  <!-- Thoughtworks quote -->
+  <section>
+    <blockquote style="font-size: 1.4em; width: 90%; padding: 1.2em 1.5em;">
+      "If an AI generates code from a spec, the spec is now the highest-leverage artifact for catching errors."
+      <br><span style="font-size: 1em; font-style: normal; color: #4a5568;">&mdash; Thoughtworks, Deer Valley 2026</span>
+    </blockquote>
+    <p class="fragment" style="margin-top: 0.8em;"><strong>Rock solid specs with /interview</strong></p>
+
+    
+  </section>
+
+  <!-- /interview step-by-step: explore + first questions -->
+  <section class="terminal-slide">
+    <div class="terminal">
+      <div class="term-header">
+        <span class="mascot"> ▐▛███▜▌</span>&nbsp;&nbsp;&nbsp;<span class="version">Opus 4.6 · Claude Max</span><br>
+        <span class="mascot">▝▜█████▛▘</span><br>
+        <span class="mascot">  ▘▘ ▝▝</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="version-dim">~/PhotoQuest</span>
+      </div>
+
+      <div class="term-content">
+        <div class="term-block fragment" data-fragment-index="0">
+          <span class="term-dim">❯</span> <span class="term-dim">/interview A photo reaction game on a beamer. The manager starts a round, guests join via QR code&hellip;</span><br><br>
+          <span class="term-agent">⏺</span> Let me explore the codebase first to understand the existing architecture before interviewing you.<br><br>
+          <span class="term-agent">⏺ Explore</span><span class="term-dim">(Explore codebase architecture)</span><br>
+          <span class="term-dim">&nbsp;&nbsp;⎿ Done (53 tool uses · 104.6k tokens · 1m 47s)</span>
+        </div>
+
+        <div class="term-block fragment" data-fragment-index="1">
+          <span class="term-agent">⏺</span> Good, I have a solid understanding of the codebase. Let me start the interview.
+        </div>
+
+        <div class="term-block fragment" data-fragment-index="2">
+          <hr class="term-hr">
+          <div class="term-checkbox">← &nbsp;☐ Entry point &nbsp;☐ Photo source &nbsp;☐ Guest join &nbsp;✔ Submit &nbsp;→</div>
+          <hr class="term-hr">
+          Where does the manager find the Ranking Game?&hellip;<br>
+          1. Manager dashboard (/admin)<br>
+          <span class="option-desc">&nbsp;&nbsp;&nbsp;Add a 'Start Ranking Game' button&hellip;</span><br>
+          2. Event detail page<br>
+          <span class="option-desc">&nbsp;&nbsp;&nbsp;Add it as a new section/tab&hellip;</span><br>
+          3. Dedicated /ranking-game route<br>
+          <span class="option-desc">&nbsp;&nbsp;&nbsp;New standalone page&hellip;</span><br>
+          <span class="term-option selected">❯ 4. Dock Link in QuestComponent</span>
+          <hr class="term-hr">
+          <span class="term-dim">Enter to select · Tab/Arrow keys to navigate · Esc to cancel</span>
+        </div>
+      </div>
+
+      <div class="term-footer">
+        <div class="term-input">
+          <span class="term-prompt">❯</span>
+          <span class="fragment fade-out" data-fragment-index="0"><span class="term-cmd">/interview A photo reaction game on a beamer. The manager starts a round, guests join via QR code&hellip;</span></span>
+        </div>
+        <div class="term-statusbar">
+          <span>PhotoQuest (2026-03-26-demo-4) | Opus 4.6 (1M context) | Ctx: 3%</span>
+          <span>29564 tokens</span>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+
+  <!-- /interview step-by-step: cookie pushback question -->
+  <section class="terminal-slide">
+    <div class="terminal">
+      <div class="term-header">
+        <span class="mascot"> ▐▛███▜▌</span>&nbsp;&nbsp;&nbsp;<span class="version">Opus 4.6 · Claude Max</span><br>
+        <span class="mascot">▝▜█████▛▘</span><br>
+        <span class="mascot">  ▘▘ ▝▝</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="version-dim">~/PhotoQuest</span>
+      </div>
+
+      <div class="term-content">
+        <div class="term-block" data-fragment-index="0">
+          <hr class="term-hr">
+          <div class="term-checkbox">← &nbsp;<span class="checked">☒ Anti-cheat</span> &nbsp;☐ Undo reactions &nbsp;✔ Submit &nbsp;→</div>
+          <hr class="term-hr">
+          Security: should we prevent reaction manipulation?&hellip;<br>
+          1. Server-side budget enforcement<br>
+          <span class="option-desc">&nbsp;&nbsp;&nbsp;DB tracks reactions per guest&hellip;</span><br>
+          2. Client-side only<br>
+          <span class="option-desc">&nbsp;&nbsp;&nbsp;Track budget in JS/Alpine state&hellip;</span><br>
+          <span class="term-option selected">❯ 3. Client side with a cookie</span>
+          <hr class="term-hr">
+          <span class="term-dim">Enter to select · Tab/Arrow keys to navigate · Esc to cancel</span>
+        </div>
+
+        <div class="term-block fragment" data-fragment-index="0">
+          <hr class="term-hr">
+          <div class="term-checkbox">← &nbsp;☐ Storage model &nbsp;☐ Min photos &nbsp;✔ Submit &nbsp;→</div>
+          <hr class="term-hr">
+          Clarifying: reactions stored in the DB, but budget tracked client-side via a cookie?&hellip;<br>
+          1. DB reactions, cookie budget<br>
+          <span class="option-desc">&nbsp;&nbsp;&nbsp;Each reaction is a DB row. Budget is client-side&hellip;</span><br>
+          2. All in cookie/localStorage<br>
+          <span class="option-desc">&nbsp;&nbsp;&nbsp;Reactions stored only in browser&hellip;</span><br>
+          3. Server-side budget enforcement<br>
+          <span class="option-desc">&nbsp;&nbsp;&nbsp;Enforce budget per cookie_token&hellip;</span><br>
+          <span class="term-option selected">❯ 4. Let's do DB enforcement. Each reaction tied to event_guest row</span>
+          <hr class="term-hr">
+          <span class="term-dim">Enter to select · Tab/Arrow keys to navigate · Esc to cancel</span>
+        </div>
+      </div>
+
+      <div class="term-footer">
+        <div class="term-input"><span class="term-prompt">❯</span></div>
+        <div class="term-statusbar">
+          <span>PhotoQuest (2026-03-26-demo-2) | Opus 4.6 (1M context) | Ctx: 5%</span>
+          <span>42318 tokens</span>
+        </div>
+      </div>
+    </div>
+    
+  </section>
+
+  <!-- /interview step-by-step: ASCII wireframe mockups -->
+  <section class="terminal-slide">
+    <div class="terminal">
+      <div class="term-header">
+        <span class="mascot"> ▐▛███▜▌</span>&nbsp;&nbsp;&nbsp;<span class="version">Opus 4.6 · Claude Max</span><br>
+        <span class="mascot">▝▜█████▛▘</span><br>
+        <span class="mascot">  ▘▘ ▝▝</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="version-dim">~/PhotoQuest</span>
+      </div>
+
+      <div class="term-content">
+        <div class="term-block" data-fragment-index="0">
+          <hr class="term-hr">
+          <div class="term-checkbox">← &nbsp;☐ React UX &nbsp;☐ QR persistence &nbsp;✔ Submit &nbsp;→</div>
+          <hr class="term-hr">
+          For the guest phone photo grid: how should reaction buttons appear? As an overlay on each photo thumbnail, or in a detail view when tapping a photo?
+        </div>
+
+        <div class="term-mockup-stack">
+          <div class="term-block fragment fade-in-then-out" data-fragment-index="1">
+<pre class="term-ascii">
+<span class="term-option selected">1. Overlay on thumbnail</span>          +---------------------------------------+
+   2. Tap to enlarge + react        | +--------+ +--------+                |
+                                    | | Photo  | | Photo  |                |
+                                    | +--------+ +--------+                |
+                                    |   ❤️ 😂 😮    ❤️ 😂 😮                 |
+                                    | +--------+ +--------+                |
+                                    | | Photo  | | Photo  |                |
+                                    | +--------+ +--------+                |
+                                    |   ❤️ 😂 😮    ❤️ 😂 😮                 |
+                                    +--------------------------------------+</pre>
+          </div>
+
+          <div class="term-block fragment fade-in" data-fragment-index="2">
+<pre class="term-ascii">
+    1. Overlay on thumbnail         +--------------------------------------+
+<span class="term-option selected">  2. Tap to enlarge + react</span>      | +------------------+                  |
+                                    | |                  |                 |
+                                    | |   Photo (big)    |                 |
+                                    | |                  |                 |
+                                    | +------------------+                 |
+                                    |    [❤️]  [😂]  [😮]                   |
+                                    |    &lt; prev | next &gt;                   |
+                                    +--------------------------------------+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="term-footer">
+        <div class="term-input"><span class="term-prompt">❯</span></div>
+        <div class="term-statusbar">
+          <span>PhotoQuest (2026-03-26-demo-2) | Opus 4.6 (1M context) | Ctx: 5%</span>
+          <span>45102 tokens</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="fragment" style="position: absolute; bottom: 18%; left: 50%; transform: translateX(-50%); font-size: 1.4em; background: rgba(255, 255, 255, 0.95); padding: 0.6em 2em; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.2); margin: 0; z-index: 10; white-space: nowrap;">
+      8 rounds &rarr; <strong>20+ design decisions</strong> &rarr; 171-line spec
+    </p>
+
+    
+  </section>
+
+  <!-- How I Review a Spec -->
+  <section>
+    <h2>How I Review a Spec</h2>
+    <div class="slide-body">
+      <pre style="font-size: 1em;"><code class="language-markdown">## Reactions
+Each guest gets 3 ❤️ + 3 😂 + 3 😮
+% confirm this is the correct cookie name
+% can we prompt user to enable fullscreen?</code></pre>
+
+      <p class="fragment" style="margin-top: 1em;">
+        Claude suggested <strong>10 changes</strong>
+      </p>
+      <p class="fragment" style="margin-top: 1em;">
+        Forced to justify: <span class="accent">8 were unnecessary</span>.
+      </p>
+
+      <p class="fragment" style="margin-top: 0.8em;">
+        You're still the engineer. <strong>Understand each decision.</strong>
+      </p>
+    </div>
+
+    
+  </section>
+
+  <!-- Missing Nav Link Story -->
+  <section>
+    <h2>The Missing Nav Link</h2>
+    <div class="slide-body">
+      <p style="color: #4a5568;">7 phases implemented, 17 tests passing</p>
+
+      <p class="fragment" style="margin-top: 1em; font-size: 1.2em;">
+        But the feature was <strong>unreachable</strong>.
+      </p>
+
+      <p class="fragment" style="margin-top: 1em;">
+        Nobody asked: <em>"How does the user get here?"</em>
+      </p>
+    </div>
+
+    
+  </section>
+
+  <!-- Skill Evolution -->
+  <section>
+    <h2>Fix the Process, Not Just the Bug</h2>
+    <p class="slide-subtitle">The /interview skill across 3 iterations</p>
+    <div class="slide-body">
+      <div style="text-align: left; max-width: 900px; margin: 0.5em auto;">
+        <p><span class="tag">Iteration 2</span> Missed nav links<br>
+          <span class="accent">&rarr; Added: mandatory topics + user stories</span></p>
+
+        <p class="fragment"><span class="tag">Iteration 3</span> Dead-end screens<br>
+          <span class="accent">&rarr; Added: state transitions + terminal states</span></p>
+
+        <p class="fragment"><span class="tag">Iteration 4</span> 26 user stories<br>
+          <span class="accent">&rarr; Zero missing entry points</span></p>
+      </div>
+    </div>
+
+    
+  </section>
+
+  <!-- SKILL.md Before / After -->
+  <section>
+    <h2>Upgrading /interview</h2>
+    <div class="slide-body">
+      <div style="display: flex; gap: 1.5em; max-width: 1200px; margin: 0.5em auto;">
+      <div style="flex: 1; text-align: left;">
+        <p style="font-family: monospace; color: #4a5568; margin-bottom: 0.3em; font-size: 1em;">SKILL.md Iteration 2</p>
+        <pre style="font-size: 0.7em; line-height: 1.5; padding: 0.8em; background: #f5f5f5; color: #0c1520; border-radius: 8px; font-family: 'Space Mono', monospace; white-space: pre-wrap; word-wrap: break-word; margin: 0;">Interview me relentlessly
+about every aspect&hellip;
+
+Use AskUserQuestion tool to
+ask about anything&hellip;
+
+Explore the codebase for
+code questions.
+
+Write the spec to a file.</pre>
+      </div>
+      <div class="fragment" style="flex: 1; text-align: left;">
+        <p style="font-family: monospace; color: #4a5568; margin-bottom: 0.3em; font-size: 1em;">SKILL.md Iteration 4</p>
+        <pre style="font-size: 0.7em; line-height: 1.5; padding: 0.8em; background: #f0f9f0; color: #0c1520; border-radius: 8px; font-family: 'Space Mono', monospace; white-space: pre-wrap; word-wrap: break-word; margin: 0;">## Mandatory interview topics
+
+- Entry points
+- User journey start-to-finish
+- Edge cases
+- State transitions
+- Terminal states &amp; dead ends
+
+## Output format
+
+Spec MUST end with User Stories.
+Navigation stories come FIRST.</pre>
+      </div>
+      </div>
+    </div>
+
+    
+  </section>
+
+  <!-- jvmskills.com -->
+  <section>
+    <h2>Filling the JVM Skill Gap</h2>
+    <div class="slide-body">
+      <p class="accent" style="font-size: 1.8em" >jvmskills.com</p>
+
+      <ul style="margin-top: 1em;">
+        <li>Curated AI coding skills for the JVM ecosystem</li>
+        <li>Each skill teaches what Claude doesn't know</li>
+        <li>Expert-authored, community-driven</li>
+        <li>Spring Boot, jOOQ, PostgreSQL, Kotlin, testing</li>
+      </ul>
+    </div>
+    
+  </section>
+</section><!-- ============================================================ -->
+<!-- SECTION 5: CLOSING THE LOOP — HOOKS -->
+<!-- ============================================================ -->
+
+<section>
+  <section class="section-opener">
+    <span class="section-label">Section 5</span>
+    <div class="opener-content">
+      <h2>The Rules That Actually Stick</h2>
+      <p style="font-size: 1em;">Hooks &mdash; deterministic in a non-deterministic world</p>
+    </div>
+
+    <div class="journey-map">
+      <div class="journey-node past"><div class="node-circle">1</div><div class="node-label">Intro</div></div>
+      <div class="journey-node past"><div class="node-circle">2</div><div class="node-label">Basics</div></div>
+      <div class="journey-node past"><div class="node-circle">3</div><div class="node-label">Context</div></div>
+      <div class="journey-node past"><div class="node-circle">4</div><div class="node-label">Skills</div></div>
+      <div class="journey-node active"><div class="node-circle">5</div><div class="node-label">Hooks</div></div>
+      <div class="journey-node"><div class="node-circle">6</div><div class="node-label">MCP</div></div>
+      <div class="journey-node"><div class="node-circle">7</div><div class="node-label">Workflows</div></div>
+      <div class="journey-node"><div class="node-circle">8</div><div class="node-label">Tips</div></div>
+      <div class="journey-node"><div class="node-circle">9</div><div class="node-label">Outlook</div></div>
+    </div>
+
+    
+  </section>
+
+  <!-- What Are Hooks? -->
+  <section>
+    <h2>Fire on Every Tool Call</h2>
+    <p class="slide-subtitle">Shell commands at lifecycle events &mdash; the ones I use</p>
+    <div class="slide-body">
+      <div style="display: flex; justify-content: center; align-items: center; gap: 0.5em; margin: 1.2em 0; flex-wrap: nowrap;">
+        <span class="tag green" style="white-space: nowrap;">SessionStart</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="tag" style="white-space: nowrap;">PreToolUse</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span style="font-size: 0.8em; color: #4a5568; white-space: nowrap;">(tool runs)</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="tag blue" style="white-space: nowrap;">PostToolUse</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="tag" style="white-space: nowrap;">SessionEnd</span>
+      </div>
+
+      <div class="fragment" style="display: flex; justify-content: center; gap: 4em; margin-top: 1.2em; align-items: flex-start;">
+        <div>
+          <p style="font-size: 1em; margin-bottom: 0.4em;"><strong>4 hook types</strong></p>
+          <ul style="font-size: 1em; list-style: none; padding: 0; margin: 0;">
+            <li><code>command</code> &mdash; shell script</li>
+            <li><code>http</code> &mdash; POST to a URL</li>
+            <li><code>prompt</code> &mdash; single-turn LLM eval</li>
+            <li><code>agent</code> &mdash; multi-turn verification</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    
+  </section>
+
+  <!-- Example Hooks I Use -->
+  <section>
+    <h2>Hooks I Use</h2>
+    <div class="slide-body">
+      <table style="font-size: 0.85em; width: 100%; border-collapse: collapse; margin-top: 1em;">
+      <thead>
+        <tr style="border-bottom: 2px solid #4a5568;">
+          <th style="text-align: left; padding: 0.4em 0.6em; color: #4a5568; font-weight: 600;">Event</th>
+          <th style="text-align: left; padding: 0.4em 0.6em; color: #4a5568; font-weight: 600;">Matcher</th>
+          <th style="text-align: left; padding: 0.4em 0.6em; color: #4a5568; font-weight: 600;">Hook</th>
+          <th style="text-align: left; padding: 0.4em 0.6em; color: #4a5568; font-weight: 600;">Does</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="padding: 0.4em 0.6em;" rowspan="2"><span class="tag" style="font-size:0.85em;">PreToolUse</span></td>
+          <td style="padding: 0.4em 0.6em;"><code>Bash</code></td>
+          <td style="padding: 0.4em 0.6em;"><code>git-guardrails.sh</code></td>
+          <td style="padding: 0.4em 0.6em; color: #4a5568;">Block dangerous git commands</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="padding: 0.4em 0.6em;"><code>Bash</code></td>
+          <td style="padding: 0.4em 0.6em;"><code>pre-commit-gate.sh</code></td>
+          <td style="padding: 0.4em 0.6em; color: #4a5568;">Block commit if lint or compile fails</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="padding: 0.4em 0.6em;"><span class="tag blue" style="font-size:0.85em;">PostToolUse</span></td>
+          <td style="padding: 0.4em 0.6em;"><code>Edit|Write</code></td>
+          <td style="padding: 0.4em 0.6em;"><code>post-edit-lint.sh</code></td>
+          <td style="padding: 0.4em 0.6em; color: #4a5568;">Feed lint violations back after every edit</td>
+        </tr>
+        <tr>
+          <td style="padding: 0.4em 0.6em;"><span class="tag" style="font-size:0.85em;">SessionEnd</span></td>
+          <td style="padding: 0.4em 0.6em; color: #718096;">—</td>
+          <td style="padding: 0.4em 0.6em;"><code>stop-uncommitted-check.sh</code></td>
+          <td style="padding: 0.4em 0.6em; color: #4a5568;">Warn on uncommitted work</td>
+        </tr>
+      </tbody>
+      </table>
+    </div>
+
+    
+  </section>
+
+  <!-- PreToolUse — Block Before It Happens -->
+  <section>
+    <h2>Pre Tool Use &mdash; Block Before It Happens</h2>
+    <p class="slide-subtitle">Exit 2 = hard block. Claude cannot proceed.</p>
+    <div class="slide-body">
+      <pre style="font-size: 0.85em; padding: 0.7em;"><code class="language-bash" data-trim># git-guardrails.sh
+DANGEROUS_PATTERNS=(
+  "git push" "git reset --hard"
+  "git clean -fd" "git branch -D"
+  "git checkout \." "git restore \."
+)
+
+for pattern in "${DANGEROUS_PATTERNS[@]}"; do
+  if echo "$COMMAND" | grep -qE "$pattern"; then
+    echo "BLOCKED: '$COMMAND' matches '$pattern'" >&2
+    exit 2
+  fi
+done</code></pre>
+    </div>
+
+    
+  </section>
+
+  <!-- Pre Tool Use — Enforce Workflow Conventions -->
+  <section>
+    <h2>Pre Tool Use &mdash; Enforce Conventions</h2>
+    <div class="slide-body">
+      <pre style="font-size: 1em;"><code class="language-bash" data-trim>TEST_PATTERNS=(
+  "gradlew test " "gradlew test$"
+  "gradlew.*--tests"
+)
+
+for pattern in "${TEST_PATTERNS[@]}"; do
+  if echo "$COMMAND" | grep -qE -- "$pattern"; then
+    deny "Use the /test skill instead"
+  fi
+done</code></pre>
+
+      <pre class="fragment" style="font-size: 1em; margin-top: 0.5em;"><code class="language-text" data-trim>⏺ Bash(git stash && ./gradlew test --tests "*LoginTest")
+  ⎿  BLOCKED: Use the /test skill instead of
+     running gradlew test directly</code></pre>
+    </div>
+
+    
+  </section>
+
+  <!-- Post Tool Use — The Self-Correction Loop -->
+  <section>
+    <h2>Post Tool Use &mdash; The Self-Correction Loop</h2>
+    <div class="slide-body">
+      <pre style="font-size: 1em;"><code class="language-text">I need to serialize participants to JSON.
+
+⏺ Added 1 line
+    3 + import com.fasterxml.jackson.databind.ObjectMapper</code></pre>
+
+      <pre class="fragment" style="font-size: 1em;"><code class="language-yaml"># detekt.yml
+ForbiddenImport:
+  imports:
+    - value: 'com.fasterxml.jackson.databind.ObjectMapper'
+      reason: 'Use tools.jackson.databind.json.JsonMapper
+        instead (Jackson 3)'</code></pre>
+
+      <p class="fragment" style="margin-top: 0.8em;"><strong>That mistake can <span class="accent">never happen again</span>.</strong></p>
+
+      <p class="fragment" style="margin-top: 0.8em;">
+        Anything you can put in a hook &mdash; <strong>put it in a hook.</strong>
+      </p>
+    </div>
+
+    
+  </section>
+
+</section>
+<!-- ============================================================ -->
+<!-- SECTION 6: HOW DO I CONNECT EXTERNAL TOOLS? -->
+<!-- ============================================================ -->
+
+<section>
+  <section class="section-opener">
+    <span class="section-label">Section 6</span>
+    <div class="opener-content">
+      <h2>Beyond the Terminal</h2>
+      <p style="font-size: 1em;">MCP &mdash; Model Context Protocol</p>
+    </div>
+
+    <div class="journey-map">
+      <div class="journey-node past"><div class="node-circle">1</div><div class="node-label">Intro</div></div>
+      <div class="journey-node past"><div class="node-circle">2</div><div class="node-label">Basics</div></div>
+      <div class="journey-node past"><div class="node-circle">3</div><div class="node-label">Context</div></div>
+      <div class="journey-node past"><div class="node-circle">4</div><div class="node-label">Skills</div></div>
+      <div class="journey-node past"><div class="node-circle">5</div><div class="node-label">Hooks</div></div>
+      <div class="journey-node active"><div class="node-circle">6</div><div class="node-label">MCP</div></div>
+      <div class="journey-node"><div class="node-circle">7</div><div class="node-label">Workflows</div></div>
+      <div class="journey-node"><div class="node-circle">8</div><div class="node-label">Tips</div></div>
+      <div class="journey-node"><div class="node-circle">9</div><div class="node-label">Outlook</div></div>
+    </div>
+
+    
+  </section>
+
+  <!-- What is MCP -->
+  <section>
+    <h2>MCP: One Protocol, Every Tool</h2>
+    <div class="slide-body">
+      <p style="font-size: 1em;">An open standard for connecting AI tools to external data sources.</p>
+
+      <table style="margin-top: 1em;">
+      <thead>
+        <tr><th>Category</th><th>Example</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Error monitoring</td><td>Sentry</td></tr>
+        <tr><td>Issue tracking</td><td>Linear</td></tr>
+        <tr><td>Documentation</td><td>Library docs</td></tr>
+        <tr><td>Communication</td><td>Slack</td></tr>
+        <tr><td>IDE integration</td><td>JetBrains</td></tr>
+        <tr><td>Custom internal tools</td><td>Your own</td></tr>
+      </tbody>
+      </table>
+    </div>
+    
+  </section>
+
+  <!-- My MCP Servers -->
+  <section>
+    <h2>What's Plugged In</h2>
+    <div class="slide-body">
+      <table>
+        <thead>
+          <tr><th>Server</th><th>What it gives me</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>IntelliJ</strong></td><td>Reformat, Rename, Run Configuration</td></tr>
+          <tr><td><strong>Linear</strong></td><td>Issue tracking</td></tr>
+          <tr><td><strong>Sentry</strong></td><td>Error investigation</td></tr>
+          <tr><td><strong>JavaDoc Central</strong></td><td>Up-to-date JVM library docs</td></tr>
+          <tr><td><strong>Spring AI</strong></td><td>Build your own MCP server</td></tr>
+        </tbody>
+      </table>
+    </div>
+    
+  </section>
+
+  <!-- IntelliJ MCP Deep Dive -->
+  <section>
+    <h2>Agent Developer Experience</h2>
+    <div class="slide-body">
+      <div class="two-col" style="margin-top: 1em;">
+      <div class="highlight-box fragment">
+        <div class="col-header red">Without MCP</div>
+        <ul style="font-size: 1em;">
+          <li>Reformat with <code>sed</code></li>
+          <li>Fix imports manually</li>
+          <li>Start via Gradle</li>
+        </ul>
+      </div>
+      <div class="highlight-box fragment">
+        <div class="col-header green">With IntelliJ MCP</div>
+        <ul style="font-size: 1em;">
+          <li><code>reformat_file</code></li>
+          <li>Auto import optimization</li>
+          <li><code>execute_run_configuration</code></li>
+        </ul>
+      </div>
+    </div>
+
+      <p class="fragment" style="margin-top: 1em;">
+        The IDE becomes an <strong>API</strong> that the agent calls.
+      </p>
+      <p class="fragment" style="margin-top: 0.5em;">
+        <strong>MCP Steroid</strong> — the agent is the user, not the developer
+      </p>
+    </div>
+    
+  </section>
+
+  <!-- CLAUDE.md rules for MCP -->
+  <section>
+    <h2>Wiring It Up</h2>
+    <div class="slide-body">
+      <div class="fragment">
+        <p style="font-size: 1em; text-align: left;"><strong>CLAUDE.md rule</strong></p>
+        <pre style="font-size: 1em;"><code class="nohighlight" data-trim>Use mcp__jetbrains__reformat_file for formatting after editing
+      </code></pre>
+      </div>
+
+      <div class="fragment">
+        <p style="font-size: 1em; text-align: left;"><strong>/restart skill</strong> — MCP wrapped in a reliable workflow</p>
+        <pre style="font-size: 1em;"><code class="nohighlight" data-trim>
+1. Stop old app:    restart-app.sh stop
+2. Start via MCP:   execute_run_configuration()
+3. Wait for ready:  restart-app.sh wait
+4. Check errors:    post-bash-log-check.sh
+      </code></pre>
+      </div>
+    </div>
+
+    
+  </section>
+</section>
+<!-- ============================================================ -->
+<!-- SECTION 7: THE PATTERNS — FROM HUMAN-IN-THE-LOOP TO RALPH -->
+<!-- ============================================================ -->
+
+<section>
+  <section class="section-opener">
+    <span class="section-label">Section 7</span>
+    <div class="opener-content">
+      <h2>From Vibe Coding to<br>Agentic Engineering</h2>
+      <p style="color: #4a5568;">
+        Not every task needs the same workflow.
+      </p>
+    </div>
+
+    <div class="journey-map">
+      <div class="journey-node past"><div class="node-circle">1</div><div class="node-label">Intro</div></div>
+      <div class="journey-node past"><div class="node-circle">2</div><div class="node-label">Basics</div></div>
+      <div class="journey-node past"><div class="node-circle">3</div><div class="node-label">Context</div></div>
+      <div class="journey-node past"><div class="node-circle">4</div><div class="node-label">Skills</div></div>
+      <div class="journey-node past"><div class="node-circle">5</div><div class="node-label">Hooks</div></div>
+      <div class="journey-node past"><div class="node-circle">6</div><div class="node-label">MCP</div></div>
+      <div class="journey-node active"><div class="node-circle">7</div><div class="node-label">Workflows</div></div>
+      <div class="journey-node"><div class="node-circle">8</div><div class="node-label">Tips</div></div>
+      <div class="journey-node"><div class="node-circle">9</div><div class="node-label">Outlook</div></div>
+    </div>
+
+    
+  </section>
+
+  <!-- Level 1 -->
+  <section>
+    <h2>Level 1: Human in the Loop</h2>
+    <div class="slide-body">
+      <ul>
+      <li>Describe, watch, redirect &mdash; real-time collaboration</li>
+      <li>Most interactive mode &mdash; you stay in control</li>
+      </ul>
+
+      <p class="fragment" style="margin-top: 1em;">
+        <strong>Scope grows. Plan before you type.</strong>
+      </p>
+    </div>
+    
+  </section>
+
+  <!-- Level 2 -->
+  <section>
+    <h2>Level 2: Built-in Plan Mode</h2>
+    <div class="slide-body">
+      <ul>
+        <li>Claude self-invokes or you trigger with <strong>Shift+Tab</strong></li>
+        <li>Explore, prototype, iterate &mdash; no upfront spec needed</li>
+      </ul>
+
+      <p class="fragment" style="margin-top: 1em;">
+        <strong>When Claude keeps guessing wrong.<br> Requirements only exist in your head.</strong>
+      </p>
+    </div>
+    
+  </section>
+
+  <!-- Level 3 -->
+  <section>
+    <h2>Level 3: Spec-Driven Development</h2>
+    <div class="slide-body">
+      <ul>
+        <li>Drive the design before code exists</li>
+        <li>Pair on the spec &mdash; with domain experts, UX, product</li>
+      </ul>
+
+      <p class="fragment" style="margin-top: 1em;">
+        <strong>When the &ldquo;what&rdquo; isn&rsquo;t obvious &mdash; only the &ldquo;why&rdquo;</strong>
+      </p>
+    </div>
+    
+  </section>
+
+  <!-- Progressive Demo: Iteration 1 vs 2 -->
+  <section>
+    <h2>Same Teammate, Better Onboarding</h2>
+    <p class="slide-subtitle">Iteration 1 vs Iteration 2</p>
+    <div class="slide-body">
+      <table style="font-size: 0.65em; width: 95%; margin: 0.5em auto; border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th style="text-align: left; padding: 0.4em 0.6em; border-bottom: 2px solid #242f27;"></th>
+          <th style="text-align: center; padding: 0.4em 0.6em; border-bottom: 2px solid #242f27;"><span class="red">Iteration 1 (no config)</span></th>
+          <th style="text-align: center; padding: 0.4em 0.6em; border-bottom: 2px solid #242f27;"><span class="green">Iteration 2 (full setup)</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding: 0.4em 0.6em; border-bottom: 1px solid #e2e8f0;"><strong>Tests</strong></td>
+          <td style="text-align: center; padding: 0.4em 0.6em; border-bottom: 1px solid #e2e8f0;">0</td>
+          <td style="text-align: center; padding: 0.4em 0.6em; border-bottom: 1px solid #e2e8f0;"><strong>37</strong></td>
+        </tr>
+        <tr>
+          <td style="padding: 0.4em 0.6em; border-bottom: 1px solid #e2e8f0;"><strong>Design decisions</strong></td>
+          <td style="text-align: center; padding: 0.4em 0.6em; border-bottom: 1px solid #e2e8f0;">0 (Claude guessed)</td>
+          <td style="text-align: center; padding: 0.4em 0.6em; border-bottom: 1px solid #e2e8f0;"><strong>20</strong> (interview)</td>
+        </tr>
+        <tr>
+          <td style="padding: 0.4em 0.6em; border-bottom: 1px solid #e2e8f0;"><strong>CLAUDE.md rules added</strong></td>
+          <td style="text-align: center; padding: 0.4em 0.6em; border-bottom: 1px solid #e2e8f0;">0</td>
+          <td style="text-align: center; padding: 0.4em 0.6em; border-bottom: 1px solid #e2e8f0;"><strong>8</strong> during session</td>
+        </tr>
+        <tr>
+          <td style="padding: 0.4em 0.6em;"><strong>Side-terminal sessions</strong></td>
+          <td style="text-align: center; padding: 0.4em 0.6em;">0</td>
+          <td style="text-align: center; padding: 0.4em 0.6em;"><strong>3</strong></td>
+        </tr>
+      </tbody>
+      </table>
+    </div>
+    
+  </section>
+
+  <!-- Level 4 -->
+  <section>
+    <h2>Level 4: The Drift Problem</h2>
+    <div class="slide-body">
+      <p>Plans work &mdash; until the context window doesn&rsquo;t.</p>
+
+      <div class="fragment" style="margin: 1em auto; display: flex; flex-direction: column; align-items: center;">
+      <style>
+        .drift-row { display: flex; align-items: center; margin: 0.6em 0; }
+        .drift-label { width: 300px; text-align: right; padding-right: 1.2em; font-size: 0.75em; font-family: 'Space Mono', monospace; flex-shrink: 0; }
+        .drift-dots { display: flex; gap: 0.8em; }
+        .drift-dot { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.5em; font-weight: 700; color: #fff; font-family: 'Space Mono', monospace; }
+        .drift-dot.green { background: #52ad3c; }
+        .drift-dot.red { background: #eb3b5a; }
+        .drift-legend { font-size: 0.65em; color: #4a5568; padding-left: 1.2em; font-family: 'Space Mono', monospace; white-space: nowrap; }
+        .drift-phase-label { width: 36px; text-align: center; font-size: 0.5em; color: #4a5568; font-family: 'Space Mono', monospace; }
+      </style>
+      <div>
+        <div class="drift-row" style="margin-bottom: 0.2em;">
+          <div class="drift-label"></div>
+          <div class="drift-dots">
+            <div class="drift-phase-label">P1</div>
+            <div class="drift-phase-label">P2</div>
+            <div class="drift-phase-label">P3</div>
+            <div class="drift-phase-label">P4</div>
+            <div class="drift-phase-label">P5</div>
+            <div class="drift-phase-label">P6</div>
+            <div class="drift-phase-label">P7</div>
+          </div>
+          <div class="drift-legend"></div>
+        </div>
+        <div class="drift-row">
+          <div class="drift-label"><code>/frontend-design</code></div>
+          <div class="drift-dots">
+            <div class="drift-dot green">&#10003;</div>
+            <div class="drift-dot red">&#10005;</div>
+            <div class="drift-dot red">&#10005;</div>
+            <div class="drift-dot red">&#10005;</div>
+            <div class="drift-dot red">&#10005;</div>
+            <div class="drift-dot red">&#10005;</div>
+            <div class="drift-dot red">&#10005;</div>
+          </div>
+          <div class="drift-legend">Dropped after Phase 1</div>
+        </div>
+        <div class="drift-row">
+          <div class="drift-label"><code>agent-browser</code></div>
+          <div class="drift-dots">
+            <div class="drift-dot green">&#10003;</div>
+            <div class="drift-dot green">&#10003;</div>
+            <div class="drift-dot green">&#10003;</div>
+            <div class="drift-dot red">&#10005;</div>
+            <div class="drift-dot red">&#10005;</div>
+            <div class="drift-dot red">&#10005;</div>
+            <div class="drift-dot red">&#10005;</div>
+          </div>
+          <div class="drift-legend">Dropped after Phase 3</div>
+        </div>
+        <div class="drift-row">
+          <div class="drift-label"><code>/simplify</code></div>
+          <div class="drift-dots">
+            <div class="drift-dot red">&#10005;</div>
+            <div class="drift-dot red">&#10005;</div>
+            <div class="drift-dot red">&#10005;</div>
+            <div class="drift-dot red">&#10005;</div>
+            <div class="drift-dot red">&#10005;</div>
+            <div class="drift-dot red">&#10005;</div>
+            <div class="drift-dot red">&#10005;</div>
+          </div>
+          <div class="drift-legend">Never used</div>
+        </div>
+      </div>
+    </div>
+      <p class="fragment" style="margin-top: 1em;">
+        <strong>The agent isn&rsquo;t a deterministic machine</strong>
+      </p>
+    </div>
+    
+  </section>
+
+  <!-- Ralph intro -->
+  <section>
+    <video data-autoplay loop muted playsinline style="max-height: 70vh; border-radius: 10px;">
+      <source src="assets/ralph-loop.mp4" type="video/mp4">
+    </video>
+    
+  </section>
+
+  <!-- Level 5: The Ralph Loop -->
+  <section>
+    <h2>Level 5: The Ralph Loop</h2>
+    <div class="slide-body">
+      <p>One <strong>fresh</strong> agent per phase. No drift.</p>
+
+      <p style="margin-top: 0.8em; font-size: 0.9em; white-space: nowrap;">
+        <span class="tag">Interview</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="tag">Spec</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="tag">Plan</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="tag green">Phase 1 Agent</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="tag green">Phase 2 Agent</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="accent">...</span>
+      </p>
+
+      <blockquote class="fragment" style="margin-top: 1.2em;">
+        "The day shift is thinking, <br>the night shift is Claude implementing"
+        <br><span style="color: #4a5568;">&mdash; Matt Pocock</span>
+      </blockquote>
+    </div>
+    
+  </section>
+
+  <!-- Task List as enforcement -->
+  <section>
+    <h2>From Checklist to Contract</h2>
+    <div class="slide-body">
+      <div class="two-col" style="margin-top: 1em;">
+      <div class="highlight-box">
+        <div class="col-header">Iteration 5: Flat markdown checklist</div>
+        <pre style="font-size: 0.6em; width: 100%; margin: 0.3em 0;"><code class="nohighlight">- [ ] RED: failing test
+- [ ] GREEN: implement</code></pre>
+        <p style="font-size: 0.9em;">Claude ticks boxes in prose. No enforcement.</p>
+        <p style="font-size: 0.9em;"><strong>39 tests.</strong></p>
+      </div>
+      <div class="highlight-box fragment">
+        <div class="col-header green">Iteration 7: TodoWrite tool</div>
+        <pre style="font-size: 0.6em; width: 100%; margin: 0.3em 0;"><code class="nohighlight">TodoWrite([
+  {content: "RED: failing test"},
+  {content: "GREEN: implement"}
+])</code></pre>
+        <p style="font-size: 0.9em;">Every task is tracked state.</p>
+        <p style="font-size: 0.9em;"><strong>60 tests.</strong></p>
+      </div>
+    </div>
+
+      <p class="fragment accent" style="margin-top: 1em;">Instructions become <strong>tracked state</strong>.</p>
+    </div>
+    
+  </section>
+
+  <!-- Get a Second Opinion -->
+  <section>
+    <h2>Get a Second Opinion</h2>
+    <div class="slide-body">
+      <p style="font-size: 0.85em; color: #4a5568; margin-bottom: 0.5em;">Same branch, same prompt &mdash; two reviewers.</p>
+      <div class="two-col" style="margin-top: 1em;">
+      <div class="highlight-box fragment">
+        <div class="col-header">Claude found</div>
+        <ul style="font-size: 0.9em; text-align: left; margin: 0.4em 0 0 1em;">
+          <li>Timer hangs if beamer tab closes</li>
+          <li>Guest never redirected on finish</li>
+          <li>Race condition in budget check</li>
+        </ul>
+      </div>
+      <div class="highlight-box fragment">
+        <div class="col-header green">Codex found</div>
+        <ul style="font-size: 0.9em; text-align: left; margin: 0.4em 0 0 1em;">
+          <li>Manager controls exposed to guests</li>
+          <li>Script injection in lobby guest list</li>
+          <li>Race condition in budget check</li>
+        </ul>
+      </div>
+    </div>
+
+      <p class="fragment accent" style="margin-top: 1em;">
+        Different models. <strong>Different blind spots.</strong>
+      </p>
+    </div>
+
+    
+  </section>
+
+
+</section>
+<!-- ============================================================ -->
+<!-- SECTION 8: TIPS & TOOLS                                      -->
+<!-- ============================================================ -->
+
+<section>
+  <section class="section-opener">
+    <span class="section-label">Section 8</span>
+    <div class="opener-content">
+      <h2>The Tools Behind the Workflow</h2>
+    </div>
+
+    <div class="journey-map">
+      <div class="journey-node past"><div class="node-circle">1</div><div class="node-label">Intro</div></div>
+      <div class="journey-node past"><div class="node-circle">2</div><div class="node-label">Basics</div></div>
+      <div class="journey-node past"><div class="node-circle">3</div><div class="node-label">Context</div></div>
+      <div class="journey-node past"><div class="node-circle">4</div><div class="node-label">Skills</div></div>
+      <div class="journey-node past"><div class="node-circle">5</div><div class="node-label">Hooks</div></div>
+      <div class="journey-node past"><div class="node-circle">6</div><div class="node-label">MCP</div></div>
+      <div class="journey-node past"><div class="node-circle">7</div><div class="node-label">Workflows</div></div>
+      <div class="journey-node active"><div class="node-circle">8</div><div class="node-label">Tips</div></div>
+      <div class="journey-node"><div class="node-circle">9</div><div class="node-label">Outlook</div></div>
+    </div>
+
+    
+  </section>
+
+  <!-- The Sandbox -->
+  <section>
+    <h2>Contain the Blast Radius</h2>
+    <p class="slide-subtitle">/sandbox and Docker Sandboxes</p>
+    <div class="slide-body">
+      <div class="two-col" style="margin-top: 1em;">
+        <div class="highlight-box">
+          <div class="col-header"><code>/sandbox</code></div>
+          <p style="font-size: 0.95em;"><strong>Filesystem + network</strong> fenced at the OS level</p>
+        </div>
+        <div class="highlight-box fragment">
+          <div class="col-header">Docker sandboxes</div>
+          <p style="font-size: 0.95em;"><strong>microVM isolation</strong> &mdash; disposable, survives a rogue agent</p>
+        </div>
+      </div>
+    </div>
+
+    
+  </section>
+
+  <!-- Talk to Claude -->
+  <section>
+    <h2>Talk to Claude</h2>
+    <p class="slide-subtitle">handy.computer &mdash; speech-to-text</p>
+    <div class="slide-body">
+      <div style="display: flex; align-items: flex-start; gap: 1em;">
+        <img src="assets/handy-mascot.svg" alt="Handy mascot" style="height: 8em; flex-shrink: 0;">
+        <div>
+          <ul style="font-size: 0.95em;">
+            <li><strong>Open source, local, unlimited</strong></li>
+            <li class="fragment"><strong>Voice is faster</strong></li>
+            <li class="fragment"><strong>Extracts the intent</strong></li>
+            <li class="fragment"><strong>Speaking exposes your reasoning</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    
+  </section>
+
+  <!-- Worktrunk — Parallel Agents -->
+  <section>
+    <h2>Three Agents, Zero Conflicts</h2>
+    <p class="slide-subtitle">Worktrunk &mdash; git worktrees for parallel AI agents</p>
+    <div class="slide-body">
+      <table class="fragment" style="font-size: 1em; width: 70%; margin: 1em auto; border-collapse: collapse;">
+        <tbody>
+          <tr><td style="padding: 0.35em 0.8em; text-align: right;"><span class="accent">branch</span></td><td style="padding: 0.35em 0.8em; color: #4a5568;">new git branch</td></tr>
+          <tr><td style="padding: 0.35em 0.8em; text-align: right;"><span class="accent">worktree</span></td><td style="padding: 0.35em 0.8em; color: #4a5568;">isolated working dir</td></tr>
+          <tr><td style="padding: 0.35em 0.8em; text-align: right;"><span class="accent">Postgres</span></td><td style="padding: 0.35em 0.8em; color: #4a5568;">dedicated instance</td></tr>
+          <tr><td style="padding: 0.35em 0.8em; text-align: right;"><span class="accent">LocalStack</span></td><td style="padding: 0.35em 0.8em; color: #4a5568;">dedicated S3 + email</td></tr>
+          <tr><td style="padding: 0.35em 0.8em; text-align: right;"><span class="accent">IntelliJ</span></td><td style="padding: 0.35em 0.8em; color: #4a5568;">opens on this branch</td></tr>
+          <tr><td style="padding: 0.35em 0.8em; text-align: right;"><span class="accent">Claude</span></td><td style="padding: 0.35em 0.8em; color: #4a5568;">runs in this shell</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    
+  </section>
+
+  <!-- /rebase-commit -->
+  <section>
+    <h2>Clean History From Messy Sessions</h2>
+    <p class="slide-subtitle">/rebase-commit</p>
+    <div class="slide-body">
+      <div class="two-col" style="margin-top: 1em;">
+        <div class="highlight-box" style="border-left-color: #eb3b5a;">
+          <div class="col-header red">46 debugging commits</div>
+          <p style="font-size: 0.95em;">fix compile, fix again, revert, retry&hellip;</p>
+        </div>
+        <div class="highlight-box">
+          <div class="col-header green">10 feature commits</div>
+          <p style="font-size: 0.95em;">Each with its feature + tests, independently reviewable</p>
+        </div>
+      </div>
+
+      <p class="fragment" style="margin-top: 1em;">
+        Each commit contains a <strong>feature and its tests</strong>
+      </p>
+    </div>
+
+    
+  </section>
+
+</section>
+<!-- ============================================================ -->
+<!-- SECTION 9: OUTLOOK & CLOSING -->
+<!-- ============================================================ -->
+
+<section>
+  <!-- Section Opener -->
+  <section class="section-opener">
+    <span class="section-label">Section 9</span>
+    <div class="opener-content">
+      <h2>Your New Job</h2>
+    </div>
+
+    <div class="journey-map">
+      <div class="journey-node past"><div class="node-circle">1</div><div class="node-label">Intro</div></div>
+      <div class="journey-node past"><div class="node-circle">2</div><div class="node-label">Basics</div></div>
+      <div class="journey-node past"><div class="node-circle">3</div><div class="node-label">Context</div></div>
+      <div class="journey-node past"><div class="node-circle">4</div><div class="node-label">Skills</div></div>
+      <div class="journey-node past"><div class="node-circle">5</div><div class="node-label">Hooks</div></div>
+      <div class="journey-node past"><div class="node-circle">6</div><div class="node-label">MCP</div></div>
+      <div class="journey-node past"><div class="node-circle">7</div><div class="node-label">Workflows</div></div>
+      <div class="journey-node past"><div class="node-circle">8</div><div class="node-label">Tips</div></div>
+      <div class="journey-node active"><div class="node-circle">9</div><div class="node-label">Outlook</div></div>
+    </div>
+
+    
+  </section>
+
+  <!-- Discipline Relocated -->
+  <section>
+    <h2>Discipline, Relocated</h2>
+    <div class="slide-body">
+      <blockquote>
+        Engineering quality doesn't disappear when AI writes code.<br>
+        It migrates to specs, tests, constraints, and risk management.
+        <br><span style="font-size: 1em; color: #4a5568;">&mdash; Thoughtworks, Deer Valley 2026</span>
+      </blockquote>
+    </div>
+
+    
+  </section>
+
+  <!-- Engineer's Role Expands -->
+  <section>
+    <h2>What Only You Can Do</h2>
+    <div class="slide-body">
+      <p>When implementation is cheap,<br>the bottleneck moves to <strong>judgment</strong>.</p>
+
+      <ul class="fragment" style="margin-top: 1em;">
+        <li><strong>What</strong> to build</li>
+        <li><strong>Whether</strong> it's right</li>
+        <li><strong>Owning</strong> the outcome</li>
+      </ul>
+
+      <p class="fragment" style="margin-top: 1em; color: #4a5568;">
+        Building bad software has never been easier.
+      </p>
+    </div>
+
+    
+  </section>
+
+  <!-- Red Line -->
+  <section data-background-color="#6dbf54">
+    <h1 style="margin-top: 0.3em; color: #ffffff; font-size: 2.2em;">
+      The speed is free.<br>The discipline is yours.
+    </h1>
+    
+  </section>
+
+  <!-- Get Started -->
+  <section>
+    <h2>Start Now or Catch Up Later</h2>
+    <div class="slide-body">
+      <pre style="font-size: 1em;"><code class="nohighlight">curl -fsSL https://claude.ai/install.sh | bash</code></pre>
+
+      <p class="fragment" style="margin-top: 1em;">
+        Observe what goes wrong. Add a rule. Repeat.
+      </p>
+    </div>
+    
+  </section>
+
+  <!-- Empowering Close -->
+  <section data-background-color="#6dbf54">
+    <h2 style="color: rgba(255,255,255,0.8);">Your setup compounds.</h2>
+    <h1 class="fragment" style="color: #ffffff;">Every rule, every skill, every session.</h1>
+
+    
+  </section>
+
+  <!-- Contact -->
+  <section>
+    <h2>Thank You</h2>
+    <p class="slide-subtitle" style="font-size: 0.95em;">Thomas Schilling</p>
+    <div class="slide-body">
+      <div style="display: flex; align-items: center; justify-content: center; gap: 2em; margin-top: 1em;">
+        <!-- Resources QR (points to jvmskills talk hub) -->
+        <div style="flex: 0 0 auto; text-align: center;">
+          <img src="./assets/qr/talk-resources.png" alt="Talk resources QR code" style="width: 280px; border-radius: 8px;">
+        </div>
+
+        <!-- Copy -->
+        <div style="flex: 0 1 auto; text-align: left;">
+          <p style="font-size: 0.9em; color: #4a5568; margin: 0 0 0.3em;">
+            Everything from this talk
+          </p>
+          <p style="font-size: 1.5em; margin: 0 0 0.7em; line-height: 1;">
+            <strong>jvmskills.com/spring-io-2026</strong>
+          </p>
+
+          <div style="display: inline-block; background: #52ad3c; color: #ffffff; padding: 0.2em 0.8em; font-family: 'Anton', 'Bebas Neue', 'Impact', sans-serif; letter-spacing: 0.04em; font-size: 1em; border-radius: 6px;">
+            OPEN TO WORK
+          </div>
+          <p style="font-size: 0.85em; margin: 0.7em 0 0; color: #4a5568;">
+            Consulting &middot; Full Time
+          </p>
+        </div>
+      </div>
+
+      <p style="font-size: 0.9em; margin-top: 1.5em; color: #4a5568;">
+        Spring I/O 2026 &middot; Barcelona
+      </p>
+    </div>
+
+    
+  </section>
+</section>
+</div><!-- slides -->
+</div><!-- reveal -->
+<script src="./vendor/reveal.js/dist/reveal.js"></script>
+<script src="./vendor/reveal.js/plugin/highlight/highlight.js"></script>
+<script src="./vendor/reveal.js/plugin/markdown/markdown.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    slideNumber: true,
+    showNotes: false,
+    transition: 'slide',
+    transitionSpeed: 'default',
+    backgroundTransition: 'fade',
+    center: true,
+    width: 1280,
+    height: 720,
+    margin: 0.04,
+    navigationMode: 'linear',
+    plugins: [RevealHighlight, RevealMarkdown]
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Not Found — jvm-skills</title>
+  <meta name="description" content="The page you're looking for doesn't exist.">
+  <meta name="robots" content="noindex">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230d1117'/%3E%3Ctext x='4' y='23' font-family='monospace' font-size='20' font-weight='bold' fill='%2300ff41'%3E%3E_%3C/text%3E%3C/svg%3E">
+
+  <script>
+    (function() {
+      var t = localStorage.getItem('jvmskills-theme');
+      if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'SF Mono', monospace;
+      --font-body: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+      --green: #00ff41;
+      --green-dim: #00cc33;
+      --green-glow: rgba(0, 255, 65, 0.15);
+      --green-glow-strong: rgba(0, 255, 65, 0.3);
+      --cyan: #00d4ff;
+      --red: #ff5f57;
+      --yellow: #febc2e;
+      --green-dot: #28c840;
+      --transition-fast: 150ms ease;
+      --transition-base: 250ms ease;
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #0a0e14;
+      --bg-secondary: #0d1117;
+      --bg-card: #111820;
+      --bg-titlebar: #1a2233;
+      --border: #1e2d3d;
+      --border-hover: #2a3f55;
+      --text-primary: #c9d1d9;
+      --text-secondary: #8b949e;
+      --text-muted: #484f58;
+      --scanline-opacity: 0.03;
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f0f2f5;
+      --bg-secondary: #ffffff;
+      --bg-card: #ffffff;
+      --bg-titlebar: #e8ecf0;
+      --border: #d0d7de;
+      --border-hover: #a8b3c0;
+      --text-primary: #1f2328;
+      --text-secondary: #57606a;
+      --text-muted: #8b949e;
+      --green: #006d1f;
+      --green-dim: #005a19;
+      --green-glow: rgba(0, 109, 31, 0.08);
+      --green-glow-strong: rgba(0, 109, 31, 0.15);
+      --cyan: #0369a1;
+      --scanline-opacity: 0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.65;
+      min-height: 100vh;
+      transition: background var(--transition-base), color var(--transition-base);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,var(--scanline-opacity)) 2px, rgba(0,0,0,var(--scanline-opacity)) 4px);
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    a { color: var(--green); text-decoration: none; transition: color var(--transition-fast); }
+    a:hover { color: var(--cyan); }
+    a:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; border-radius: 2px; }
+
+    .container { max-width: 780px; margin: 0 auto; padding: 0 20px; width: 100%; }
+
+    header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .logo {
+      font-family: var(--font-mono);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .logo .prompt-char { opacity: 0.5; font-weight: 400; }
+    .header-actions { display: flex; align-items: center; gap: 12px; }
+    .nav-link {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: all var(--transition-fast);
+    }
+    .nav-link:hover { color: var(--text-primary); border-color: var(--border-hover); background: var(--bg-card); }
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .theme-toggle:hover { color: var(--text-primary); border-color: var(--border-hover); background: var(--bg-card); }
+
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 0;
+    }
+
+    .error-window {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      box-shadow: 0 0 40px var(--green-glow);
+    }
+    .titlebar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: var(--bg-titlebar);
+      border-bottom: 1px solid var(--border);
+    }
+    .titlebar .dots {
+      display: flex;
+      gap: 6px;
+    }
+    .titlebar .dots span {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .titlebar .dots span:nth-child(1) { background: var(--red); }
+    .titlebar .dots span:nth-child(2) { background: var(--yellow); }
+    .titlebar .dots span:nth-child(3) { background: var(--green-dot); }
+    .titlebar .path {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-left: 8px;
+    }
+
+    .window-body { padding: 40px 32px; font-family: var(--font-mono); }
+
+    .error-code {
+      font-size: clamp(3.2rem, 10vw, 5.5rem);
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: 0.04em;
+      line-height: 1;
+      text-shadow: 0 0 18px var(--green-glow-strong);
+      margin-bottom: 18px;
+    }
+    .error-code .caret { animation: blink 1.1s steps(2) infinite; opacity: 0.9; }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .error-line {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    .error-line .prompt { color: var(--green-dim); }
+    .error-line .cmd { color: var(--text-primary); }
+    .error-line.err { color: var(--red); }
+
+    .error-body {
+      margin: 22px 0 26px;
+      font-family: var(--font-body);
+      color: var(--text-primary);
+    }
+    .error-body p + p { margin-top: 10px; }
+    .error-body code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      padding: 1px 6px;
+      background: var(--bg-primary);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--green);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .action-btn {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      transition: all var(--transition-fast);
+    }
+    .action-btn:hover {
+      border-color: var(--green);
+      color: var(--green);
+      background: var(--bg-card);
+      box-shadow: 0 0 12px var(--green-glow);
+    }
+    .action-btn.primary {
+      border-color: var(--green);
+      color: var(--green);
+    }
+    .action-btn.primary:hover { background: var(--green-glow); }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 18px 0;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    @media (max-width: 520px) {
+      .window-body { padding: 28px 20px; }
+      .titlebar .path { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <a href="/" class="logo" aria-label="jvm-skills home">
+        <span class="prompt-char">$</span> jvm-skills
+      </a>
+      <div class="header-actions">
+        <a href="/" class="nav-link">Skills</a>
+        <a href="/blog/" class="nav-link">Blog</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" type="button">
+          <span class="theme-icon" aria-hidden="true">◐</span>
+          <span>theme</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="error-window">
+        <div class="titlebar">
+          <span class="dots"><span></span><span></span><span></span></span>
+          <span class="path">~/jvmskills — zsh — 404</span>
+        </div>
+        <div class="window-body">
+          <div class="error-code">404<span class="caret">_</span></div>
+
+          <div class="error-line"><span class="prompt">$</span> <span class="cmd">cat <span id="reqPath">page</span></span></div>
+          <div class="error-line err">cat: no such file or directory</div>
+
+          <div class="error-body">
+            <p>That path doesn't exist on jvmskills.com.</p>
+            <p>It may have moved, or the link you followed is out of date. Try one of these instead.</p>
+          </div>
+
+          <div class="actions">
+            <a href="/" class="action-btn primary">cd ~/</a>
+            <a href="/blog/" class="action-btn">ls blog/</a>
+            <a href="/spring-io-2026/" class="action-btn">ls spring-io-2026/</a>
+            <a href="https://github.com/jvm-skills/jvm-skills" class="action-btn">git remote</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">jvmskills.com — exit code 404</div>
+  </footer>
+
+  <script>
+    (function () {
+      'use strict';
+      const html = document.documentElement;
+      const themeBtn = document.getElementById('themeToggle');
+      const themeIcon = themeBtn.querySelector('.theme-icon');
+
+      function setTheme(theme) {
+        html.setAttribute('data-theme', theme);
+        localStorage.setItem('jvmskills-theme', theme);
+        themeIcon.textContent = theme === 'dark' ? '◐' : '◑';
+      }
+
+      const stored = localStorage.getItem('jvmskills-theme');
+      const initial = stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      themeIcon.textContent = initial === 'dark' ? '◐' : '◑';
+
+      themeBtn.addEventListener('click', function () {
+        const current = html.getAttribute('data-theme');
+        setTheme(current === 'dark' ? 'light' : 'dark');
+      });
+
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+        if (!localStorage.getItem('jvmskills-theme')) {
+          setTheme(e.matches ? 'dark' : 'light');
+        }
+      });
+
+      const reqPath = document.getElementById('reqPath');
+      if (reqPath && window.location && window.location.pathname) {
+        const p = window.location.pathname.replace(/^\/+/, '') || 'page';
+        reqPath.textContent = p.length > 60 ? p.slice(0, 57) + '...' : p;
+      }
+    })();
+  </script>
+</body>
+</html>

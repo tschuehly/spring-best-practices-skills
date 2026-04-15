@@ -4,7 +4,8 @@ set -euo pipefail
 # ══════════════════════════════════════════════
 # watch.sh — Live-reload dev server for jvmskills.com
 #
-# Watches site/template.html, skills/**/*.yaml
+# Watches site/ (all templates, build.main.kts, slides),
+# skills/**, blog/**
 # Rebuilds on change, serves on http://localhost:8080
 # ══════════════════════════════════════════════
 
@@ -45,9 +46,7 @@ echo "Watching for changes... (Ctrl+C to stop)"
 
 if [[ "$WATCHER" == "fswatch" ]]; then
   fswatch -o \
-    "$SITE_DIR/template.html" \
-    "$SITE_DIR/blog-post-template.html" \
-    "$SITE_DIR/blog-index-template.html" \
+    "$SITE_DIR" \
     "$ROOT_DIR/skills/" \
     "$ROOT_DIR/blog/" \
   | while read -r; do
@@ -58,7 +57,7 @@ if [[ "$WATCHER" == "fswatch" ]]; then
 elif [[ "$WATCHER" == "inotifywait" ]]; then
   while true; do
     inotifywait -q -r -e modify,create,delete \
-      "$SITE_DIR/template.html" \
+      "$SITE_DIR" \
       "$ROOT_DIR/skills/" \
       "$ROOT_DIR/blog/" 2>/dev/null
     echo ""
@@ -68,8 +67,8 @@ elif [[ "$WATCHER" == "inotifywait" ]]; then
 else
   # Polling fallback
   get_hash() {
-    find "$SITE_DIR/template.html" "$ROOT_DIR/skills" "$ROOT_DIR/blog" \
-      \( -name '*.yaml' -o -name '*.html' -o -name '*.md' \) 2>/dev/null | \
+    find "$SITE_DIR" "$ROOT_DIR/skills" "$ROOT_DIR/blog" \
+      \( -name '*.yaml' -o -name '*.html' -o -name '*.md' -o -name '*.kts' -o -name '*.css' -o -name '*.js' -o -name '*.svg' -o -name '*.png' -o -name '*.webp' \) 2>/dev/null | \
       xargs stat -f '%m' 2>/dev/null || \
       xargs stat -c '%Y' 2>/dev/null || echo ""
   }
