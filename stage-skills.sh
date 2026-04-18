@@ -49,6 +49,8 @@ for yaml in "${yaml_files[@]}"; do
     dest_dir="$STAGING_DIR/$skill_name"
     mkdir -p "$dest_dir"
     cp -R "$src_dir"/. "$dest_dir"/
+    # Project-local overlays never ship with the skill.
+    rm -f "$dest_dir/references/project.md"
     echo "staged $skill_name ($(basename "$yaml"))"
     staged=$((staged + 1))
 done

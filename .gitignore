@@ -1,4 +1,5 @@
 /.idea/
 /.claude/worktrees/
+/.claude/skills/*/references/project.md
 dist/
 target/
