@@ -12,7 +12,6 @@ skills:
   - database/jooq-best-practices
   - workflow/interview
   - workflow/spec
-  - workflow/spec-to-plan
   - testing/tdd-task
   - web/frontend-design
   - tool/agent-browser
@@ -45,7 +44,6 @@ Every skill below has a SKILL.md you can drop into `.claude/skills/` and start u
 
 - [interview](https://github.com/tschuehly/jvm-skills/blob/main/.claude/skills/interview/SKILL.md) — turn a vague idea into a spec by getting interviewed
 - [spec](https://github.com/tschuehly/jvm-skills/blob/main/.claude/skills/spec/SKILL.md) — write the requirements doc Claude will implement against
-- [spec-to-plan](https://github.com/tschuehly/jvm-skills/blob/main/.claude/skills/spec-to-plan/SKILL.md) — break the spec into phased implementation steps
 - [commit](https://github.com/tschuehly/jvm-skills/blob/main/.claude/skills/commit/SKILL.md) + [rebase-commit](https://github.com/tschuehly/jvm-skills/blob/main/.claude/skills/rebase-commit/SKILL.md)
 
 **Testing**
