@@ -289,23 +289,17 @@ For each survivor, delegate to `/tdd-task` with a prompt like:
 > Prefer strengthening assertions in the covering test; if that isn't natural, add a new sibling test case.
 > The test is expected to pass against current production code — don't force a red-first state. RED proof comes from the pitest rerun below.
 
-After `/tdd-task` returns, verify with a scoped pitest rerun:
+After `/tdd-task` returns, verify with a scoped pitest rerun. **Override `targetClasses` / `targetTests` via Gradle `-P` flags — do not edit `build.gradle.kts` for per-iteration scope changes**. The `info.solidsoft.pitest` plugin reads `pitest.targetClasses` and `pitest.targetTests` project properties and they take precedence over the block:
 
-```kotlin
-// Narrow targetClasses to the single class AND its nested/synthetic classes.
-// `MediaSubmission*` matches sibling top-level classes (MediaSubmissionService)
-// and inflates scope. Bare `MediaSubmission` misses inner classes
-// ($Page data class) and lambdas ($getPhotoSubmissions$1.map — synthetic
-// classes emitted by `kotlinc` for `.let { }`, `.map { }`, etc.).
-// Use the class FQN AND `<FQN>$*` together.
-pitest {
-    targetClasses.set(setOf(
-        "com.example.pkg.MediaSubmission",
-        "com.example.pkg.MediaSubmission\$*",
-    ))
-    targetTests.set(setOf("com.example.pkg.MediaSubmissionTest"))
-}
+```bash
+./gradlew pitest \
+  -Ppitest.targetClasses='com.example.pkg.MediaSubmission,com.example.pkg.MediaSubmission$*' \
+  -Ppitest.targetTests='com.example.pkg.MediaSubmissionTest'
 ```
+
+The scoping set must include both the class FQN AND `FQN$*` — Kotlin emits synthetic classes for nested data classes (`Foo$Page`) and lambdas (`Foo$methodName$1`), and the bare FQN alone doesn't match them. `FQN*` (prefix glob without the `$`) is the opposite mistake: it also matches sibling top-level classes (`MediaSubmissionService`) and inflates scope. In the shell, escape or single-quote the `$` to prevent the shell from expanding it.
+
+Keep the `pitest { }` block in `build.gradle.kts` pinned to a stable, broad default (the module-level package you actually CI against). Treat per-iteration scopes as transient CLI overrides.
 
 ```bash
 ./gradlew pitest
