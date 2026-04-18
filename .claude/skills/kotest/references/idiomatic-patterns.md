@@ -21,24 +21,22 @@ fun `should create talk and speaker correctly`() { ... }
 Use real spaces. Preserve the intent of the Java name — do not paraphrase
 behavior differently.
 
-## Spring bean injection
+## Collaborator wiring
 
-Prefer constructor injection via `@Autowired constructor(...)`. Do not use
-`@Autowired lateinit var` unless the test framework cannot inject through the
-constructor for that specific setup.
+Prefer constructor parameters over mutable fields for the class under test
+and its collaborators:
 
 ```kotlin
-@SpringBootTest
-@Transactional
-class TalkServiceTest @Autowired constructor(
-    private val talkService: TalkService,
-    private val speakerRepository: SpeakerRepository,
-) {
+class TagServiceTest {
+    private val tagRepository = mockk<TagRepository>()
+    private val tagService = TagService(tagRepository)
+
     // tests
 }
 ```
 
-This removes boilerplate and makes dependencies explicit at the class header.
+Use `lateinit var` only where a framework requires it (e.g. DI container
+field injection that has no constructor hook).
 
 ## Multiple assertions on one object
 
@@ -135,7 +133,7 @@ for nullables). Never invent defaults like `""`, `"N/A"`, or `0`.
 
 ## Anti-patterns
 
-- `@Autowired lateinit var` when constructor injection would work.
+- `lateinit var` fields when constructor parameters would work.
 - camelCase test names when backticked sentences are supported.
 - Re-asserting fields already proven by a full-object equality check.
 - Hand-constructing DTOs when a factory exists nearby.

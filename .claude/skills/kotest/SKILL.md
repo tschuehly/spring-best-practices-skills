@@ -1,12 +1,11 @@
 ---
 name: kotest
-description: Write a new Spring Boot test, or modernize an existing Kotlin test, using Kotest matchers and idiomatic Kotlin test style — constructor injection, backticked names, apply/assertSoftly blocks, and existing object mothers and helpers. Use when adding a test for behavior that does not yet have one, or when improving a Kotlin test that still uses JUnit assertions or AssertJ chains. Assumes project test infrastructure exists; flag missing factories or helpers rather than building them here.
+description: Write a new Kotlin test, or modernize an existing one, using Kotest matchers and idiomatic Kotlin test style — backticked names, apply/assertSoftly blocks, and existing object mothers and helpers. Use when adding a test for behavior that does not yet have one, or when improving a Kotlin test that still uses JUnit assertions or AssertJ chains. Assumes project test infrastructure exists; flag missing factories or helpers rather than building them here.
 ---
 
 # Kotest
 
-Produce one high-quality Kotlin test for Spring Boot code in idiomatic style
-with Kotest matchers.
+Produce one high-quality Kotlin test in idiomatic style with Kotest matchers.
 
 Two tracks, one skill:
 
@@ -22,12 +21,11 @@ knowledge applied to either starting point.
   factory / helper / DSL is missing, add a minimal inline fallback and tell
   the user that extraction may be warranted separately.
 - Do not change production code to make a test easier, unless the user asks.
-- Pick the narrowest Spring test type that covers the behavior. Broader
-  contexts are slower and hide failures.
 - **Modernize track only**: preserve assertion semantics exactly. Order
   sensitivity, nullability, and exception types must not change.
 - Follow project overlay (`references/project.md`) if present — it overrides
-  shared defaults.
+  shared defaults. The overlay is where framework-specific context lives
+  (base classes, test annotations, single-test command, factory locations).
 
 ## Step 1 — Pick the track
 
@@ -51,48 +49,35 @@ Once the track is picked, follow the corresponding procedure below.
 Read the production code the test will exercise:
 
 - The class/method under test and its collaborators.
-- Any validation annotations, exception branches, or ordering guarantees that
-  shape assertions.
+- Any validation, exception branches, or ordering guarantees that shape
+  assertions.
 - Existing tests nearby — use them as style reference and to avoid
   duplicating coverage.
 
 If the behavior is ambiguous, ask the user before writing the test.
 
-### 2. Pick the test type
-
-Read `references/spring-test-types.md` and choose the narrowest type that
-covers the behavior:
-
-- **Unit test** — pure logic, no Spring collaborators.
-- **`@WebMvcTest`** — controller behavior, service mocked.
-- **`@DataJpaTest`** — repository behavior, no HTTP.
-- **`@SpringBootTest`** — end-to-end across layers (add Testcontainers if a
-  real DB/queue is needed).
-
-### 3. Scan for reusable infrastructure
+### 2. Scan for reusable infrastructure
 
 Before writing, search for what to reuse:
 
 - Object-mother / factory functions (typically `*ObjectMother.kt`, `TestData.kt`).
 - Kotlin extensions on domain types (`toDto()`, `Iterable<T>.names()`).
-- MockMvc / HTTP helpers.
-- Transactional / test-data scope wrappers.
+- Test helpers for setup/teardown or I/O wiring.
 - DSLs for object-graph assembly.
-- Project base classes for tests.
+- Project base classes for tests (see `references/project.md` overlay).
 
 If required infra is missing, add a minimal inline fallback or stop and flag
 it to the user. Do not quietly grow shared infra here.
 
-### 4. Write the class header
+### 3. Write the class header
 
-Follow `references/idiomatic-patterns.md`:
+- Pick the test base class or annotations indicated by the project overlay.
+  If there is no overlay, use a plain class with collaborators wired via
+  constructor parameters.
+- Follow `references/idiomatic-patterns.md` for collaborator wiring and
+  naming.
 
-- Slice/context annotations appropriate to the chosen test type.
-- Constructor injection via `@Autowired constructor(...)` for Spring beans.
-- `lateinit var` only where required (`@MockkBean` fields).
-- Preserve project-mandated profiles (`@ActiveProfiles("it")` etc.).
-
-### 5. Write each test method
+### 4. Write each test method
 
 For each scenario:
 
@@ -117,21 +102,19 @@ Each assertion must add independent semantic coverage. Do not restate fields
 already proven by a full-object equality. Do not wrap conditions in
 `assertTrue` — use a matcher that describes what the condition means.
 
-### 6. Run the focused test
+### 5. Run the focused test
 
-```bash
-./gradlew test --tests 'your.package.YourNewTest'
-# or
-./gradlew integrationTest --tests 'your.package.YourNewIT'
-```
+Use the single-test command defined in the project overlay. If none is
+specified, the project's usual test runner with a class-name filter is the
+right default.
 
 If it fails: first confirm the assertion is correct for the behavior. A green
 test with the wrong assertion is worse than a red one. If production code is
 wrong, flag to the user — do not weaken the test.
 
-### 7. Report
+### 6. Report
 
-- New file path and test type chosen (why).
+- New file path.
 - Which existing infrastructure was reused.
 - Any inline fallbacks added (and whether shared extraction is warranted).
 - Scenarios covered / intentionally out of scope.
@@ -141,14 +124,13 @@ wrong, flag to the user — do not weaken the test.
 
 ## Modernize track
 
-### 1. Classify the source test
+### 1. Read the source test
 
-Read `references/spring-test-types.md` and record:
+Record the existing:
 
-- Test type (unit / web slice / integration).
-- Injection style (field vs constructor).
-- Transactional behavior.
-- Active profiles and Testcontainer dependencies.
+- Test framework hooks and annotations — preserve them verbatim.
+- Collaborator wiring style (fields vs constructor).
+- Any setup/teardown behavior.
 
 These must not drift during modernization. Changing them silently is a bug.
 
@@ -161,8 +143,9 @@ almost always underused in pre-Kotest tests — swap them in during this pass.
 
 Work in this order — the class must compile between each step:
 
-1. Switch `@Autowired lateinit var` fields to `@Autowired constructor(...)`
-   injection. Keep `lateinit var` for `@MockkBean` fields — those require it.
+1. Switch mutable collaborator fields to constructor parameters where the
+   test framework allows it. Keep `lateinit var` for fields that a framework
+   mechanism requires (consult project overlay).
 2. Rename camelCase test methods to backticked sentences, preserving intent:
    `shouldCreateTalk` → `` `should create talk` ``.
 3. Leave assertions untouched for now. Only after compilation is clean, move
@@ -226,23 +209,21 @@ Add the Kotest imports listed in `references/kotest-matchers.md`.
 
 ### 9. Run the focused test
 
-```bash
-./gradlew test --tests 'your.package.YourModernizedTest'
-```
+Use the single-test command defined in the project overlay.
 
 Iterate until green. Common causes of failure:
 
 - Order-sensitive matcher where an any-order matcher was needed, or vice versa.
-- Nullability mismatch (Java boxed types vs Kotlin non-null).
+- Nullability mismatch between original Java-sourced types and Kotlin
+  non-null types.
 - Missing Kotest matcher import.
-- Transactional boundary silently changed.
 - Backticked name not escaped properly.
 
 ### 10. Report
 
 - File modernized.
 - Track taken (Modernize).
-- What changed at the structure level (injection, naming).
+- What changed at the structure level (wiring, naming).
 - Which existing infrastructure was newly adopted.
 - Semantics-sensitive decisions (ordering / exceptions / nullability).
 - Exact verification command.
@@ -251,8 +232,6 @@ Iterate until green. Common causes of failure:
 
 ## Common pitfalls (both tracks)
 
-- **Over-broad test type**: using `@SpringBootTest` where a unit test would
-  cover the behavior 50× faster.
 - **Hand-building DTOs when a factory exists**: scan for `create*Request`,
   `*Dto.toEntity()`, etc. before constructing manually.
 - **Restating factory defaults**: if the factory defaults
@@ -264,14 +243,14 @@ Iterate until green. Common causes of failure:
   together", not for sequential dependent assertions.
 - **Coroutine tests without `runTest`**: suspend functions must run inside
   `runTest { ... }` (or the project's test-dispatcher wrapper).
-- **Silently dropping `@Transactional`** (Modernize track): the source may
-  depend on automatic rollback. If the modernized version loses it, tests
-  pollute each other and fail intermittently.
+- **Silently dropping framework hooks** (Modernize track): setup/teardown
+  annotations, transaction boundaries, and active profiles must carry over
+  verbatim. Dropping them can cause intermittent pollution that only fails
+  under certain run orders.
 
 ## Project overlay
 
 If `references/project.md` exists in this skill's directory after install, it
-overrides the shared defaults. It typically covers: test base classes,
-preferred mocking library, single-test command pattern, package layout,
-naming conventions, available factories and DSLs, and any non-obvious
-transactional/cleanup helpers.
+overrides the shared defaults. This is where framework-specific context
+belongs (e.g. Spring Boot test types, base classes, single-test command,
+mocking library, factory locations). The skill itself stays framework-neutral.

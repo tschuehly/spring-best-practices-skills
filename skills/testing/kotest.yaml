@@ -1,12 +1,12 @@
 name: Kotest
 description: >-
-  Write a new Spring Boot test, or modernize an existing Kotlin test, using
-  Kotest matchers and idiomatic Kotlin test style — constructor injection,
-  backticked test names, apply/assertSoftly blocks, and existing object
-  mothers and helpers. Picks the narrowest Spring test type for the behavior
-  under test, preserves assertion semantics when modernizing, and verifies
-  with a focused test command. Ships with shared references on Kotest
-  matchers, idiomatic Kotlin test patterns, and Spring test types.
+  Write a new Kotlin test, or modernize an existing one, using Kotest
+  matchers and idiomatic Kotlin test style — backticked names,
+  apply/assertSoftly blocks, and existing object mothers and helpers.
+  Preserves assertion semantics when modernizing, and verifies with a
+  focused test command. Framework-neutral — project-specific context
+  (base classes, test annotations, single-test command) plugs in via a
+  local `references/project.md` overlay.
 repo: jvm-skills/jvm-skills
 skill_path: ".claude/skills/kotest/SKILL.md"
 category: testing
@@ -15,11 +15,10 @@ languages:
 trust: community
 author: Urs Peter
 maintainer: jvm-skills
-version: "0.1.0"
+version: "0.2.0"
 last_updated: "2026-04-18"
 scope: focused
 tech:
-  - spring-boot
   - kotest
   - junit
   - assertj
@@ -27,6 +26,5 @@ tags:
   - kotlin
   - testing
   - kotest
-  - spring-boot
   - test-authoring
   - modernization
