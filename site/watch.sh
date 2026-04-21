@@ -25,7 +25,7 @@ fi
 
 build() {
   if command -v kotlin &>/dev/null; then
-    (cd "$ROOT_DIR" && kotlin "$SITE_DIR/build.main.kts" 2>&1)
+    (cd "$ROOT_DIR" && INCLUDE_DRAFTS=1 kotlin "$SITE_DIR/build.main.kts" 2>&1)
   else
     echo "ERROR: kotlin is required. Install via: sdk install kotlin" >&2
     return 1

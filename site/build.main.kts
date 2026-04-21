@@ -27,6 +27,8 @@ val evalsDistDir = File(distDir, "evals")
 
 val categories = listOf("framework", "language", "database", "testing", "fullstack", "web", "workflow", "tool")
 
+val includeDrafts = System.getenv("INCLUDE_DRAFTS") == "1"
+
 fun htmlEscape(s: String): String = s
     .replace("&", "&amp;")
     .replace("<", "&lt;")
@@ -268,9 +270,13 @@ if (blogDir.isDirectory) {
             continue
         }
 
-        if (fm["draft"] == true) {
+        val isDraft = fm["draft"] == true
+        if (isDraft && !includeDrafts) {
             System.err.println("  SKIP: ${mdFile.name} (draft)")
             continue
+        }
+        if (isDraft) {
+            System.err.println("  DRAFT: ${mdFile.name} (included — INCLUDE_DRAFTS=1)")
         }
 
         val document = mdParser.parse(body)

@@ -147,26 +147,6 @@
     a:hover { color: var(--cyan); }
     a:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; border-radius: 2px; }
 
-    /* Skip to content */
-    .skip-link {
-      position: absolute;
-      top: -100%;
-      left: 16px;
-      background: var(--green);
-      color: var(--bg-primary);
-      padding: 8px 16px;
-      font-family: var(--font-mono);
-      font-size: 0.85rem;
-      font-weight: 600;
-      z-index: 10000;
-      border-radius: 0 0 4px 4px;
-      transition: top var(--transition-fast);
-    }
-    .skip-link:focus {
-      top: 0;
-      outline: none;
-    }
-
     /* ══════════════════════════════════════════════
        LAYOUT
        ══════════════════════════════════════════════ */
@@ -1192,8 +1172,6 @@
   </style>
 </head>
 <body>
-  <a href="#main-content" class="skip-link">Skip to content</a>
-
   <!-- ═══════════ HEADER ═══════════ -->
   <header role="banner">
     <div class="container header-inner">
