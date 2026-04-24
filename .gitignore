@@ -1,4 +1,5 @@
 /.idea/
+/.DS_Store
 /.claude/worktrees/
 /.claude/skills/*/references/project.md
 /dist/
