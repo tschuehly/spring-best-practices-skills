@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Agentic Engineering Consulting — Thomas Schilling</title>
-  <meta name="description" content="If you're not doing agentic engineering, you'll fall behind. I help Spring and JVM teams build a custom AI coding workflow that ships faster, cheaper, and at higher quality than traditional development.">
+  <title>Spring I/O 2026 Resources + Workshop — Thomas Schilling</title>
+  <meta name="description" content="Spring I/O 2026 resources for Claude Code for Spring Developers, a live late-May agentic coding workshop, and focused consulting for Spring and JVM teams.">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jvmskills.com/spring-io-2026/">
-  <meta property="og:title" content="Agentic Engineering Consulting — Thomas Schilling">
-  <meta property="og:description" content="Custom AI coding workflows for Spring and JVM teams. External or embedded. Four months refining an agentic loop on production code — now bringing it to your team.">
+  <meta property="og:title" content="Spring I/O 2026 Resources + Workshop — Thomas Schilling">
+  <meta property="og:description" content="Slides, toolbelt, learn.md, a live late-May workshop, and focused consulting for Spring and JVM teams adopting agentic coding.">
   <meta property="og:site_name" content="jvm-skills">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Agentic Engineering Consulting — Thomas Schilling">
-  <meta name="twitter:description" content="Custom AI coding workflows for Spring and JVM teams. External or embedded.">
+  <meta name="twitter:title" content="Spring I/O 2026 Resources + Workshop — Thomas Schilling">
+  <meta name="twitter:description" content="Spring I/O resources, a late-May workshop, and focused consulting for agentic coding with Spring and JVM teams.">
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='4' fill='%230d1117'/%3E%3Ctext x='4' y='23' font-family='monospace' font-size='20' font-weight='bold' fill='%2300ff41'%3E%3E_%3C/text%3E%3C/svg%3E">
 
@@ -149,7 +149,7 @@
       padding: 6px 10px;
       border: 1px solid var(--border);
       border-radius: 4px;
-      transition: all var(--transition-fast);
+      transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
       display: flex;
       align-items: center;
       text-decoration: none;
@@ -167,7 +167,7 @@
       font-family: var(--font-mono);
       font-size: 0.8rem;
       color: var(--text-secondary);
-      transition: all var(--transition-fast);
+      transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
       display: flex;
       align-items: center;
       gap: 4px;
@@ -217,7 +217,6 @@
     /* ── Shared ── */
     .section { padding: 72px 0; border-bottom: 1px solid var(--border); }
     .section:last-of-type { border-bottom: none; }
-    .section-sub { padding: 48px 0; }
     .eyebrow {
       font-family: var(--font-mono);
       font-size: 0.75rem;
@@ -258,6 +257,15 @@
     .hero p.sub { max-width: 680px; margin-bottom: 32px; }
 
     .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px; }
+    .hero .cta-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .hero .cta-row .btn {
+      width: 100%;
+      justify-content: center;
+      text-align: center;
+    }
     .btn {
       font-family: var(--font-mono);
       font-size: 0.95rem;
@@ -267,7 +275,7 @@
       border: 1px solid var(--green);
       color: var(--green);
       background: transparent;
-      transition: all var(--transition-fast);
+      transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -308,17 +316,48 @@
       50% { opacity: 0.35; }
     }
 
-    /* ── Problem / Warning ── */
-    .warning-box {
-      background: var(--bg-card);
-      border-left: 4px solid var(--amber);
-      border-radius: 0 8px 8px 0;
-      padding: 24px 28px;
-      margin: 28px 0;
+    /* ── Three paths ── */
+    .path-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-auto-rows: 1fr;
+      gap: 16px;
+      margin-top: 30px;
     }
-    .warning-box strong { color: var(--amber); }
+    .path-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      min-height: 260px;
+      transition: border-color var(--transition-base), transform var(--transition-base);
+    }
+    .path-card:hover { border-color: var(--green); transform: translateY(-2px); }
+    .path-card .icon {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--green);
+      background: var(--bg-secondary);
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      display: inline-block;
+      width: fit-content;
+      margin-bottom: 12px;
+    }
+    .path-card p {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .path-card .btn {
+      margin-top: auto;
+      width: fit-content;
+    }
 
-    /* ── Pitch block (forward to lead) ── */
+    /* ── Pitch blocks ── */
     .pitch-block {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -413,59 +452,37 @@
       line-height: 1.6;
     }
 
-    /* ── Process / steps ── */
-    .process-list {
-      list-style: none;
-      counter-reset: step;
-      margin-top: 24px;
+    /* ── Workshop ── */
+    .workshop-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin: 28px 0;
     }
-    .process-list li {
-      counter-increment: step;
-      position: relative;
-      padding: 18px 20px 18px 68px;
+    .workshop-fact {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 8px;
-      margin-bottom: 12px;
+      padding: 16px 18px;
     }
-    .process-list li::before {
-      content: counter(step, decimal-leading-zero);
-      position: absolute;
-      left: 20px;
-      top: 18px;
-      font-family: var(--font-mono);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--green);
-    }
-    .process-list li strong {
+    .workshop-fact .label {
       display: block;
       font-family: var(--font-mono);
-      color: var(--text-primary);
-      margin-bottom: 4px;
-    }
-    .process-list li p {
-      margin-bottom: 0;
-      font-size: 0.92rem;
+      font-size: 0.72rem;
       color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 6px;
     }
-
-    /* ── Audience blocks ── */
-    .audience-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-      margin-top: 28px;
+    .workshop-fact .value {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--green);
+      font-variant-numeric: tabular-nums;
+      line-height: 1.35;
     }
-    .audience-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 22px;
-    }
-    .audience-card h3 { color: var(--amber); font-size: 0.95rem; margin-bottom: 10px; }
-    .audience-card p { margin-bottom: 0; font-size: 0.9rem; color: var(--text-secondary); }
-
     /* ── Bullet lists ── */
     ul.clean { list-style: none; padding: 0; }
     ul.clean li {
@@ -537,19 +554,6 @@
       margin-bottom: 8px;
     }
 
-    /* ── Final CTA ── */
-    .final-cta {
-      background: var(--bg-card);
-      border: 1px solid var(--green);
-      border-radius: 12px;
-      padding: 44px 32px;
-      text-align: center;
-      box-shadow: 0 0 60px var(--green-glow);
-    }
-    .final-cta h2 { margin-bottom: 14px; }
-    .final-cta p { max-width: 560px; margin-left: auto; margin-right: auto; color: var(--text-secondary); }
-    .final-cta .cta-row { justify-content: center; margin-top: 24px; }
-
     /* ── Footer ── */
     footer {
       padding: 32px 0;
@@ -575,6 +579,14 @@
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .stat-card { padding: 18px 16px; }
       .stat-card .num { font-size: 1.6rem; }
+    }
+
+    @media (max-width: 520px) {
+      .hero .cta-row { grid-template-columns: 1fr; }
+    }
+
+    @media (min-width: 980px) {
+      .path-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -611,84 +623,56 @@
     <!-- ═════════════════ SPRING I/O ATTENDEE BANNER ═════════════════ -->
     <div class="springio-banner" role="note">
       <div class="inner">
-        <span><span class="flag">Spring I/O 2026 attendee?</span> Every tool, skill, hook and link from the talk is below — plus a short pitch you can forward to your lead.</span>
+        <span><span class="flag">Spring I/O 2026 attendee?</span> Slides, toolbelt, learn.md, the late-May workshop, and team consulting are below.</span>
         <a class="jump ext" href="slides/">Slides</a>
-        <a class="jump" href="#learn">Learn it ↓</a>
-        <a class="jump" href="#talk-toolbelt">Toolbelt ↓</a>
-        <a class="jump" href="#forward">For your lead ↓</a>
+        <a class="jump" href="#workshop">Workshop</a>
+        <a class="jump" href="#consulting">Consulting</a>
+        <a class="jump" href="#learn">Learn it</a>
+        <a class="jump" href="#talk-toolbelt">Toolbelt</a>
       </div>
     </div>
 
     <!-- ═════════════════ HERO ═════════════════ -->
     <section class="hero">
       <div class="container-narrow">
-        <span class="hero-tag"><span class="dot"></span>Available now · External or embedded</span>
+        <span class="hero-tag"><span class="dot"></span>Spring I/O 2026 · late-May workshop · Consulting</span>
         <h1>If you're not doing <span class="hl">agentic engineering</span>, you will fall behind.</h1>
         <p class="lead">Every team that doesn't adopt agentic engineering will be out-shipped by one that does — at a fraction of the cost, in a fraction of the time, with more quality.</p>
-        <p class="sub">I spent the last four months refining an agentic engineering loop on a production SaaS. With the right tools and structure, the code is better than what I write by hand. I can bring that to your team.</p>
+        <p class="sub">I spent the last four months refining an agentic engineering loop on a production SaaS. With the right tools and structure, the code is better than what I write by hand. Consulting brings that loop into your team's codebase. The workshop teaches you how to build it yourself.</p>
         <div class="cta-row">
-          <a href="mailto:thomas@jvmskills.com?subject=Free%20agentic%20engineering%20audit&body=Hey%20there%2C%0A%0AI'm%20working%20at%20%5Bcompany%5D%20as%20%5Brole%5D.%20I'm%20interested%20in%20the%20audit." aria-label="Get a free audit">
-            <button class="btn primary" type="button">Get a free audit</button>
-          </a>
-          <a href="slides/" aria-label="View the slides">
-            <button class="btn" type="button">View the slides ↗</button>
-          </a>
-          <a href="https://www.linkedin.com/in/tschuehly/" aria-label="Connect on LinkedIn">
-            <button class="btn" type="button">Connect on LinkedIn</button>
-          </a>
-          <a href="#talk-toolbelt" aria-label="Spring I/O toolbelt">
-            <button class="btn ghost" type="button">Spring I/O toolbelt ↓</button>
-          </a>
-          <a href="#offer" aria-label="What I do">
-            <button class="btn ghost" type="button">What I do ↓</button>
-          </a>
+          <a class="btn primary" href="https://buy.stripe.com/bJe6oI3eg2EE1t548wc7u04">Reserve workshop seat</a>
+          <a class="btn" href="slides/">View the slides ↗</a>
+          <a class="btn" href="#talk-toolbelt">Spring I/O toolbelt ↓</a>
+          <a class="btn ghost" href="#consulting">Consulting ↓</a>
         </div>
       </div>
     </section>
 
-    <!-- ═════════════════ PROBLEM ═════════════════ -->
+    <!-- ═════════════════ THREE PATHS ═════════════════ -->
     <section class="section">
       <div class="container-narrow">
-        <span class="eyebrow">The problem</span>
-        <h2>You already know this. The time to fix it is what you don't have.</h2>
-        <p class="lead">Building bad software has never been easier. Coding agents ship faster than any of us. That's exactly why ownership and care for quality matter more, not less. The engineer who owns the outcome is what's left.</p>
-        <p>Every team feels the shift. They've tried Copilot. They've tried Claude. But shipping features is the job — <strong>re-inventing the toolchain is not</strong>. So the experiments stay shallow, the hallucinations stay common, and the backlog keeps winning.</p>
-        <p>That's the gap I close.</p>
+        <span class="eyebrow">Choose your path</span>
+        <h2>Talk resources, workshop, or team implementation.</h2>
+        <p class="lead">The Spring I/O talk is the entry point. From there, you can study the material yourself, join the late-May workshop, or bring the workflow into a team codebase.</p>
 
-        <div class="warning-box">
-          <p style="margin:0;"><strong>The window is closing.</strong> Every month your team doesn't invest in an agentic loop, your competitors compound their lead. The gap between shops that figured this out and shops that didn't will look like the gap between teams that adopted version control and teams that emailed zipfiles. You don't catch up in a sprint.</p>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ═════════════════ OFFER ═════════════════ -->
-    <section class="section" id="offer">
-      <div class="container-narrow">
-        <span class="eyebrow">The offer</span>
-        <h2>Your agentic engineering department — external or embedded.</h2>
-        <p class="lead">I embed with your team as an external partner or an internal force multiplier, and I build the workflow that turns AI from a toy into a compounding asset.</p>
-
-        <div class="offer-grid">
-          <div class="offer-card">
-            <span class="icon">CLAUDE.md</span>
-            <h3>Project context, earned line by line</h3>
-            <p>Every session is day one for the agent. A CLAUDE.md grown from real failures in your repo — build commands, conventions, the "don't do this" rules — so the next session starts where the last one left off.</p>
+        <div class="path-grid">
+          <div class="path-card">
+            <span class="icon">Spring I/O</span>
+            <h3>Take the talk home</h3>
+            <p>Slides, learn.md, and the full toolbelt from <em>Claude Code for Spring Developers</em>. Use the material in your own Spring project and replay the exercises at your own pace.</p>
+            <a class="btn" href="#learn">Open resources ↓</a>
           </div>
-          <div class="offer-card">
-            <span class="icon">skills/</span>
-            <h3>The documentation you should have written</h3>
-            <p>Skills like <code style="font-family:var(--font-mono);font-size:0.85em;color:var(--green);">/interview</code>, <code style="font-family:var(--font-mono);font-size:0.85em;color:var(--green);">/tdd-task</code>, <code style="font-family:var(--font-mono);font-size:0.85em;color:var(--green);">/test</code>, <code style="font-family:var(--font-mono);font-size:0.85em;color:var(--green);">/commit</code>, <code style="font-family:var(--font-mono);font-size:0.85em;color:var(--green);">/restart</code> — tuned to your Spring Boot version, your build system, your test stack. Your senior devs' knowledge, written down once, applied every session.</p>
+          <div class="path-card">
+            <span class="icon">workshop</span>
+            <h3>Build the loop live in late May</h3>
+            <p>A half-day remote workshop for Spring and JVM developers who watched the talk and want the hands-on version: spec, Ralph workflow, tests, hooks, and Claude Code + Codex review.</p>
+            <a class="btn primary" href="https://buy.stripe.com/bJe6oI3eg2EE1t548wc7u04">Reserve your seat</a>
           </div>
-          <div class="offer-card">
-            <span class="icon">hooks/</span>
-            <h3>The rules that actually stick</h3>
-            <p>PreToolUse / PostToolUse hooks block dangerous git commands, gate commits on lint + compile, feed Detekt violations back into the next turn. Constraints compound. That mistake can never happen again.</p>
-          </div>
-          <div class="offer-card">
-            <span class="icon">workflow</span>
-            <h3>From vibe coding to agentic engineering</h3>
-            <p>Five levels: human in the loop → plan mode → spec-driven → the drift problem → Ralph loop. Match the approach to the problem — bug fixes don't need a 9-phase plan, complex features don't survive vibe coding.</p>
+          <div class="path-card">
+            <span class="icon">consulting</span>
+            <h3>Adapt it to your team</h3>
+            <p>Focused help for teams that need their own context files, skills, hooks, MCP wiring, and enablement around the way they already build Spring and JVM software.</p>
+            <a class="btn" href="#consulting">See consulting ↓</a>
           </div>
         </div>
       </div>
@@ -699,7 +683,7 @@
       <div class="container-narrow">
         <span class="eyebrow">The proof</span>
         <h2>Four months of real numbers on a real SaaS.</h2>
-        <p>PhotoQuest is the wedding photo game platform I founded and still run. Year three, 300+ weddings served. You only get one shot at each — a bad deploy on a Saturday evening is not recoverable. That's the constraint the workflow had to survive.</p>
+        <p>PhotoQuest is the wedding photo game platform I founded and still run. Year three, 300+ weddings served. You only get one shot at each — a bad deploy on a Saturday evening is not recoverable. That's the constraint behind the talk, the workshop, and the consulting work.</p>
 
         <div class="stats-grid">
           <div class="stat-card"><span class="num">5×</span><span class="label">commit velocity</span></div>
@@ -717,34 +701,113 @@
       </div>
     </section>
 
-    <!-- ═════════════════ PROCESS ═════════════════ -->
-    <section class="section">
+    <!-- ═════════════════ WORKSHOP ═════════════════ -->
+    <section class="section" id="workshop">
       <div class="container-narrow">
-        <span class="eyebrow">How we work together</span>
-        <h2>Four phases. Measurable output at every step.</h2>
+        <span class="eyebrow">Late-May workshop</span>
+        <h2>Agentic coding workshop for Claude Code and Codex.</h2>
+        <p class="lead">A live, hands-on workshop for Spring and JVM developers who have watched the Spring I/O talk and want to run the workflow on real code.</p>
+        <p>This is not a prompt demo or an intro to AI coding. Bring a Spring or JVM project you can run locally, or use the prepared fallback repo. We will turn the talk into a working loop: spec, Ralph workflow, build feedback, tests, review, and the places where agents usually guess wrong.</p>
 
-        <ol class="process-list">
-          <li>
-            <strong>Audit <span style="font-family:var(--font-mono);font-size:0.7rem;color:var(--green);border:1px solid var(--green);padding:2px 8px;border-radius:999px;margin-left:8px;vertical-align:middle;">free</span></strong>
-            <p>Your suspicion that the team is falling behind is the signal. Send a note — we hop on a call, I hear where AI is breaking in your codebase today, and we talk through what's fixable and what's structural. No commitment after.</p>
-          </li>
-          <li>
-            <strong>Deep dive</strong>
-            <p>I spend time in the codebase and sit alongside the team. I see how you actually work — the stack, the conventions, the review rituals, the pain points — and design a tailored agentic workflow around it.</p>
-          </li>
-          <li>
-            <strong>Build</strong>
-            <p>CLAUDE.md, domain skills, hooks, MCP wiring, and workflow commands — all shaped to your stack, all committed to your repo. Evals prove the delta against a baseline.</p>
-          </li>
-          <li>
-            <strong>Enable</strong>
-            <p>Your engineers pair with me on real backlog tasks until the workflow is muscle memory. I leave documentation, not dependency.</p>
-          </li>
-          <li>
-            <strong>Compound (optional retainer)</strong>
-            <p>Every quarter I come back, look at what broke, close the gaps, upgrade the loop as the tools evolve. The agent keeps getting smarter — so does the team.</p>
-          </li>
-        </ol>
+        <div class="workshop-facts" aria-label="Workshop facts">
+          <div class="workshop-fact">
+            <span class="label">When</span>
+            <span class="value">Last week<br>of May 2026</span>
+          </div>
+          <div class="workshop-fact">
+            <span class="label">Format</span>
+            <span class="value">Live remote<br>half-day</span>
+          </div>
+          <div class="workshop-fact">
+            <span class="label">Length</span>
+            <span class="value">4 hours</span>
+          </div>
+          <div class="workshop-fact">
+            <span class="label">Seat</span>
+            <span class="value">300 EUR<br>per person</span>
+          </div>
+          <div class="workshop-fact">
+            <span class="label">Minimum</span>
+            <span class="value">Runs with<br>10+ paid seats</span>
+          </div>
+          <div class="workshop-fact">
+            <span class="label">Overflow</span>
+            <span class="value">Extra slots<br>if needed</span>
+          </div>
+          <div class="workshop-fact">
+            <span class="label">Support</span>
+            <span class="value">Private Discord<br>14 days Q&amp;A</span>
+          </div>
+        </div>
+
+        <div class="offer-grid" style="margin-top:28px;">
+          <div class="offer-card">
+            <span class="icon">context</span>
+            <h3>Write the context agents actually need</h3>
+            <p>Turn build commands, architecture decisions, package conventions, and failure notes into a tight AGENTS.md / CLAUDE.md style context file the agent can use every session.</p>
+          </div>
+          <div class="offer-card">
+            <span class="icon">spec</span>
+            <h3>Turn the talk into a spec</h3>
+            <p>Use the spec workflow from the Spring I/O material to turn one real change into a concrete plan the agent can execute without drifting across context windows.</p>
+          </div>
+          <div class="offer-card">
+            <span class="icon">Ralph</span>
+            <h3>Run the Ralph workflow</h3>
+            <p>Set up the Ralph loop in a controlled way: scoped issue, agent execution, focused verification, and human review before anything becomes a trusted pattern.</p>
+          </div>
+          <div class="offer-card">
+            <span class="icon">review</span>
+            <h3>Keep the loop grounded</h3>
+            <p>Use tests, hooks, and multi-agent review so Claude Code and Codex check different blind spots instead of just producing more code faster.</p>
+          </div>
+        </div>
+
+        <div class="pitch-block">
+          <span class="label">Reservation policy</span>
+          <p>The seat is a paid reservation through Stripe. The workshop runs during the last week of May 2026 once 10 people have reserved a seat. If demand is higher than one hands-on group should handle, I will add additional live workshop slots that same week.</p>
+          <p>If the late-May workshop does not reach 10 paid reservations, you receive a full refund.</p>
+          <p>The private Discord stays open after the workshop. Active async support is included for the first 14 days after the live session.</p>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn primary" href="https://buy.stripe.com/bJe6oI3eg2EE1t548wc7u04">Reserve your seat</a>
+          <a class="btn" href="mailto:thomas@jvmskills.com?subject=Agentic%20coding%20workshop%20question&body=Hey%20there%2C%0A%0AI%20have%20a%20question%20about%20the%20May%202026%20agentic%20coding%20workshop.">Ask a question</a>
+          <a class="btn ghost" href="#learn">Try learn.md first ↓</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═════════════════ CONSULTING ═════════════════ -->
+    <section class="section" id="consulting">
+      <div class="container-narrow">
+        <span class="eyebrow">Consulting</span>
+        <h2>A focused agentic coding setup for your team.</h2>
+        <p class="lead">The workshop shows the shape of the loop. Consulting adapts it to the way your team actually builds software: your repo, your tests, your review habits, your release risks.</p>
+
+        <div class="offer-grid">
+          <div class="offer-card">
+            <span class="icon">context</span>
+            <h3>Project memory that survives sessions</h3>
+            <p>AGENTS.md / CLAUDE.md context, project conventions, build commands, and the failure notes that keep agents from rediscovering the same mistakes.</p>
+          </div>
+          <div class="offer-card">
+            <span class="icon">skills</span>
+            <h3>Workflows for your stack</h3>
+            <p>Reusable skills for planning, TDD, focused test runs, commits, restart loops, and review flows that match your Spring Boot, Gradle, Kotlin, Java, and database setup.</p>
+          </div>
+          <div class="offer-card">
+            <span class="icon">hooks</span>
+            <h3>Constraints that actually run</h3>
+            <p>Command policy, post-edit lint feedback, commit gates, MCP integrations, and lightweight evals so the workflow gets safer as it gets faster.</p>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn primary" href="mailto:thomas@jvmskills.com?subject=Agentic%20coding%20consulting&body=Hey%20there%2C%0A%0AI'm%20working%20at%20%5Bcompany%5D%20as%20%5Brole%5D.%20I'd%20like%20to%20talk%20about%20agentic%20coding%20consulting%20for%20our%20team.">Request consulting</a>
+          <a class="btn" href="https://www.linkedin.com/in/tschuehly/">Connect on LinkedIn</a>
+          <a class="btn ghost" href="#workshop">Prefer the workshop? ↑</a>
+        </div>
       </div>
     </section>
 
@@ -981,50 +1044,6 @@
       </div>
     </section>
 
-    <!-- ═════════════════ FORWARD TO YOUR LEAD ═════════════════ -->
-    <section class="section" id="forward">
-      <div class="container-narrow">
-        <span class="eyebrow">For the developer who saw the talk</span>
-        <h2>Forwarding this to your Head of Engineering?</h2>
-        <p class="lead">You believe the argument. Your lead has to act on it. Here's the 60-second version they can read before deciding whether it's worth a conversation.</p>
-
-        <div class="pitch-block">
-          <span class="label">Draft — forward as is</span>
-          <p><strong>Subject:</strong> Agentic engineering &mdash; worth 30 minutes?</p>
-          <p>Hey there, I saw a talk at Spring I/O 2026: <em>Claude Code for Spring Developers</em> by Thomas Schilling. He ran his own agentic engineering loop on a production SaaS for four months and documented the delta:</p>
-          <ul class="clean">
-            <li>5&times; commit velocity &mdash; 3,700+ commits, 1,700+ Claude sessions, 11k+ prompts</li>
-            <li>Reliability went up over the same window &mdash; Sentry errors down</li>
-            <li>Not vibe coding &mdash; TDD, hooks, spec-driven workflow, evals, static-analysis constraints</li>
-          </ul>
-          <p>He's offering a free audit: send a note, hop on a call, he hears where AI is breaking in our codebase today and we talk through what's fixable and what's structural. No commitment after.</p>
-          <p>Full toolbelt + links from the talk: <a href="https://jvmskills.com/spring-io-2026/">jvmskills.com/spring-io-2026</a></p>
-          <p>Worth a 30-minute call?</p>
-        </div>
-
-        <div class="cta-row">
-          <a class="btn primary" href="mailto:?subject=Agentic%20engineering%20%E2%80%94%20worth%2030%20minutes%3F&body=Hey%20there,%20I%20saw%20a%20talk%20at%20Spring%20I%2FO%202026%3A%20Claude%20Code%20for%20Spring%20Developers%20by%20Thomas%20Schilling.%20He%20ran%20his%20own%20agentic%20engineering%20loop%20on%20a%20production%20SaaS%20for%20four%20months%20and%20documented%20the%20delta%3A%0A%0A-%205x%20commit%20velocity%20%E2%80%94%203%2C700%2B%20commits%2C%201%2C700%2B%20Claude%20sessions%2C%2011k%2B%20prompts%0A-%20Reliability%20went%20up%20over%20the%20same%20window%20%E2%80%94%20Sentry%20errors%20down%0A-%20Not%20vibe%20coding%20%E2%80%94%20TDD%2C%20hooks%2C%20spec-driven%20workflow%2C%20evals%2C%20static-analysis%20constraints%0A%0AHe's%20offering%20a%20free%20audit%3A%20send%20a%20note%2C%20hop%20on%20a%20call%2C%20he%20hears%20where%20AI%20is%20breaking%20in%20our%20codebase%20today%20and%20we%20talk%20through%20what's%20fixable%20and%20what's%20structural.%20No%20commitment%20after.%0A%0AFull%20toolbelt%20%2B%20links%20from%20the%20talk%3A%20https%3A%2F%2Fjvmskills.com%2Fspring-io-2026%2F%0A%0AWorth%20a%2030-minute%20call%3F">Forward via email</a>
-          <a class="btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fjvmskills.com%2Fspring-io-2026%2F">Share on LinkedIn</a>
-          <a class="btn ghost" href="#talk-toolbelt">Back to the toolbelt ↑</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═════════════════ FINAL CTA ═════════════════ -->
-    <section class="section-sub">
-      <div class="container-narrow">
-        <div class="final-cta">
-          <span class="eyebrow">Free audit</span>
-          <h2>Start with a free audit.</h2>
-          <p>Your suspicion that the team is falling behind is the signal. Send a note — we hop on a call, I hear where AI is breaking in your codebase today, and we talk through what's fixable and what's structural. No commitment after.</p>
-          <div class="cta-row">
-            <a class="btn primary" href="mailto:thomas@jvmskills.com?subject=Free%20agentic%20engineering%20audit&body=Hey%20there%2C%0A%0AI'm%20working%20at%20%5Bcompany%5D%20as%20%5Brole%5D.%20I'm%20interested%20in%20the%20audit.">thomas@jvmskills.com</a>
-            <a class="btn" href="https://www.linkedin.com/in/tschuehly/">Connect on LinkedIn</a>
-            <a class="btn ghost" href="https://github.com/tschuehly">GitHub</a>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <footer role="contentinfo">
