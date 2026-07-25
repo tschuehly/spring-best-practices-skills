@@ -268,12 +268,12 @@
         <h2>More autonomy moves human thinking to the edges.</h2>
         <p class="section-lead">The right workflow depends on how well you understand the problem and how large it is. Prototype when uncertainty is high. Add durable structure as the work becomes clearer and larger.</p>
         <ol class="levels" reversed>
-          <li><span class="num">05</span><strong>Loops</strong><span>Fresh session per phase.</span></li>
-          <li><span class="num">04</span><strong>Big specs</strong><span>One session reaches the limits of its context.</span></li>
+          <li><span class="num">04</span><strong>Sliced loops</strong><span>Give every slice a fresh context.</span></li>
           <li><span class="num">03</span><strong>Spec-driven</strong><span>Drive the design before implementation.</span></li>
           <li><span class="num">02</span><strong>Plan mode</strong><span>Review the proposal, then implement.</span></li>
           <li><span class="num">01</span><strong>Pair programming</strong><span>Watch the work and redirect continuously.</span></li>
         </ol>
+        <p class="callout"><strong>Failure state: big specs.</strong> One overloaded session fills its context and loses important steps. Slice the specification so each group of stories starts fresh.</p>
       </div>
     </section>
 
@@ -308,11 +308,11 @@
         <h2>The JVM toolbelt from the talk.</h2>
         <p class="section-lead">Start with the constraint that matches your current bottleneck. You do not need every tool at once.</p>
         <div class="resource-grid">
+          <a class="card resource-card" href="/"><code>jvm-skills</code><p>Deep JVM knowledge built by JVM experts you can trust.</p></a>
+          <a class="card resource-card" href="https://github.com/jvm-skills/jvm-skills/blob/main/skills/database/jooq-best-practices.yaml"><code>jOOQ skill</code><p>Load focused production knowledge such as MULTISET guidance only when the task needs it.</p></a>
           <a class="card resource-card" href="https://github.com/jvm-skills/jvm-skills/blob/main/skills/testing/tdd-task.yaml"><code>tdd-task</code><p>Keep implementation inside a visible red → green → refactor loop.</p></a>
-          <a class="card resource-card" href="https://github.com/jvm-skills/jvm-skills/blob/main/skills/testing/test-gradle.yaml"><code>test-gradle</code><p>Return focused Gradle test failures without flooding the agent context.</p></a>
           <a class="card resource-card" href="https://github.com/jvm-skills/jvm-skills/blob/main/skills/workflow/grill-with-docs-bundle.yaml"><code>grill-with-docs</code><p>Grill the design one decision at a time while building the domain glossary and recording durable architectural decisions.</p></a>
           <a class="card resource-card" href="https://github.com/jvm-skills/jvm-skills/blob/main/skills/workflow/spec.yaml"><code>spec</code><p>Turn resolved decisions into a durable, verifiable implementation contract.</p></a>
-          <a class="card resource-card" href="https://github.com/jvm-skills/jvm-skills/blob/main/examples/hooks/pre-commit-gate.sh"><code>pre-commit-gate.sh</code><p>Make compile, lint, and test constraints run before commits are accepted.</p></a>
           <a class="card resource-card" href="https://github.com/JetBrains/mcpjetbrains"><code>IntelliJ MCP</code><p>Give the agent semantic JVM operations instead of shell-only feedback.</p></a>
           <a class="card resource-card" href="https://javadoccentral.com"><code>JavaDoc Central</code><p>Resolve current Java and Kotlin library documentation from Maven coordinates.</p></a>
         </div>
@@ -322,8 +322,8 @@
     <section class="content close">
       <div class="narrow">
         <span class="eyebrow">The takeaway</span>
-        <h2>Improve the loop. Let agents judge the output.</h2>
-        <p class="section-lead">Spend your attention where mistakes matter most.</p>
+        <h2>Align. Build. Prove.</h2>
+        <p class="section-lead">Align before the agent builds. Build through verified feedback loops. Turn behavior into reviewable evidence.</p>
         <div class="actions">
           <a class="button primary" href="slides/">Open the slides ↗</a>
           <a class="button" href="https://www.linkedin.com/in/tschuehly/">Connect on LinkedIn ↗</a>

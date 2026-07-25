@@ -193,7 +193,14 @@
       font-size: 28px;
       color: var(--pink-bright);
     }
-    .concept-gate__descriptor { color: var(--pink-bright); }
+    .concept-gate__descriptor {
+      font-family: 'Source Code Pro', monospace;
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: 0;
+      color: #a5f3fc;
+    }
     .concept-gate--purple { --gate-accent: #d8b4fe; --gate-accent-rgb: 168, 85, 247; }
     .concept-gate--green  { --gate-accent: var(--green); --gate-accent-rgb: 132, 204, 22; }
     .concept-gate--yellow { --gate-accent: var(--yellow); --gate-accent-rgb: 234, 179, 8; }
@@ -1406,12 +1413,11 @@
 <section id="lv-section">
 
 <section id="lv-journey-slide" class="lv-slide">
-    <div class="lv-stage lv-journey-stage">
-      <div class="lv-journey-grid" aria-hidden="true"></div>
-      <div class="lv-journey-copy">
-        <span>MY JOURNEY THROUGH</span>
-        <strong>FOUR LEVELS</strong>
-        <em>OF AGENTIC ENGINEERING</em>
+    <div class="lv-stage concept-gate-stage">
+      <div class="concept-gate concept-gate--purple">
+        <span class="concept-gate__kicker">MY JOURNEY THROUGH</span>
+        <strong class="concept-gate__headline">FOUR LEVELS</strong>
+        <b class="concept-gate__descriptor">OF AGENTIC ENGINEERING</b>
       </div>
       <nav class="phase-nav phase-nav--levels lv-level-nav" data-active-level="1" aria-label="Four levels of agentic engineering">
         <div class="phase-nav__modes lv-level-modes">
@@ -1550,11 +1556,11 @@
       <div class="lv-choice-map" aria-label="Choose Pair, Plan, Spec, or Sliced Loops based on certainty, scope, complexity, and alignment depth">
         <div class="lv-choice-axis lv-choice-axis--y"><span>LARGE · COMPLEX</span><i></i><span>SMALL · SIMPLE</span></div>
         <div class="lv-choice-grid">
-          <div class="lv-choice-card lv-choice-pair"><span>PAIR</span><strong>prototype · learn</strong></div>
-          <div class="fragment lv-choice-card lv-choice-plan" data-fragment-index="0"><span>PLAN</span><strong>small · known change</strong></div>
-          <div class="fragment lv-choice-card lv-choice-spec" data-fragment-index="1"><span>SPEC</span><strong>behavior · explicit</strong></div>
-          <div class="fragment lv-choice-prototype" data-fragment-index="3">NEED CERTAINTY? ALIGN FIRST.</div>
-          <div class="fragment lv-choice-card lv-choice-loops" data-fragment-index="2"><span>SLICED LOOPS</span><strong>large · known change</strong></div>
+          <div class="fragment lv-choice-card lv-choice-pair" data-fragment-index="0"><span>PAIR</span><strong>prototype · learn</strong></div>
+          <div class="fragment lv-choice-card lv-choice-plan" data-fragment-index="1"><span>PLAN</span><strong>small · known change</strong></div>
+          <div class="fragment lv-choice-card lv-choice-spec" data-fragment-index="2"><span>SPEC</span><strong>behavior · explicit</strong></div>
+          <div class="fragment lv-choice-prototype" data-fragment-index="4">NEED CERTAINTY? ALIGN FIRST.</div>
+          <div class="fragment lv-choice-card lv-choice-loops" data-fragment-index="3"><span>SLICED LOOPS</span><strong>large · known change</strong></div>
         </div>
         <div class="lv-choice-axis lv-choice-axis--x"><span>LOW CERTAINTY</span><i></i><span>HIGH CERTAINTY</span></div>
       </div>
@@ -1576,12 +1582,6 @@
       linear-gradient(180deg,#0c0c12 0%, #070709 100%);
     overflow:hidden;
   }
-  .lv-journey-stage{display:grid;place-items:center;isolation:isolate;}
-  .lv-journey-grid{position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(34,211,238,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(168,85,247,.08) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(circle at 50% 50%,#000,transparent 76%);}
-  .lv-journey-copy{display:grid;justify-items:center;gap:7px;text-align:center;text-transform:uppercase;}
-  .lv-journey-copy span{font:800 19px/1 'Source Code Pro',monospace;letter-spacing:.24em;color:#f472b6;}
-  .lv-journey-copy strong{font:400 88px/.92 'Jersey 15',Impact,sans-serif;letter-spacing:.035em;color:#fff;text-shadow:0 0 20px rgba(34,211,238,.22),0 0 44px rgba(168,85,247,.18);}
-  .lv-journey-copy em{font:800 25px/1.1 'Source Code Pro',monospace;letter-spacing:.12em;color:#a5f3fc;font-style:normal;}
   .lv-stage::before{
     content:""; position:absolute; inset:0;
     background-image:
@@ -2359,7 +2359,7 @@
       <div class="im-grill-intro concept-gate concept-gate--pink">
         <span class="im-entry-kicker concept-gate__kicker">ALIGNMENT</span>
         <strong class="concept-gate__headline">GRILL WITH DOCS</strong>
-        <small class="concept-gate__source">Matt Pocock &middot; aihero.dev</small>
+        <b class="concept-gate__descriptor">Matt Pocock &middot; aihero.dev</b>
       </div>
       <nav class="phase-nav phase-nav--persistent" data-active-phase="align" aria-label="Talk phases: Alignment, Implementation, Review">
         <div class="phase-nav__modes">
@@ -2557,13 +2557,6 @@
   #im-align-entry-slide .im-grill-intro {
     --gate-accent: var(--role-human, var(--pink-bright));
     --gate-accent-rgb: var(--role-human-rgb, 244, 114, 182);
-  }
-
-  #im-align-entry-slide .concept-gate__source {
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    color: #94a3b8;
   }
 
   #im-grill-slide .im-eight-question-box,
@@ -4432,7 +4425,6 @@
 
   </section>
 
-<!-- LOCKS: 783 official jOOQ blog articles and 34 knowledge files verified in the local jvm-skills repository on 2026-07-22. -->
 <section id="gr-skills-jvm-slide" data-phase="implement">
     <div class="gr-stage gr-grid-stage">
       <div class="gr-head">
@@ -4440,7 +4432,7 @@
         <div class="gr-sub">expert-authored production practices</div>
       </div>
 
-      <div class="gr-expertise-route gr-expertise-route--jvm" aria-label="JVMskills provides expert JVM knowledge, loading the MULTISET topic when the task needs it">
+      <div class="gr-expertise-route gr-expertise-route--jvm" aria-label="JVMskills provides deep JVM knowledge built by JVM experts you can trust, loading the MULTISET topic when the task needs it">
         <div class="gr-expertise-gap">
           <div class="gr-expertise-generic">
             <span>GENERAL SKILLS</span>
@@ -4450,8 +4442,8 @@
           <div class="fragment gr-expertise-source" data-fragment-index="0">
             <div>
               <span>JVMSKILLS.COM</span><br>
-              <strong>expert JVM knowledge</strong><br>
-              <b>built by JVM developers</b>
+              <strong>deep JVM knowledge</strong><br>
+              <b>built by JVM experts you can trust</b>
             </div>
             <img src="assets/qr/jvmskills.png" alt="QR code for jvmskills.com">
           </div>
@@ -4609,7 +4601,7 @@
             <marker id="im-arrow-b1-yellow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#eab308"></path></marker>
           </defs>
           <path d="M480 225 H585" class="im-iter-path im-b1-review-path im-line-cyan" marker-end="url(#im-arrow-b1-cyan)"></path>
-          <path d="M585 330 H535 V410 H165 V296" class="im-iter-path im-b1-findings-path im-line-red" marker-end="url(#im-arrow-b1-red)"></path>
+          <path d="M605 318 H550 V410 H118 V296" class="im-iter-path im-b1-findings-path im-line-red" marker-end="url(#im-arrow-b1-red)"></path>
           <path d="M930 375 V392" class="im-iter-path im-b1-clean-path im-line-green" marker-end="url(#im-arrow-b1-green)"></path>
           <path d="M930 436 V458" class="im-iter-path im-b1-next-path im-line-yellow" marker-end="url(#im-arrow-b1-yellow)"></path>
         </svg>
@@ -4722,17 +4714,17 @@
   #gr-instructions-slide .gr-onboard-pseudocode code{display:flex;flex-direction:column;gap:3px;font-size:17px;line-height:1.18;color:#fff;white-space:nowrap;}
   #gr-instructions-slide .gr-code-comment{color:#c4b5fd;}
   #gr-instructions-slide .gr-code-call{margin-top:13px;color:#a5f3fc;font-weight:900;}
-  #gr-skills-jvm-slide .gr-expertise-route{position:absolute;left:76px;right:76px;top:176px;bottom:84px;z-index:3;display:grid;grid-template-rows:190px 172px;align-content:start;gap:24px;}
+  #gr-skills-jvm-slide .gr-expertise-route{position:absolute;left:76px;right:76px;top:176px;bottom:84px;z-index:3;display:grid;grid-template-rows:210px 150px;align-content:start;gap:36px;}
   #gr-skills-jvm-slide .gr-expertise-gap{display:grid;grid-template-columns:.78fr 1.42fr;gap:24px;min-width:0;}
   #gr-skills-jvm-slide .gr-expertise-generic{display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;padding:20px 26px;border-left:5px solid #fb7185;background:linear-gradient(90deg,rgba(251,113,133,.1),rgba(8,10,18,.96));text-align:left;}
   #gr-skills-jvm-slide .gr-expertise-generic span{font-size:16px;font-weight:900;letter-spacing:1.5px;color:#fecdd3;}
   #gr-skills-jvm-slide .gr-expertise-generic strong{margin-top:13px;font-size:26px;color:#fff;}
   #gr-skills-jvm-slide .gr-expertise-generic b{margin-top:10px;font-size:17px;color:#fca5a5;}
-  #gr-skills-jvm-slide .gr-expertise-source{display:grid;grid-template-columns:1fr 126px;align-items:center;gap:24px;box-sizing:border-box;padding:20px 24px 20px 32px;border:3px solid var(--green);border-radius:14px;background:linear-gradient(145deg,rgba(20,45,12,.86),rgba(8,10,18,.98));text-align:left;box-shadow:0 0 26px rgba(132,204,22,.17);}
+  #gr-skills-jvm-slide .gr-expertise-source{display:grid;grid-template-columns:1fr 164px;align-items:center;gap:28px;box-sizing:border-box;padding:22px 24px 22px 34px;border:3px solid var(--green);border-radius:14px;background:linear-gradient(145deg,rgba(20,45,12,.86),rgba(8,10,18,.98));text-align:left;box-shadow:0 0 26px rgba(132,204,22,.17);}
   #gr-skills-jvm-slide .gr-expertise-source span{font-size:23px;font-weight:950;letter-spacing:2px;color:#d9f99d;}
-  #gr-skills-jvm-slide .gr-expertise-source strong{display:inline-block;margin-top:10px;font-size:30px;color:#fff;}
-  #gr-skills-jvm-slide .gr-expertise-source b{display:inline-block;margin-top:9px;font-size:18px;color:#bef264;}
-  #gr-skills-jvm-slide .gr-expertise-source img{width:116px;height:116px;box-sizing:border-box;padding:5px;background:#fff;image-rendering:pixelated;}
+  #gr-skills-jvm-slide .gr-expertise-source strong{display:inline-block;margin-top:12px;font-size:31px;color:#fff;}
+  #gr-skills-jvm-slide .gr-expertise-source b{display:inline-block;margin-top:11px;font-size:21px;line-height:1.2;color:#bef264;}
+  #gr-skills-jvm-slide .gr-expertise-source img{width:154px;height:154px;box-sizing:border-box;padding:6px;background:#fff;image-rendering:pixelated;}
   #gr-skills-jvm-slide .gr-jvm-skill-flow{display:grid;grid-template-columns:1fr 44px 1fr 44px 1.4fr 44px 1fr;align-items:stretch;min-width:0;}
   #gr-skills-jvm-slide .gr-jvm-flow-step{display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;padding:12px 20px;border:2px solid var(--cyan-bright);border-radius:12px;background:linear-gradient(145deg,rgba(8,31,39,.92),rgba(8,10,18,.98));text-align:left;}
   #gr-skills-jvm-slide .gr-jvm-flow-step span{font-size:14px;font-weight:950;line-height:1.15;letter-spacing:1.2px;color:#a5f3fc;}
@@ -4876,7 +4868,7 @@
   .im-b1-reviewer>strong{font-family:'Jersey 15','Impact',sans-serif;font-size:28px;color:#fff;}
   .im-b1-reviewer>b{padding:6px 9px;border-left:3px solid var(--purple-bright);background:rgba(168,85,247,.12);font-size:18px;color:#e9d5ff;}
 
-  .im-b1-findings-label{position:absolute;left:270px;top:391px;z-index:5;padding:4px 11px;background:#090b12;font-size:18px;font-weight:900;letter-spacing:1.4px;color:#fb7185;opacity:0;transition:opacity var(--deck-motion-state) var(--deck-ease);}
+  .im-b1-findings-label{position:absolute;left:245px;top:391px;z-index:5;padding:4px 11px;background:#090b12;font-size:18px;font-weight:900;letter-spacing:1.4px;color:#fb7185;opacity:0;transition:opacity var(--deck-motion-state) var(--deck-ease);}
   .im-b1-verified{position:absolute;left:850px;top:392px;width:160px;height:44px;z-index:5;display:flex;align-items:center;justify-content:center;border:2px solid var(--green);border-radius:999px;background:#0d1609;font-size:18px;font-weight:900;letter-spacing:1px;color:var(--green);opacity:0;transform:translateY(10px);transition:opacity var(--deck-motion-state) var(--deck-ease),transform var(--deck-motion-state) var(--deck-ease);}
   .im-b1-next-unit{position:absolute;left:795px;top:458px;width:270px;height:58px;z-index:5;display:flex;align-items:center;justify-content:center;gap:13px;border:2px dashed var(--yellow);border-radius:999px;background:rgba(38,31,5,.72);opacity:0;transform:translateY(12px);transition:opacity var(--deck-motion-state) var(--deck-ease),transform var(--deck-motion-state) var(--deck-ease);}
   .im-b1-next-unit strong{font-family:'Jersey 15','Impact',sans-serif;font-size:23px;letter-spacing:1px;white-space:nowrap;color:var(--yellow);}
@@ -5357,7 +5349,7 @@ fun `asks once after purchase`() {
 
   </section>
 
-<section id="cl-sendoff-slide" data-phase="review" data-background-color="#070709">
+<section id="cl-sendoff-slide" data-background-color="#070709">
     <div class="cl-stage cl-hero-stage" data-state="0">
       <div class="cl-stars" aria-hidden="true"></div>
       <div class="cl-horizon" aria-hidden="true"></div>
@@ -5370,11 +5362,11 @@ fun `asks once after purchase`() {
         </div>
         <div class="fragment cl-final-beat cl-final-beat-two" data-fragment-index="0">
           <span>02</span>
-          <strong>Improve implementation through loops.</strong>
+          <strong>Build through verified feedback loops.</strong>
         </div>
         <div class="fragment cl-final-beat cl-final-beat-three" data-fragment-index="1">
           <span>03</span>
-          <strong>Turn output into evidence<br><em>humans can judge.</em></strong>
+          <strong>Turn behavior into<br><em>reviewable evidence.</em></strong>
         </div>
       </div>
 
@@ -5386,28 +5378,6 @@ fun `asks once after purchase`() {
 
   </section>
 
-<section id="cl-level-six-slide" data-background-color="#030305">
-    <!-- SOURCE: https://x.com/steipete/status/2078277297791189132 -->
-    <div class="cl-level-six-stage">
-      <div class="cl-level-six-grid" aria-hidden="true"></div>
-      <div class="cl-level-six-orbit" aria-hidden="true">
-        <i></i><i></i><i></i><i></i><i></i><i></i>
-        <svg viewBox="0 0 720 360" preserveAspectRatio="none">
-          <path d="M110 180 L250 78 L420 118 L610 54 M110 180 L260 292 L420 118 L590 282 M250 78 L260 292 M420 118 L590 282 M610 54 L590 282"/>
-        </svg>
-      </div>
-      <a class="cl-level-six-tweet" href="https://x.com/steipete/status/2078277297791189132" aria-label="Open Peter Steinberger's post on X">
-        <img src="./assets/section5/graph-engineering-tweet.png" alt="Peter Steinberger: Are we still talking loops or did we shift to graphs yet?">
-      </a>
-      <div class="cl-level-six-copy">
-        <span>LEVEL 6?</span>
-        <strong>GRAPH ENGINEERING</strong>
-      </div>
-      <div class="cl-level-six-tag">A SNEAK PEEK</div>
-    </div>
-
-  </section>
-
 </section>
 
 
@@ -5415,19 +5385,6 @@ fun `asks once after purchase`() {
   /* Keep review evidence above the persistent phase footer (top edge: 666px). */
   #review-section #dr-wall .dr-wall-evidence{bottom:70px;}
 
-  #review-section .cl-level-six-stage{position:relative;width:var(--deck-stage-width);height:var(--deck-stage-height);margin:0 auto;overflow:hidden;display:grid;place-items:center;background:radial-gradient(circle at 50% 48%,rgba(168,85,247,.14),transparent 32%),radial-gradient(circle at 50% 50%,rgba(34,211,238,.08),transparent 58%),#030305;color:#fff;isolation:isolate;}
-  #review-section .cl-level-six-grid{position:absolute;inset:0;z-index:-2;background-image:linear-gradient(rgba(34,211,238,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(34,211,238,.055) 1px,transparent 1px);background-size:42px 42px;mask-image:radial-gradient(circle at center,#000,transparent 74%);}
-  #review-section .cl-level-six-orbit{position:absolute;inset:420px 215px 26px;opacity:.26;filter:drop-shadow(0 0 10px rgba(34,211,238,.25));}
-  #review-section .cl-level-six-orbit svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;}
-  #review-section .cl-level-six-orbit path{fill:none;stroke:url(#none);stroke:#22d3ee;stroke-width:2;stroke-dasharray:7 9;}
-  #review-section .cl-level-six-orbit i{position:absolute;width:18px;height:18px;border:2px solid #f472b6;border-radius:50%;background:#08080c;box-shadow:0 0 16px rgba(244,114,182,.7);}
-  #review-section .cl-level-six-orbit i:nth-child(1){left:9%;top:47%;}#review-section .cl-level-six-orbit i:nth-child(2){left:29%;top:17%;}#review-section .cl-level-six-orbit i:nth-child(3){left:31%;top:78%;}#review-section .cl-level-six-orbit i:nth-child(4){left:54%;top:29%;}#review-section .cl-level-six-orbit i:nth-child(5){left:81%;top:10%;}#review-section .cl-level-six-orbit i:nth-child(6){left:78%;top:75%;}
-  #review-section .cl-level-six-tweet{position:absolute;z-index:3;top:22px;left:70px;width:1140px;display:block;}
-  #review-section .cl-level-six-tweet img{display:block;width:100%;height:auto;}
-  #review-section .cl-level-six-copy{position:absolute;z-index:4;left:0;right:0;bottom:54px;display:grid;justify-items:center;gap:8px;text-align:center;text-transform:uppercase;}
-  #review-section .cl-level-six-copy span{font:900 22px/1 'Source Code Pro',monospace;letter-spacing:.26em;color:#f472b6;}
-  #review-section .cl-level-six-copy strong{font:400 76px/.92 'Jersey 15',Impact,sans-serif;letter-spacing:.035em;color:#fff;text-shadow:0 0 22px rgba(168,85,247,.42),0 0 48px rgba(34,211,238,.25);}
-  #review-section .cl-level-six-tag{position:absolute;right:42px;bottom:34px;font:800 13px/1 'Source Code Pro',monospace;letter-spacing:.18em;color:#71717a;}
   #review-section .dr-stage{
     position:relative;
     width:var(--deck-stage-width);
@@ -6499,11 +6456,11 @@ fun `asks once after purchase`() {
   (function () {
     const phases = ['align', 'implement', 'review'];
     const labels = ['Alignment', 'Implementation', 'Review'];
-    document.querySelectorAll('.reveal .slides section[data-phase], .reveal .slides #cl-level-six-slide').forEach(function (slide) {
+    document.querySelectorAll('.reveal .slides section[data-phase]').forEach(function (slide) {
       slide.querySelectorAll('.talk-phase-marker').forEach(function (legacyMarker) { legacyMarker.remove(); });
       if (slide.querySelector(':scope > .phase-nav--persistent')) return;
 
-      const active = slide.dataset.phase || (slide.id === 'cl-level-six-slide' ? 'review' : '');
+      const active = slide.dataset.phase || '';
       const activeIndex = phases.indexOf(active);
       if (activeIndex < 0) return;
       if (slide.querySelector('.phase-nav')) return;
@@ -6542,6 +6499,65 @@ fun `asks once after purchase`() {
     navigationMode: 'linear',
     plugins: [RevealHighlight, RevealMarkdown]
   });
+</script>
+<script>
+  // Keep complete rescue notes available without inviting the speaker to read.
+  // Reveal owns the speaker-view document, so install the control after S opens it.
+  (function () {
+    const speakerViewName = 'reveal.js - Notes';
+
+    function installNotesToggle(attempt) {
+      const speakerWindow = window.open('', speakerViewName);
+      if (!speakerWindow || speakerWindow.closed) return;
+
+      const speakerDocument = speakerWindow.document;
+      const notesPanel = speakerDocument.querySelector('.speaker-controls-notes');
+      if (!notesPanel) {
+        if (attempt < 20) window.setTimeout(function () { installNotesToggle(attempt + 1); }, 100);
+        return;
+      }
+      if (speakerDocument.getElementById('speaker-notes-toggle')) return;
+
+      const style = speakerDocument.createElement('style');
+      style.textContent = [
+        '.speaker-controls-notes{min-height:160px;position:relative}',
+        '.speaker-controls-notes .label{display:flex;align-items:center;justify-content:space-between;gap:12px}',
+        '#speaker-notes-toggle{padding:6px 10px;border:1px solid #777;border-radius:4px;background:#222;color:#fff;font:700 11px/1 sans-serif;cursor:pointer}',
+        '#speaker-notes-toggle:hover,#speaker-notes-toggle:focus-visible{border-color:#fff;outline:none}',
+        'body.speaker-notes-concealed .speaker-controls-notes .value{visibility:hidden}',
+        'body.speaker-notes-concealed .speaker-controls-notes::after{content:"Notes hidden · press N";position:absolute;inset:38px 16px 16px;display:grid;place-items:center;background:#111;color:#aaa;font:700 16px/1.3 sans-serif;letter-spacing:.04em}'
+      ].join('');
+      speakerDocument.head.appendChild(style);
+
+      const toggle = speakerDocument.createElement('button');
+      toggle.id = 'speaker-notes-toggle';
+      toggle.type = 'button';
+
+      function setNotesVisible(visible) {
+        speakerDocument.body.classList.toggle('speaker-notes-concealed', !visible);
+        toggle.textContent = visible ? 'HIDE NOTES (N)' : 'SHOW NOTES (N)';
+        toggle.setAttribute('aria-pressed', String(visible));
+      }
+
+      toggle.addEventListener('click', function () {
+        setNotesVisible(speakerDocument.body.classList.contains('speaker-notes-concealed'));
+      });
+      notesPanel.querySelector('.label').appendChild(toggle);
+      setNotesVisible(false);
+
+      speakerDocument.addEventListener('keydown', function (event) {
+        if (event.key.toLowerCase() !== 'n' || event.metaKey || event.ctrlKey || event.altKey) return;
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        setNotesVisible(speakerDocument.body.classList.contains('speaker-notes-concealed'));
+      }, true);
+    }
+
+    window.addEventListener('keyup', function (event) {
+      if (event.key.toLowerCase() !== 's' || event.metaKey || event.ctrlKey || event.altKey) return;
+      window.setTimeout(function () { installNotesToggle(0); }, 0);
+    });
+  })();
 </script>
 <script>
   // Lightweight review-status tracker. Query-gated so no review UI can appear in

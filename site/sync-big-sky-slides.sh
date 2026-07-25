@@ -29,6 +29,7 @@ perl -0pe '
   s{^\s*<script[^>]+asciinema-player[^>]+></script>\s*$}{}gm;
   s{^\s*<script src="\./node_modules/reveal\.js/plugin/notes/notes\.js"></script>\s*$}{}gm;
   s/RevealNotes,\s*//g;
+  s{[ \t]+$}{}gm;
 ' "$presentation_dir/index.html" > "$output_dir/index.html"
 
 cp "$presentation_dir/assets/velocity-chart.svg" "$output_dir/assets/"
