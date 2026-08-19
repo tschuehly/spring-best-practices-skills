@@ -1,0 +1,42 @@
+name: Plinth
+description: >-
+  Plinth is an AI-native engineering toolkit for modern Java enterprise SDLC,
+  built around reusable Commands, Agents, Skills, and MCP Servers.
+repo: jabrena/plinth
+skill_path: ""
+category: framework
+tools:
+  - cursor
+  - claude
+  - codex
+  - github-copilot
+languages:
+  - java
+trust: curated
+author: Juan Antonio Breña Moral
+version: "1.0.0"
+last_updated: "2026-07-03"
+scope: comprehensive
+tech:
+  - maven
+  - spring-boot
+  - quarkus
+  - micronaut
+tags:
+  - java
+  - framework
+  - spring-boot
+  - quarkus
+  - micronaut
+  - maven
+  - oop-design
+  - concurrency
+  - security
+  - generics
+  - functional-programming
+  - refactoring
+  - jmeter
+  - gatling
+  - openapi
+  - wiremock
+  - hexagonal-architecture
