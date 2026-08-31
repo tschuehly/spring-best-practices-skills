@@ -78,7 +78,7 @@ The additions fall into three trust tiers.
 - [Kotlin API Design Review and POJO→Data-Class Refactoring](https://github.com/jbaruch/kotlin-tutor), by Baruch Sadogursky
 - [Quarkus + LangChain4j Scaffolding](https://github.com/eldermoraes/quarkus-agentic-scaffolding), by Elder Moraes (Red Hat)
 - [Kotlin REPL Prototyping](https://github.com/nomisRev/koog-workshop), by Simon Vergauwen (Arrow)
-- [The jabrena JVM collection](https://github.com/jabrena/cursor-rules-java), by Juan Antonio Breña Moral
+- [Plinth](https://github.com/jabrena/plinth), by Juan Antonio Breña Moral
 - [Oracle OKafka Java Clients](https://github.com/anders-swanson/oracle-database-code-samples), by Anders Swanson (Oracle)
 - [Compose Desktop UI Testing](https://github.com/Mr3zee/Release-Wizard), by Mr3zee
 
